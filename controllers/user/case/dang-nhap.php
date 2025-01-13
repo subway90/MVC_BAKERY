@@ -1,0 +1,54 @@
+<?php
+# [VARIABLE]
+    $username = '';
+
+# [HANDLE]
+if(isset($_POST['login'])) {
+    // lấy thông tin từ form
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Bắt validate
+    if(!$username) alert('Vui lòng nhập username');
+    else {
+        if(!$password) alert('Vui lòng nhập mật khẩu');
+        else{
+            // Thực hiện lấy thông tin trên database
+            $get_user = pdo_query_one(
+                'SELECT * FROM user WHERE username = "'.$username.'"'
+            );
+            // Kiểm tra
+            if(!$get_user) alert('Tài khoản này không tồn tại');
+            else {
+                // Đăng nhập thành công
+                if(md5($password) == $get_user['password']) {
+                    $_SESSION['user'] = $get_user;
+                    // Chuyển hướng theo role
+                    if($_SESSION['user']['role'] == 0) {
+                        header('Location: '.URL.'admin');
+                        exit;
+                    }else {
+                        header('Location : '.URL);
+                        exit;
+                    }
+                    
+                }
+                // Đăng nhập thất bại
+                else alert('Mật khẩu không chính xác !');
+            }
+        }
+    }
+
+    
+
+
+
+}
+
+# [DATA]
+$data = [
+    'username' => $username
+];
+
+# [RENDER VIEW]
+view('Đăng nhập','login',$data);
