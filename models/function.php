@@ -7,14 +7,14 @@
  * @param $data Mảng dữ liệu
 */
 function view($title,$page,$data) {
-    if(file_exists('../../views/user/'.$page.'.php')) {
+    if(file_exists('views/user/'.$page.'.php')) {
         if(!empty($data)) extract($data);
-        require_once '../../models/user/header.php';
-        require_once '../../views/user/layout/header.php';
-        require_once '../../views/user/'.$page.'.php';
-        require_once '../../views/user/layout/footer.php';
+        require_once 'models/user/header.php';
+        require_once 'views/user/layout/header.php';
+        require_once 'views/user/'.$page.'.php';
+        require_once 'views/user/layout/footer.php';
     }else {
-        die('Trang view <strong>'.$page.'.php</strong> chưa được tạo.<br> <strong>path : ../../views/user/'.$page.'.php</strong> in folder VIEWS');
+        die('<div style="color:red">PHÁT HIỆN LỖI:</div><div style="margin-left:10px">Trang view <strong>'.$page.'.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/user/'.$page.'.php</strong></div>');
     }
 }
 
@@ -25,14 +25,14 @@ function view($title,$page,$data) {
 function view_404($type) {
     $page = '';
     if($type === 'user') {
-        require_once '../../views/user/layout/header.php';
-        require_once '../../views/user/404.php';
-        require_once '../../views/user/layout/footer.php';
+        require_once 'views/user/layout/header.php';
+        require_once 'views/user/404.php';
+        require_once 'views/user/layout/footer.php';
     }
     else if($type === 'admin') {
-        require_once '../../views/admin/layout/header.php';
-        require_once '../../views/admin/404.php';
-        require_once '../../views/admin/layout/footer.php';
+        require_once 'views/admin/layout/header.php';
+        require_once 'views/admin/404.php';
+        require_once 'views/admin/layout/footer.php';
     }else die('$type not valid');
 }
 
