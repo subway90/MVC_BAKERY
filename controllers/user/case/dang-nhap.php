@@ -28,7 +28,8 @@ if(isset($_POST['login'])) {
                         header('Location: '.URL.'admin');
                         exit;
                     }else {
-                        header('Location : '.URL);
+                        header('Location: '.URL);
+                        toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
                         exit;
                     }
                     
