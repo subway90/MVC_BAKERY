@@ -160,3 +160,52 @@ function route($name_case) {
     // Báo lỗi
     die( _s_me_error.'Route <strong> /'.$name_case.'</strong> không tồn tại.'._e_me_error);
 }
+
+/**
+ * Hàm dùng để tạo toast
+ * @param string $type Loại background [danger,warning,success]
+ * @param string $message Tin nhắn cần thông báo
+ */
+function toast_create($type,$message) {
+    $_SESSION['toast'][0] = $type;
+    $_SESSION['toast'][1] = $message;
+
+}
+
+/**
+ * Dùng để show toast (Thường để ở header layout)
+ * @return void
+ */
+function toast_show() {
+    if(!empty($_SESSION['toast'])) {
+        echo '
+        <style>
+        .line-bar {
+            height: 2px;
+            animation: lmao '.(TOAST_TIME/1000).'s linear forwards;
+        }
+        @keyframes lmao {
+            from {
+              width: 100%;
+            }
+            to {
+              width: 0;
+            }
+          }      
+        </style>
+        <div style="z-index: 3;" class="position-fixed end-0 me-1 mt-5 pt-5">
+            <div class="w-100 alert alert-'.$_SESSION['toast'][0].' border-0 alert-dismissible fade show m-0 rounded-0" role="alert">
+                <span class="">'.$_SESSION['toast'][1].'</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="bg-'.$_SESSION['toast'][0].' line-bar"></div>
+        </div>
+        <script>
+            function closeAlert() {
+                document.querySelector(".btn-close").click();
+            }
+            setTimeout(closeAlert,'.TOAST_TIME.')
+        </script>';
+        }
+        $_SESSION['toast'] = [];
+}
