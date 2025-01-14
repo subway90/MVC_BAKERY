@@ -169,7 +169,6 @@ function route($name_case) {
 function toast_create($type,$message) {
     $_SESSION['toast'][0] = $type;
     $_SESSION['toast'][1] = $message;
-
 }
 
 /**
@@ -195,17 +194,17 @@ function toast_show() {
         </style>
         <div style="z-index: 3;" class="position-fixed end-0 me-1 mt-5 pt-5">
             <div class="w-100 alert alert-'.$_SESSION['toast'][0].' border-0 alert-dismissible fade show m-0 rounded-0" role="alert">
-                <span class="">'.$_SESSION['toast'][1].'</span>
+                <span class="ps-2 pe-5 py-2">'.$_SESSION['toast'][1].'</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="bg-'.$_SESSION['toast'][0].' line-bar"></div>
         </div>
         <script>
             function closeAlert() {
-                document.querySelector(".btn-close").click();
+                document    .querySelector(".btn-close").click();
             }
             setTimeout(closeAlert,'.TOAST_TIME.')
         </script>';
-        }
-        $_SESSION['toast'] = [];
+    }
+    unset($_SESSION['toast']);
 }
