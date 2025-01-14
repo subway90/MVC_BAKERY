@@ -10,15 +10,17 @@ if(isset($_GET['act']) && $_GET['act']) {
     $_action=$_arrayURL[0];
     // kiểm tra có phải action của admin
     if($_action === 'admin') {
-        // cắt phần tử đầu tiên, tức xoá phần tử chứa 'admin'
-        $_arrayURL = array_shift($_arrayURL);
+        // Kiểm tra có phải là admin hay không
+        if(!$_SESSION['user'] || $_SESSION['user']['role'] != 0) return route('dang-nhap');
+        // Cắt phần tử đầu tiên, tức xoá phần tử chứa 'admin'
+        $_arrayURL = array_slice($_arrayURL, 1);
         // Kiểm tra request có rỗng không, để lấy action
-        if(!$_arrayURL) $_action = 'thong-ke';
+        if(!$_arrayURL || !$_arrayURL[0]) return route('thong-ke');
         else $_action = $_arrayURL[0];
         // Hiển thị file cho action
         if(file_exists('controllers/admin/case/'.$_action.'.php')) require_once 'controllers/admin/case/'.$_action.'.php';
         // Trả về trang 404 nếu không tìm thấy action
-        else return view_404('user');
+        else return view_404('admin');
     }
     // Trả về action bên user
     else{
