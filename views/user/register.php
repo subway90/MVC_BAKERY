@@ -5,7 +5,7 @@
 
         <div class="d-flex flex-lg-row flex-column-reverse g-0" data-aos="fade-up" data-aos-delay="100">
 
-            <div class="col-lg-7 reservation-img" style="background-image: url(assets/img/reservation.jpg);"></div>
+            <div class="col-lg-7 reservation-img d-lg-block d-none" style="background-image: url(assets/img/reservation.jpg);"></div>
 
             <div class="col-lg-5 border px-lg-3 px-4 py-5 py-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                 <h2 class="text-center mb-3">Đăng kí tài khoản</h2>
