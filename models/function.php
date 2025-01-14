@@ -1,5 +1,8 @@
 <?php
 
+const _s_me_error = '<div style="color:red">PHÁT HIỆN LỖI:</div><div style="margin-left:10px">';
+const _e_me_error = '</div>';
+
 /**
  * Load view từ views/user
  * @param string $title Tiêu đề trang
@@ -133,4 +136,27 @@ function server() {
     print_r($_SERVER) ;
     echo'</pre>';
     exit;
+}
+
+
+/**
+ * Hàm này dùng để chuyển đến case theo yêu cầu.
+ * 
+ * Nếu chuyển đến admin thì thêm admin/ trước route đó.
+ * 
+ * @param string $name_case Tên route muốn chuyển đến
+ */
+function route($name_case) {
+    // Kiểm tra route ở admin
+    if(file_exists('controllers/admin/case/'.$name_case.'.php')){
+        header('Location:'.URL_ADMIN.$name_case);
+        exit;
+    }
+    // Kiểm tra route ở user
+    else if(file_exists('controllers/user/case/'.$name_case.'.php')) {
+        header('Location:'.URL.$name_case);
+        exit;
+    }
+    // Báo lỗi
+    die( _s_me_error.'Route <strong> /'.$name_case.'</strong> không tồn tại.'._e_me_error);
 }
