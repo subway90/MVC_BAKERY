@@ -36,6 +36,11 @@
   ======================================================== -->
 </head>
 
+<?=
+// dùng toast
+toast_show();
+?>
+
 <body class="index-page">
 
     <header id="header" class="header d-flex align-items-center sticky-top">

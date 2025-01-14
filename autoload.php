@@ -13,7 +13,3 @@ require_once 'config.php';
 // models
 require_once 'models/database.php';
 require_once 'models/function.php';
-
-// dùng toast
-toast_show();
-

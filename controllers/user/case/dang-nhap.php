@@ -9,16 +9,16 @@ if(isset($_POST['login'])) {
     $password = $_POST['password'];
 
     // Bắt validate
-    if(!$username) alert('Vui lòng nhập username');
+    if(!$username) toast_create('danger','Vui lòng nhập username');
     else {
-        if(!$password) alert('Vui lòng nhập mật khẩu');
+        if(!$password) toast_create('danger','Vui lòng nhập mật khẩu');
         else{
             // Thực hiện lấy thông tin trên database
             $get_user = pdo_query_one(
                 'SELECT * FROM user WHERE username = "'.$username.'"'
             );
             // Kiểm tra
-            if(!$get_user) alert('Tài khoản này không tồn tại');
+            if(!$get_user) toast_create('danger','Tài khoản này không tồn tại');
             else {
                 // Đăng nhập thành công
                 if(md5($password) == $get_user['password']) {
@@ -34,7 +34,7 @@ if(isset($_POST['login'])) {
                     
                 }
                 // Đăng nhập thất bại
-                else alert('Mật khẩu không chính xác !');
+                else toast_create('danger','Mật khẩu không chính xác !');
             }
         }
     }
