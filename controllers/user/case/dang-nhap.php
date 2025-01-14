@@ -51,4 +51,4 @@ $data = [
 ];
 
 # [RENDER VIEW]
-view('Đăng nhập','login',$data);
+view('user','Đăng nhập','login',$data);
