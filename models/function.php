@@ -9,15 +9,16 @@ const _e_me_error = '</div>';
  * @param string $page Tên file view cần load
  * @param $data Mảng dữ liệu
 */
-function view($title,$page,$data) {
-    if(file_exists('views/user/'.$page.'.php')) {
+function view($type,$title,$page,$data) {
+    if($type != 'admin' && $type != 'user') die(_s_me_error.'Type khai báo <strong>'.$type.'</strong> không phù hợp trong mảng [user,admin] '._e_me_error);
+    if(file_exists('views/'.$type.'/'.$page.'.php')) {
         if(!empty($data)) extract($data);
-        require_once 'models/user/header.php';
-        require_once 'views/user/layout/header.php';
-        require_once 'views/user/'.$page.'.php';
-        require_once 'views/user/layout/footer.php';
+        require_once 'models/'.$type.'/header.php';
+        require_once 'views/'.$type.'/layout/header.php';
+        require_once 'views/'.$type.'/'.$page.'.php';
+        require_once 'views/'.$type.'/layout/footer.php';
     }else {
-        die('<div style="color:red">PHÁT HIỆN LỖI:</div><div style="margin-left:10px">Trang view <strong>'.$page.'.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/user/'.$page.'.php</strong></div>');
+        die(_s_me_error.'Trang view <strong>'.$page.'.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/'.$type.'/'.$page.'.php</strong>'._e_me_error);
     }
 }
 
@@ -26,17 +27,15 @@ function view($title,$page,$data) {
  * @param $type string [user] hoặc [admin]
  */
 function view_404($type) {
-    $page = '';
-    if($type === 'user') {
-        require_once 'views/user/layout/header.php';
-        require_once 'views/user/404.php';
-        require_once 'views/user/layout/footer.php';
+    if($type != 'admin' && $type != 'user') die(_s_me_error.'Type khai báo <strong>'.$type.'</strong> không phù hợp trong mảng [user,admin] '._e_me_error);
+    if(file_exists('views/'.$type.'/404.php')) {
+        require_once 'models/'.$type.'/header.php';
+        require_once 'views/'.$type.'/layout/header.php';
+        require_once 'views/'.$type.'/404.php';
+        require_once 'views/'.$type.'/layout/footer.php';
+    }else {
+        die(_s_me_error.'Trang view <strong>404.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/'.$type.'/404.php</strong>'._e_me_error);
     }
-    else if($type === 'admin') {
-        require_once 'views/admin/layout/header.php';
-        require_once 'views/admin/404.php';
-        require_once 'views/admin/layout/footer.php';
-    }else die('$type not valid');
 }
 
 function alert($content) {
