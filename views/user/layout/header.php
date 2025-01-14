@@ -77,6 +77,9 @@ toast_show();
                     <ul class="dropdown-menu w-100">
                         <li><a class="px-3 dropdown-item" href="#">Thông tin cá nhân</a></li>
                         <li><a class="px-3 dropdown-item" href="#">Lịch sử mua hàng</a></li>
+                        <?php if($is_admin) {?>
+                        <li><a class="px-3 dropdown-item" href="<?=URL_ADMIN?>">Trang quản trị</a></li>
+                        <?php }?>
                         <li>
                             <hr class="px-3 dropdown-divider">
                         </li>
