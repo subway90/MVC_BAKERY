@@ -23,6 +23,7 @@
                             <button class="btn btn-accent" name="login" type="submit">Đăng nhập</button>
                         </div>
                 </form>
+                <a class="text-center mt-5" href="<?=URL?>dang-ki">Tạo tài khoản mới</a>
             </div><!-- End Reservation Form -->
 
         </div>
