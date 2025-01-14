@@ -14,4 +14,6 @@ require_once 'config.php';
 require_once 'models/database.php';
 require_once 'models/function.php';
 
+// dùng toast
+toast_show();
 
