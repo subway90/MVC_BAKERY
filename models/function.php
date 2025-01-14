@@ -123,3 +123,14 @@ function get_ip(){
     }
     return $ip;
 }
+
+/**
+ * Dùng để trả về các thông số của $_SERVER
+ * @return array
+ */
+function server() {
+    echo'<pre>';
+    print_r($_SERVER) ;
+    echo'</pre>';
+    exit;
+}
