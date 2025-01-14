@@ -23,6 +23,21 @@ function view($type,$title,$page,$data) {
 }
 
 /**
+ * Load model theo loại [user,admin]
+ * @param string $type Loại model [user,admin]
+ * @param string $name_model Tên model cần gọi ra
+ * @return void
+ */
+function model($type,$name_model) {
+    if($type != 'admin' && $type != 'user') die(_s_me_error.'Type khai báo <strong>'.$type.'</strong> không phù hợp trong mảng [user,admin] '._e_me_error);
+    if(file_exists('models/'.$type.'/'.$name_model.'.php')) {
+        require_once 'models/'.$type.'/'.$name_model.'.php';
+    }else {
+        die(_s_me_error.'Model <strong> '.$name_model.'</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : models/'.$type.'/'.$name_model.'php</strong>'._e_me_error);
+    }
+}
+
+/**
  * Hiển thị trang 404
  * @param $type string [user] hoặc [admin]
  */
