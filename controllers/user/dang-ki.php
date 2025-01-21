@@ -10,7 +10,7 @@ $error = []; // nội dung mảng lỗi
 
 // nếu submit form
 if(isset($_POST['register'])) {
-    // lấy dữ liệu từ input 
+    // lấy dữ liệu từ input     
     $full_name = clear_input($_POST['full_name']);
     $email = clear_input($_POST['email']);
     $username = clear_input($_POST['username']); 

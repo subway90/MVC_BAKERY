@@ -25,15 +25,15 @@ if(isset($_GET['act']) && $_GET['act']) {
         if(!$_arrayURL || !$_arrayURL[0]) return route('thong-ke');
         else $_action = $_arrayURL[0];
         // Hiển thị file cho action
-        if(file_exists('controllers/admin/case/'.$_action.'.php')) require_once 'controllers/admin/case/'.$_action.'.php';
+        if(file_exists('controllers/admin/'.$_action.'.php')) require_once 'controllers/admin/'.$_action.'.php';
         // Trả về trang 404 nếu không tìm thấy action
         else return view_404('admin');
     }
     // Trả về action bên user
     else{
-        if(file_exists('controllers/user/case/'.$_action.'.php')) require_once 'controllers/user/case/'.$_action.'.php';
+        if(file_exists('controllers/user/'.$_action.'.php')) require_once 'controllers/user/'.$_action.'.php';
         else return view_404('user');
     }
 }
 // Trường hợp không có action
-else require_once 'controllers/user/case/trang-chu.php';
+else require_once 'controllers/user/trang-chu.php';

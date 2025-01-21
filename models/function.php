@@ -162,12 +162,12 @@ function server() {
  */
 function route($name_case) {
     // Kiểm tra route ở admin
-    if(file_exists('controllers/admin/case/'.$name_case.'.php')){
+    if(file_exists('controllers/admin/'.$name_case.'.php')){
         header('Location:'.URL_ADMIN.$name_case);
         exit;
     }
     // Kiểm tra route ở user
-    else if(file_exists('controllers/user/case/'.$name_case.'.php')) {
+    else if(file_exists('controllers/user/'.$name_case.'.php')) {
         header('Location:'.URL.$name_case);
         exit;
     }
