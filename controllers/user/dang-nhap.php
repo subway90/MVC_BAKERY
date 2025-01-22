@@ -1,6 +1,7 @@
 <?php
 
 # [AUTHOR]
+// Kiểm tra đã đăng nhập chưa
 if(!empty($_SESSION['user'])) route('trang-chu');
 
 # [MODEL]
@@ -10,8 +11,6 @@ model('user','user');
     $username = '';
 
 # [HANDLE]
-// Kiểm tra đã đăng nhập chưa
-if($is_user) route('trang-chu');
 
 if(isset($_POST['login'])) {
     // lấy thông tin từ form
