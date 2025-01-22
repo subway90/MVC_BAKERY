@@ -1,4 +1,11 @@
 <?php
+
+# [AUTHOR]
+if(!empty($_SESSION['user'])) route('trang-chu');
+
+# [MODEL]
+model('user','user');
+
 # [VARIABLE]
     $username = '';
 
@@ -18,14 +25,15 @@ if(isset($_POST['login'])) {
         else{
             // Thực hiện lấy thông tin trên database
             $get_user = pdo_query_one(
-                'SELECT * FROM user WHERE username = "'.$username.'"'
+                'SELECT username, password FROM user WHERE username = "'.$username.'"'
             );
             // Kiểm tra
             if(!$get_user) toast_create('danger','Tài khoản này không tồn tại');
             else {
                 // Đăng nhập thành công
                 if(md5($password) == $get_user['password']) {
-                    $_SESSION['user'] = $get_user;
+                    
+                    $_SESSION['user'] = get_one_user_by_username($get_user['username']);
                     // Chuyển hướng theo role
                     if($_SESSION['user']['role'] == 0) {
                         header('Location: '.URL.'admin');
