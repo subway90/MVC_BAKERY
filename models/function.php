@@ -4,6 +4,22 @@ const _s_me_error = '<div style="color:red">PHÁT HIỆN LỖI:</div><div style=
 const _e_me_error = '</div>';
 
 /**
+ * Dùng để xác nhận quyền xác thực theo custom role
+ * @param mixed $type Loại author cần xác thực
+ */
+function author($type) {
+    $list_author = [];
+    $list_name_role = pdo_query('SELECT name_role FROM role ORDER BY created_at ASC');
+    foreach ($list_name_role as $key => $name) $list_author[] = $name['name_role'];
+    if(!in_array($type,$list_author)) die(_s_me_error.'Loại author tên <strong>'.$type.'</strong> không thuộc mảng author ['.implode(' , ',$list_author).']'._e_me_error);
+    else{
+        if(!empty($_SESSION['user'])) if($_SESSION['user']['name_role'] === $type) return 1;
+        else return 0;
+    }
+    
+}
+
+/**
  * Load view từ views/user
  * @param string $title Tiêu đề trang
  * @param string $page Tên file view cần load
