@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="<?= URL ?>assets/img/system/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= URL_STORAGE ?>system/favicon.png" type="image/x-icon">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -56,7 +56,7 @@ toast_show();
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
-                    <li><a href="<?= URL ?>" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a></li>
+                    <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a></li>
                     <li><a href="<?= URL ?>" class="<?= ($page == '615161' ? 'active' : '') ?>">Theo dõi đơn hàng<br></a>
                     </li>
                     <li><a href="<?= URL ?>" class="<?= ($page == '415151' ? 'active' : '') ?>">Liên hệ<br></a></li>
