@@ -34,7 +34,7 @@ if(isset($_POST['login'])) {
                     
                     $_SESSION['user'] = get_one_user_by_username($get_user['username']);
                     // Chuyển hướng theo role
-                    if($_SESSION['user']['role'] == 0) {
+                    if($_SESSION['user']['name_role'] == 'admin') {
                         header('Location: '.URL.'admin');
                         exit;
                     }else {
