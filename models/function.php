@@ -260,3 +260,27 @@ function clear_input($input) {
 // Giữ lại chữ cái, số, dấu gạch dưới, dấu chấm, dấu at, dấu cách và các ký tự tiếng Việt
 return preg_replace('/[^a-zA-Z0-9_. @àáảãạâầấẩẫậêềếểễệîìíỉĩịôồốổỗộơờớởỡợđÀÁẢÃẠÂẦẤẨẪẬÊỀẾỂỄỆÎÌÍỈĨỊÔỒỐỔỖỘƠỜỚỞỠỢĐ]/u', '', $input);
 }
+
+/**
+ * Hàm này dùng để lưu file
+ * @param string $path Đường dẫn thư mục để lưu file
+ * @param mixed $file File cần lưu
+ * @return string Trả về đường dẫn đã lưu nếu lưu thành công, trả về 0 nếu lưu thất bại
+ */
+function save_file($path,$file) {
+    // Mã hóa tên file
+    $file['name'] = uniqid().'.'.pathinfo($file['name'], PATHINFO_EXTENSION);
+    // Tiến hành lưu
+    $check = move_uploaded_file($file["tmp_name"], $path.basename($file["name"]));
+    if($check) return $path.$file['name'];
+    return 0;
+}
+
+/**
+ * Hàm này dùng để xoá file theo PATH
+ * @param mixed $path Đường dẫn file cần xoá
+ */
+function move_file($path) {
+    if (file_exists($path)) (unlink($path));
+    else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.$path._e_me_error);
+}
