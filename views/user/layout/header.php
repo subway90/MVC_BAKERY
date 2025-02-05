@@ -69,7 +69,7 @@
             <div class="dropdown">
                 <?php
                 if (!$_SESSION['user']) { ?>
-                    <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person-circle me-2"></i>Đăng nhập</a>
+                    <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person"></i><span class="ms-2 d-lg-inline d-none">Đăng nhập</span></a>
                 <?php } else { ?>
                     <button class="btn btn-accent rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -87,7 +87,7 @@
                         <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
                     </ul>
                     <?php }?>
-                    <button class="btn border rounded-circle ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
+                    <button class="btn border rounded-circle ms-lg-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
                         <i class="bi bi-basket"></i>
                     </button>
                 </div>
