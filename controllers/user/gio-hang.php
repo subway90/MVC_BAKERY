@@ -26,6 +26,28 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete') {
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
+// Tăng số lượng sản phẩm ở giỏ hàng
+if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'plus') {
+    // Lấy ID sản phẩm
+    if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
+        $id_product = $_arrayURL[2];
+        update_quantity('plus',$id_product);
+        showCanvas();
+        header('Location:'.URL.'thuc-don');
+    }else view_404('user'); // Nếu ID Product không hợp lệ
+}
+
+// Giảm số lượng sản phẩm ở giỏ hàng
+if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'minus') {
+    // Lấy ID sản phẩm
+    if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
+        $id_product = $_arrayURL[2];
+        update_quantity('minus',$id_product);
+        showCanvas();
+        header('Location:'.URL.'thuc-don');
+    }else view_404('user'); // Nếu ID Product không hợp lệ
+}
+
 # [DATA]
 $data = [
 

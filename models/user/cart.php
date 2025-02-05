@@ -40,3 +40,22 @@ function delete_cart($id) {
         }
     }
 }
+/**
+ * Hàm này dùng để cập nhật số lượng
+ * @param mixed $id
+ * @param string $type
+ * @return void
+ */
+function update_quantity($type,$id): void {
+        foreach ($_SESSION['cart'] as $i => $product) { 
+            // Nếu ID sản phẩm đã tồn tại trong giỏ hàng
+            if($_SESSION['cart'][$i]['id_product'] == $id){
+                if($type == 'plus') $_SESSION['cart'][$i]['quantity_product']++; // Thêm số lượng
+                if($type == 'minus') {
+                    if($_SESSION['cart'][$i]['quantity_product']>1) $_SESSION['cart'][$i]['quantity_product']--; // Giảm số lượng
+                }
+                break;
+            }
+
+        }
+}

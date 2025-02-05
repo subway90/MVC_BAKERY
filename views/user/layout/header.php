@@ -110,19 +110,31 @@
                     class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain" alt="...">
                 <div class="col-8 text-start">
                     <div class="h6 text-primary mt-1"><?= $name_product ?></div>
-                    <div class="mt-1">Số lượng : <?=$quantity_product_in_cart?> <span
-                            class="text-primary small ms-2">( giới hạn: <?=number_format($quantity_product,0,',','.')?> )</span></div>
                     <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_product,0,',','.')?>
                             <sup>vnđ</sup></span></div>
-                        <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
-                            <i class="bi bi-trash me-2"></i>Xóa
+                    <div class="mt-1">
+                        <a href="<?=URL?>gio-hang/minus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2 <?=$quantity_product_in_cart < 2 ? 'disabled' : ''?>">
+                            <i class="bi bi-dash"></i>
                         </a>
+                        <span class="px-2"><?=$quantity_product_in_cart?></span>
+                        <a href="<?=URL?>gio-hang/plus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
+                    <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
+                        <i class="bi bi-trash me-2"></i>Xóa
+                    </a>
                 </div>
             </div>
-            <?php }}?>
+            <?php }?>
             <div class="text-center mb-3">
                 <a class="border rounded-5 px-3 py-2" href="#">Thanh toán</a>
             </div>
+            <?php }else{ ?>
+                <div class="text-center mb-3">
+                    <span>Giỏ hàng trống</span>
+                </div>
+            <?php }?>
         </div>
     </div>
     <main class="main">
