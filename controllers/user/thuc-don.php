@@ -24,6 +24,7 @@ foreach ($list_category as $category) {
 # [DATA]
 $data = [
     'array_menu' => $array_menu,
+    'show_canvas' => $_SESSION['canvas'],
 ];
 
 # [RENDER]

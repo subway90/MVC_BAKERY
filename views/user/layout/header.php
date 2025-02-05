@@ -87,14 +87,14 @@
                         <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
                     </ul>
                     <?php }?>
-                    <button class="btn border rounded-circle ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <button class="btn border rounded-circle ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
                         <i class="bi bi-basket"></i>
                     </button>
                 </div>
         </div>
     </header>
     <!-- Canvas Cart -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

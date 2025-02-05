@@ -54,6 +54,8 @@
             <p class="price">
             <?=number_format($product['price_product'],0,',','.')?> <sup>vnđ</sup>
             </p>
+            <a class="border px-2 py-1 rounded-1" href="<?=URL?>gio-hang/add/<?=$product['id_product']?>"><i class="bi bi-bag-plus me-1"></i> Giỏ hàng</a>
+            <a class="border px-2 py-1 rounded-1 ms-3" href="<?=URL?>gio-hang/delete/<?=$product['id_product']?>"><i class="bi bi-bag-check me-1"></i> Mua ngay</a>
           </div><!-- Menu Item -->
         <?php }?>
         </div>
