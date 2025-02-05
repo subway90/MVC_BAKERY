@@ -127,9 +127,16 @@
                             <i class="bi bi-dash"></i>
                         </a>
                         <span class="px-2"><?=$quantity_product_in_cart?></span>
-                        <a href="<?=URL?>gio-hang/plus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2">
+                        <a href="<?=URL?>gio-hang/plus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2 <?=$quantity_product == $quantity_product_in_cart ? 'disabled' : ''?>">
                             <i class="bi bi-plus"></i>
                         </a>
+                        <span class="small">
+                            <?php if($quantity_product) {?>
+                            (còn <span class="text-primary"><?=$quantity_product?></span> cái)
+                            <?php }else{?>
+                                <span class="text-danger">(đã hết hàng)</span>
+                            <?php }?>
+                        </span>
                     </div>
                     <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
                         <i class="bi bi-trash me-2"></i>Xóa
