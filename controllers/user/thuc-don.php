@@ -11,7 +11,7 @@ model('user','menu');
 // Lấy danh sách danh mục
 $list_category = get_all_category();
 
-//Vòng lặp danh mục
+// Vòng lặp danh mục để lấy danh sách sản phẩm của danh mục đó
 foreach ($list_category as $category) {
     $array_menu[] = [
         'name_category' => $category['name_category_product'],
