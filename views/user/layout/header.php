@@ -96,37 +96,33 @@
     <!-- Canvas Cart -->
     <div class="offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h5>
+            <h3 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h3>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <?php
-            foreach ($_SESSION['cart'] as $cart) {
-                $product = pdo_query_one(
-                    'SELECT * FROM product
-                    WHERE id_product ='.$cart['id_product']
-                    .' AND status_product = 1'
-                );
-                if(!empty($product)) extract($product);
-                else continue;
+            if(!empty(list_product_in_cart())) {
+            foreach (list_product_in_cart() as $product) {
+                extract($product);
             ?>
-            <div class="row my-3 mx-1 border rounded-5 rounded-end-0">
-                <img src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>"
+            <div class="row my-3 mx-1 ps-2 border rounded-5 rounded-end-0">
+                <img src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>" onerror="this.onerror=null; this.src='<?=DEFAULT_IMAGE?>';"
                     class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain" alt="...">
                 <div class="col-8 text-start">
                     <div class="h6 text-primary mt-1"><?= $name_product ?></div>
-                    <div class="mt-1">Số lượng : <?=$cart['quantity_product']?> <span
+                    <div class="mt-1">Số lượng : <?=$quantity_product_in_cart?> <span
                             class="text-primary small ms-2">( giới hạn: <?=number_format($quantity_product,0,',','.')?> )</span></div>
                     <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_product,0,',','.')?>
                             <sup>vnđ</sup></span></div>
-                    <form action="" method="post">
                         <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
                             <i class="bi bi-trash me-2"></i>Xóa
                         </a>
-                    </form>
                 </div>
             </div>
-            <?php }?>
+            <?php }}?>
+            <div class="text-center mb-3">
+                <a class="border rounded-5 px-3 py-2" href="#">Thanh toán</a>
+            </div>
         </div>
     </div>
     <main class="main">

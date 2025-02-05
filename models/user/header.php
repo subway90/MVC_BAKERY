@@ -17,3 +17,31 @@ function boolCanvas() {
 function showCanvas() {
     $_SESSION['canvas'] = 'true';
 }
+
+/**
+ * Lấy dữ liệu danh sách sản phẩm trong session giỏ hàng
+ */
+function list_product_in_cart() {
+    $list_product = [];
+    if(!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $cart) {
+            $product = pdo_query_one(
+                'SELECT * FROM product
+                WHERE id_product ='.$cart['id_product']
+                .' AND status_product = 1'
+            );
+            if(!empty($product)) {
+                extract($product);
+                $list_product[] = [
+                    'quantity_product_in_cart' => $cart['quantity_product'],
+                    'name_product' => $name_product,
+                    'quantity_product' => $quantity_product,
+                    'price_product' => $price_product,
+                    'image_product' => $image_product,
+                    'id_product' => $id_product,
+                ];
+            }
+        }
+    }
+    return $list_product;
+}
