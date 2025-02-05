@@ -284,21 +284,3 @@ function move_file($path) {
     if (file_exists($path)) (unlink($path));
     else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.$path._e_me_error);
 }
-
-/**
- * Dùng để hiển thị Canvas giỏ hàng nếu $_SESSION['showCanvasCart'] TRUE
- */
-function boolCanvas() {
-    if($_SESSION['canvas']) {
-        unset($_SESSION['canvas']);
-        return 'show';
-    }
-}
-
-/**
- * Dùng để bật canvas Cart
- * @return void
- */
-function showCanvas() {
-    $_SESSION['canvas'] = 'true';
-}
