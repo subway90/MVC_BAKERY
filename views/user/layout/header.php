@@ -37,8 +37,8 @@
 </head>
 
 <?=
-// dùng toast
-toast_show();
+        // dùng toast
+    toast_show();
 ?>
 
 <body class="index-page">
@@ -47,29 +47,30 @@ toast_show();
         <div class="container position-relative d-flex align-items-center justify-content-between">
 
             <a href="<?= URL ?>" class="logo d-flex align-items-center me-auto me-xl-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">Yummy</h1>
-                <span>.</span>
+                <img src="<?=URL_STORAGE?>system/logo.png" alt="">
+                <!-- <h1 class="sitename">BBB</h1>
+                <span>.</span> -->
             </a>
 
             <nav id="navmenu" class="navmenu">
+            <i class="mobile-nav-toggle d-xl-none bi bi-list ms-2"></i>
                 <ul>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
-                    <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a></li>
-                    <li><a href="<?= URL ?>" class="<?= ($page == '615161' ? 'active' : '') ?>">Theo dõi đơn hàng<br></a>
+                    <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a>
+                    </li>
+                    <li><a href="<?= URL ?>" class="<?= ($page == '615161' ? 'active' : '') ?>">Theo dõi đơn
+                            hàng<br></a>
                     </li>
                     <li><a href="<?= URL ?>" class="<?= ($page == '415151' ? 'active' : '') ?>">Liên hệ<br></a></li>
                     <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                 </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list ms-2"></i>
             </nav>
 
-            <?php
-            if (!$_SESSION['user']) { ?>
-                <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person-circle me-2"></i>Đăng nhập</a>
-            <?php } else { ?>
-                <div class="dropdown">
+            <div class="dropdown">
+                <?php
+                if (!$_SESSION['user']) { ?>
+                    <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person-circle me-2"></i>Đăng nhập</a>
+                <?php } else { ?>
                     <button class="btn btn-accent rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <span class="fw-light small">xin chào</span> <?= $_SESSION['user']['full_name'] ?>
@@ -77,18 +78,44 @@ toast_show();
                     <ul class="dropdown-menu w-100">
                         <li><a class="px-3 dropdown-item" href="#">Thông tin cá nhân</a></li>
                         <li><a class="px-3 dropdown-item" href="#">Lịch sử mua hàng</a></li>
-                        <?php if(author('admin')) {?>
-                        <li><a class="px-3 dropdown-item" href="<?=URL_ADMIN?>">Trang quản trị</a></li>
-                        <?php }?>
+                        <?php if (author('admin')) { ?>
+                            <li><a class="px-3 dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a></li>
+                        <?php } ?>
                         <li>
                             <hr class="px-3 dropdown-divider">
                         </li>
-                        <li><a class="px-3 dropdown-item" href="<?=URL?>dang-xuat">Đăng xuất</a></li>
+                        <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
                     </ul>
+                    <?php }?>
+                    <button class="btn border rounded-circle ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="bi bi-basket"></i>
+                    </button>
                 </div>
-            <?php } ?>
-
         </div>
     </header>
-
+    <!-- Canvas Cart -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="row my-3 mx-1 border rounded-5 rounded-end-0 ">
+                <img src="<?= DEFAULT_IMAGE ?>"
+                    class="p-0 col-4 rounded-5 rounded-end-0 object-fit-cover" alt="...">
+                <div class="col-8 text-start">
+                    <div class="mt-1">name product</div>
+                    <div class="mt-1">Số lượng : 999 <span
+                            class="text-primary small ms-2">( giới hạn: 999 )</span></div>
+                    <div class="mt-1">Giá : <span class="text-primary"><?= number_format(99999) ?>
+                            <sup>vnđ</sup></span></div>
+                    <form action="" method="post">
+                        <button name="removeCart" value="<?= 0 ?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
+                            <i class="bi bi-trash me-2"></i>Xóa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="main">
