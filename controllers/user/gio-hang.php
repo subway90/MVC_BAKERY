@@ -21,6 +21,7 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete') {
     if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
         $id_product = $_arrayURL[2];
         delete_cart($id_product);
+        showCanvas();
         route('thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }

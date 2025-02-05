@@ -100,22 +100,33 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="row my-3 mx-1 border rounded-5 rounded-end-0 ">
-                <img src="<?= DEFAULT_IMAGE ?>"
-                    class="p-0 col-4 rounded-5 rounded-end-0 object-fit-cover" alt="...">
+            <?php
+            foreach ($_SESSION['cart'] as $cart) {
+                $product = pdo_query_one(
+                    'SELECT * FROM product
+                    WHERE id_product ='.$cart['id_product']
+                    .' AND status_product = 1'
+                );
+                if(!empty($product)) extract($product);
+                else continue;
+            ?>
+            <div class="row my-3 mx-1 border rounded-5 rounded-end-0">
+                <img src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>"
+                    class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain" alt="...">
                 <div class="col-8 text-start">
-                    <div class="mt-1">name product</div>
-                    <div class="mt-1">Số lượng : 999 <span
-                            class="text-primary small ms-2">( giới hạn: 999 )</span></div>
-                    <div class="mt-1">Giá : <span class="text-primary"><?= number_format(99999) ?>
+                    <div class="h6 text-primary mt-1"><?= $name_product ?></div>
+                    <div class="mt-1">Số lượng : <?=$cart['quantity_product']?> <span
+                            class="text-primary small ms-2">( giới hạn: <?=number_format($quantity_product,0,',','.')?> )</span></div>
+                    <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_product,0,',','.')?>
                             <sup>vnđ</sup></span></div>
                     <form action="" method="post">
-                        <button name="removeCart" value="<?= 0 ?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
+                        <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
                             <i class="bi bi-trash me-2"></i>Xóa
-                        </button>
+                        </a>
                     </form>
                 </div>
             </div>
+            <?php }?>
         </div>
     </div>
     <main class="main">
