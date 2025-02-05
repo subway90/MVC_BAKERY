@@ -3,6 +3,7 @@
 # [MODEL]
 model('user','cart');
 model('user','header');
+
 # [HANDLE]
 // Thêm sản phẩm vào giỏ hàng
 if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'add') {
@@ -46,6 +47,13 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'minus') {
         showCanvas();
         header('Location:'.URL.'thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
+}
+
+// Xoá tất cả giỏ hàng
+if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete_all') {
+    unset($_SESSION['cart']);
+    showCanvas();
+    header('Location:'.URL.'thuc-don');
 }
 
 # [DATA]
