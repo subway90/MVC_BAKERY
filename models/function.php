@@ -284,3 +284,19 @@ function move_file($path) {
     if (file_exists($path)) (unlink($path));
     else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.$path._e_me_error);
 }
+
+/**
+ * Tạo mã ngẫu nhiên độ dài 24, thích hợp cho làm id
+ * @return string
+ */
+function create_uuid()
+{
+    // Tạo một chuỗi ngẫu nhiên
+    $data = random_bytes(16);
+    // Đặt giá trị phiên bản (4 cho UUID ngẫu nhiên)
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // Phiên bản 4
+    // Đặt giá trị variant (2 cho RFC 4122)
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+    // Chuyển đổi thành UUID
+    return vsprintf('%s-%s-%s-%s-%s', str_split(bin2hex($data), 4));
+}
