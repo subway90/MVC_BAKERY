@@ -185,23 +185,11 @@ function test_array($array) {
 /**
  * Hàm này dùng để chuyển đến case theo yêu cầu.
  * 
- * Nếu chuyển đến admin thì thêm admin/ trước route đó.
- * 
- * @param string $name_case Tên route muốn chuyển đến
+ * @param string $case Tên route muốn chuyển đến
  */
-function route($name_case) {
-    // Kiểm tra route ở admin
-    if(file_exists('controllers/admin/'.$name_case.'.php')){
-        header('Location:'.URL_ADMIN.$name_case);
+function route($case) {
+        header('Location:'.URL.$case);
         exit;
-    }
-    // Kiểm tra route ở user
-    else if(file_exists('controllers/user/'.$name_case.'.php')) {
-        header('Location:'.URL.$name_case);
-        exit;
-    }
-    // Báo lỗi
-    die( _s_me_error.'Route <strong> /'.$name_case.'</strong> không tồn tại.'._e_me_error);
 }
 
 /**
