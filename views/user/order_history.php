@@ -4,9 +4,9 @@
     <p><span>lịch sử</span> <span class="description-title">mua hàng</span></p>
 </div><!-- End Section Title -->
 
-<div class="container">
+<div class="container py-5">
 
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
     <table class="table align-middle" data-aos="fade-up" data-aos-delay="100">
         <thead>
             <tr>
@@ -18,8 +18,9 @@
         </thead>
         <tbody>
             <?php
-            foreach ($list_order as $order) {
-                extract($order);
+            if(!empty($list_order)) {
+                foreach ($list_order as $order) {
+                    extract($order);
             ?>
             <tr>
                 <th><?= $id_order ?></th>
@@ -31,6 +32,12 @@
                     </a>
                 </td>
             </tr>
+            <?php }}else{?>
+                <tr class="align-middle">
+                    <td class="text-center py-5" colspan="4">
+                        Danh sách trống.
+                    </td>
+                </tr>
             <?php }?>
         </tbody>
     </table>
