@@ -45,9 +45,17 @@
   background-color: var(--accent-color) !important;
 }
 
-.btn-primary {
-  background-color: var(--accent-color) !important;
-  color: var(--surface-color) !important;
+.btn-primary,
+.btn-primary:focus {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  transition: 0.3s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
