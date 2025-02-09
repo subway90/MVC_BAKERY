@@ -33,9 +33,11 @@ if(isset($_POST['checkout'])) {
         ); // hoá đơn
     
         foreach ($_SESSION['cart'] as $cart) {
+            // lấy giá sản phẩm lúc này
+            $price_product = pdo_query_value('SELECT price_product FROM product WHERE id_product ='.$cart['id_product']);
             pdo_execute(
-                'INSERT INTO order_detail (id_order,id_product,quantity_order)
-                VALUES ("'.$id_order.'",'.$cart['id_product'].','.$cart['quantity_product'].')'
+                'INSERT INTO order_detail (id_order,id_product,quantity_order,price_order)
+                VALUES ("'.$id_order.'",'.$cart['id_product'].','.$cart['quantity_product'].','.$price_product.')'
             );
         } // hoá đơn chi tiết
     
