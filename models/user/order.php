@@ -46,3 +46,41 @@ function check_order_exist($id_order) {
         WHERE id_order = "'.$id_order.'"'
     );
 }
+
+
+/**
+ * Hàm này để lấy danh sách hoá đơn theo username
+ * @param mixed $username
+ * @return array
+ */
+function get_all_order_by_username($username) {
+    $result = [];
+    // lấy danh sách hoá đơn
+    $list_order = pdo_query(
+        'SELECT *
+        FROM orders
+        WHERE username = "'.$username.'"'
+    );
+
+    // lặp từng hoá đơn để tính tổng
+    foreach($list_order as $order) {
+        // lấy danh sách hoá đơn chi tiết
+        $order_detail = pdo_query(
+            'SELECT d.quantity_order, d.price_order
+            FROM order_detail d
+            JOIN orders o
+            ON d.id_order = o.id_order
+            WHERE d.id_order = "'.$order['id_order'].'"'
+        );
+        // tính tổng tiền
+        $total = 0;
+        foreach ($order_detail as $detail) {
+            $total += $detail['price_order']*$detail['quantity_order'];
+        };
+        $order += ['total'=> $total];
+        $result[] = $order;
+    }
+
+    return $result;
+
+}
