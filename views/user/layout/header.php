@@ -145,11 +145,11 @@
                 </div>
             </div>
             <?php }?>
-            <div class="text-center mb-3">
-                <a class="border rounded-5 px-3 py-2" href="#">Thanh toán</a>
+            <div class="text-center">
+                <a class="border rounded-5 px-3 py-2 w-100 d-block" href="<?= URL ?>thanh-toan">Thanh toán</a>
             </div>
             <?php }else{ ?>
-                <div class="text-center mb-3">
+                <div class="w-100 text-center mb-3">
                     <span>Giỏ hàng trống</span>
                 </div>
             <?php }?>
