@@ -9,7 +9,7 @@
 
             <div class="col-lg-5 border rounded-lg-end-3 rounded-top-3 px-lg-3 px-4 py-5 py-lg-0 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                 <h2 class="text-center mb-3">Đăng nhập</h2>
-                <form action="<?= URL ?>dang-nhap" method="post" role="form" class="">
+                <form action="<?= URL ?>dang-nhap<?=($return_checkout_page) ? '/thanh-toan' : ''?>" method="post" role="form" class="">
                     <div class="row justify-content-center">
                         <div class="px-0 col-lg-10 col-md-6 form-floating mb-3">
                             <input name="username" value="<?=$username?>" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
