@@ -42,7 +42,8 @@ if(isset($_POST['checkout'])) {
         } // hoá đơn chi tiết
     
         toast_create('success','Đơn hàng đã được tạo thành công !');
-        unset($_SESSION['cart']);
+        unset($_SESSION['cart']); // xoá session giỏ hàng
+        route('don-hang/'.$id_order); // chuyển đến trang đơn hàng
     }
     else toast_create('danger',$error_valid[0]); // thông báo lỗi validate
     
