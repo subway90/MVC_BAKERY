@@ -9,14 +9,17 @@ const _e_me_error = '</div>';
  * @return void
  */
 function author($type) {
-    $author = false;
+    $author = false; // trạng thái author
     $array_type = [];
-    // tạo thành mảng nếu là chuỗi
-    if(!is_array($type)) $array_type[] = $type;
-    else $array_type = $type;
-
-    foreach($array_type as $type){
-        if($_SESSION['user']['name_role'] == $type) $author = true;
+    // kiểm tra đã đăng nhập chưa
+    if(!empty($_SESSION['user'])) {
+        // tạo thành mảng nếu là chuỗi
+        if(!is_array($type)) $array_type[] = $type;
+        else $array_type = $type;
+        // so sánh phần tử của mảng author yêu cầu với author hiện tại của user
+        foreach($array_type as $type){
+            if($_SESSION['user']['name_role'] == $type) $author = true;
+        }
     }
     if(!$author) view_404('user');
 }
