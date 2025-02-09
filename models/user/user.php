@@ -47,6 +47,7 @@ function get_one_user_by_username($username) {
         FROM user u
         JOIN role r
         ON u.id_role = r.id_role
-        AND u.status = 1'
+        WHERE u.status = 1
+        AND u.username = "'.$username.'"'
     );
 }
