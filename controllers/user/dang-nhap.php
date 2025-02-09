@@ -9,8 +9,11 @@ model('user','user');
 
 # [VARIABLE]
     $username = '';
+    $return_checkout_page = false; // trạng thái quay lại trang thanh toán
 
 # [HANDLE]
+// Kiểm tra xem có quay lại trang thanh toán không
+if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'thanh-toan') $return_checkout_page = true;
 
 if(isset($_POST['login'])) {
     // lấy thông tin từ form
@@ -33,6 +36,11 @@ if(isset($_POST['login'])) {
                 if(md5($password) == $get_user['password']) {
                     
                     $_SESSION['user'] = get_one_user_by_username($get_user['username']);
+                    // Chuyển hướng trang thanh toán (nếu có)
+                    if($return_checkout_page) {
+                        toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
+                        route('thanh-toan');
+                    }
                     // Chuyển hướng theo role
                     if($_SESSION['user']['name_role'] == 'admin') {
                         header('Location: '.URL.'admin');
@@ -58,7 +66,8 @@ if(isset($_POST['login'])) {
 
 # [DATA]
 $data = [
-    'username' => $username
+    'username' => $username,
+    'return_checkout_page' => $return_checkout_page
 ];
 
 # [RENDER VIEW]
