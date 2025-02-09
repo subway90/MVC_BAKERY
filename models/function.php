@@ -6,17 +6,19 @@ const _e_me_error = '</div>';
 /**
  * Dùng để xác nhận quyền xác thực theo custom role
  * @param mixed $type Loại author cần xác thực
+ * @return void
  */
 function author($type) {
-    $list_author = [];
-    $list_name_role = pdo_query('SELECT name_role FROM role ORDER BY created_at ASC');
-    foreach ($list_name_role as $key => $name) $list_author[] = $name['name_role'];
-    if(!in_array($type,$list_author)) die(_s_me_error.'Loại author tên <strong>'.$type.'</strong> không thuộc mảng author ['.implode(' , ',$list_author).']'._e_me_error);
-    else{
-        if(!empty($_SESSION['user'])) if($_SESSION['user']['name_role'] === $type) return 1;
-        else return 0;
+    $author = false;
+    $array_type = [];
+    // tạo thành mảng nếu là chuỗi
+    if(!is_array($type)) $array_type[] = $type;
+    else $array_type = $type;
+
+    foreach($array_type as $type){
+        if($_SESSION['user']['name_role'] == $type) $author = true;
     }
-    
+    if(!$author) view_404('user');
 }
 
 /**

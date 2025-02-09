@@ -77,8 +77,8 @@
                     </button>
                     <ul class="dropdown-menu w-100">
                         <li><a class="px-3 dropdown-item" href="#">Thông tin cá nhân</a></li>
-                        <li><a class="px-3 dropdown-item" href="#">Lịch sử mua hàng</a></li>
-                        <?php if (author('admin')) { ?>
+                        <li><a class="px-3 dropdown-item" href="<?= URL ?>lich-su-mua-hang">Lịch sử mua hàng</a></li>
+                        <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
                             <li><a class="px-3 dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a></li>
                         <?php } ?>
                         <li>
