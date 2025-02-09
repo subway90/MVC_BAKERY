@@ -64,6 +64,7 @@ function view_404($type) {
         require_once 'views/'.$type.'/layout/header.php';
         require_once 'views/'.$type.'/404.php';
         require_once 'views/'.$type.'/layout/footer.php';
+        exit();
     }else {
         die(_s_me_error.'Trang view <strong>404.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/'.$type.'/404.php</strong>'._e_me_error);
     }
