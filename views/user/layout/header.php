@@ -101,18 +101,19 @@
         </div>
         <div class="offcanvas-body">
             <?php
-            if(!empty(list_product_in_cart())) {
+            $list_product_in_cart = list_product_in_cart();
+            if(!empty($list_product_in_cart)) {
             ?>
             <div class="d-flex justify-content-between">
                 <div class="">
-                    <span>Số lượng sản phẩm:</span> <span class="text-primary"><?=count(list_product_in_cart())?></span>
+                    <span>Số lượng sản phẩm:</span> <span class="text-primary"><?=count($list_product_in_cart)?></span>
                 </div>
                 <div class="">
                     <a href="<?=URL?>gio-hang/delete_all" class="border rounded-2 py-1 px-2 small"><i class="bi bi-trash"></i> tất cả</a>
                 </div>
             </div>
             <?php
-            foreach (list_product_in_cart() as $product) {
+            foreach ($list_product_in_cart as $product) {
                 extract($product);
             ?>
             <div class="row my-3 mx-1 ps-2 border rounded-5 rounded-end-0">
