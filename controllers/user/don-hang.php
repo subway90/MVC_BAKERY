@@ -2,7 +2,6 @@
 
 # [MODEL]
 model('user','order');
-model('user','user');
 
 # [VARIABLE]
 $total = 0;
@@ -11,7 +10,10 @@ $total = 0;
 // lấy id order từ request
 if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     $id_order = $_arrayURL[1];
+    // kiếm tra xem đơn hàng có tồn tại hay không
+    if(!check_order_exist($id_order)) view_404('user');
 }else view_404('user');
+
 
 # [DATA]
 

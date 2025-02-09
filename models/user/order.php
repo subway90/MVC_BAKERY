@@ -33,3 +33,16 @@ function get_one_order_by_id($id_order) {
         'order_detail' => $order_detail,
     ];
 }
+
+/**
+ * Hàm này kiểm tra xem đơn hàng có tồn tại hay không
+ * @param mixed $id_order Mã đơn hàng cần kiểm tra
+ * @return string
+ */
+function check_order_exist($id_order) {
+    return pdo_query_one(
+        'SELECT id_order
+        FROM orders 
+        WHERE id_order = "'.$id_order.'"'
+    );
+}
