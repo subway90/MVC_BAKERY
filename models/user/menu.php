@@ -22,6 +22,7 @@ function get_all_product_by_slug_category($slug) {
         'SELECT * FROM product p
         JOIN category_product c
         ON c.id_category_product = p.id_category_product
-        WHERE c.slug_category_product = "'.$slug.'"'
+        WHERE c.slug_category_product = "'.$slug.'"
+        AND p.status_product = 1'
     );
 }
