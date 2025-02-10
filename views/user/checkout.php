@@ -59,9 +59,7 @@
             <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
             <div class="row w-100">
             <?php
-            $list_product_in_cart = list_product_in_cart();
             if(!empty($list_product_in_cart)) {
-                $total = 0;
             ?>
             <div class="d-flex justify-content-between">
                 <h1>Giỏ hàng</h1>
@@ -69,7 +67,6 @@
             <?php
             foreach ($list_product_in_cart as $product) {
                 extract($product);
-                $total += $price_product*$quantity_product_in_cart;
             ?>
             <div class="row justify-content-between px-4 my-2 mx-1 border rounded-5 align-items-center">
                 <img style="width:80px" src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>" onerror="this.onerror=null; this.src='<?=DEFAULT_IMAGE?>';" class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain" alt="...">
@@ -88,7 +85,7 @@
                 <span>Số lượng sản phẩm:</span> <span class="text-primary"><?=count($list_product_in_cart)?></span>
             </div>
             <div class="text-center">
-                <span class="h6 text-primary border rounded-5 py-2 w-100 d-block">Tổng: <strong><?=number_format($total,0,',','.')?></strong><sup> vnđ</sup></span>
+                <span class="h6 text-primary border rounded-5 py-2 w-100 d-block">Tổng: <strong><?=number_format($total_cart,0,',','.')?></strong><sup> vnđ</sup></span>
             </div>
             <?php }else{ ?>
                 <div class="text-center mb-3">

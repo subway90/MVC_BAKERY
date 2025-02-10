@@ -101,6 +101,7 @@
         <div class="offcanvas-body">
             <?php
             $list_product_in_cart = list_product_in_cart();
+            $total_cart = total_cart();
             if(!empty($list_product_in_cart)) {
             ?>
             <div class="d-flex justify-content-between">
@@ -145,6 +146,10 @@
             </div>
             <?php }?>
             <div class="text-center">
+                <div class="d-flex justify-content-between text-primary p-2">
+                   <h5 class="fw-bold">Tổng:</h5>
+                   <div class=""><?= number_format($total_cart,0,',','.') ?> <sup>vnđ</sup></div>
+                </div>
                 <a class="border rounded-5 px-3 py-2 w-100 d-block" href="<?= URL ?>thanh-toan">Thanh toán</a>
             </div>
             <?php }else{ ?>
