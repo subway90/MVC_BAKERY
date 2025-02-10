@@ -9,7 +9,7 @@
     <div class="container-fluid row mt-lg-5 mt-2" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-7 col-12 px-lg-5 ps-4 ps-lg-0">
             <div class="row">
-            <div class="col-12 text-start border-bottom mb-4">
+                <div class="col-12 text-start border-bottom mb-4">
                     <h4>Thông tin <span class="text-primary">đơn hàng</span></h4>
                 </div>
                 <div class="col-12 d-flex flex-row">
@@ -22,15 +22,6 @@
                 </div>
                 <div class="col-12 d-flex flex-row">
                     <div class="col-4 fw-bold text-start text-primary">
-                        Tổng tiền:
-                    </div>
-                    <div class="">
-                        <?=number_format($total,0,',','.')?>
-                        <sup>vnđ</sup>
-                    </div>
-                </div>
-                <div class="col-12 d-flex flex-row">
-                    <div class="col-4 fw-bold text-start text-primary">
                         Trạng thái:
                     </div>
                     <div class="">
@@ -39,10 +30,46 @@
                 </div>
                 <div class="col-12 d-flex flex-row">
                     <div class="col-4 fw-bold text-start text-primary">
-                        Phương thức thanh toán:
+                        Địa chỉ giao:
                     </div>
                     <div class="">
-                        <?=$order['method_payment'] == 1 ? 'Tiền mặt (COD)' : ($order['method_payment'] == 2 ? 'Ví điện tử VNPAY' : 'Ví điện tử Momo')?>
+                        <?=$order['address_order']?>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Ghi chú:
+                    </div>
+                    <div class="">
+                        <?=$order['note_order'] ?? '<span class="text-muted fst-italic>Trống</span>'?>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Ngày tạo đơn:
+                    </div>
+                    <div class="">
+                        <?=format_time($order['created_at'],'lúc hh:mm DD/MM/YYYY')?>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Ngày cập nhật:
+                    </div>
+                    <div class="">
+                        <?=$order['updated_at'] ? format_time($order['created_at'],'lúc hh:mm DD/MM/YYYY') : '<span class="text-muted fst-italic">chưa cập nhật</span>'?>
+                    </div>
+                </div>
+                <div class="col-12 text-start border-bottom my-4">
+                    <h4>Thông tin <span class="text-primary">thanh toán</span></h4>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Tổng thanh toán:
+                    </div>
+                    <div class="">
+                        <?=number_format($total,0,',','.')?>
+                        <sup>vnđ</sup>
                     </div>
                 </div>
                 <div class="col-12 d-flex flex-row">
@@ -51,6 +78,14 @@
                     </div>
                     <div class="">
                         <?=$order['status_payment'] ? 'Đã thanh toán' : 'Chưa thanh toán'?>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Phương thức thanh toán:
+                    </div>
+                    <div class="">
+                        <?=$order['method_payment'] == 1 ? 'Tiền mặt (COD)' : ($order['method_payment'] == 2 ? 'Ví điện tử VNPAY' : 'Ví điện tử Momo')?>
                     </div>
                 </div>
                 <div class="col-12 text-start border-bottom my-4">
@@ -73,6 +108,21 @@
                     </div>
                     <div class="">
                         <?=$order['email']?>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Điện thoại:
+                    </div>
+                    <div class="">
+                        <?=$order['phone']?>
+                    </div>
+                </div><div class="col-12 d-flex flex-row">
+                    <div class="col-4 fw-bold text-start text-primary">
+                        Địa chỉ:
+                    </div>
+                    <div class="">
+                        <?=$order['address']?>
                     </div>
                 </div>
             </div>
