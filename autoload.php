@@ -2,6 +2,7 @@
 // hàm khởi tạo
 ob_start();
 session_start();
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 // Khởi tạo các session
 if(!isset($_SESSION['user'])) $_SESSION['user'] = '';
