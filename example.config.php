@@ -14,7 +14,7 @@
 
 // const VNPAY_TMNCODE = '';
 // const VNPAY_HASHKEY = '';
-// const VNPAY_URL_RETURN = URL.'/thanh-toan?call-back-vnpay';
+// const VNPAY_URL_RETURN = URL.'thanh-toan?call-back-vnpay';
 // const VNPAY_URL_SANDBOX = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
 
 // const TOAST_TIME = 3000;
