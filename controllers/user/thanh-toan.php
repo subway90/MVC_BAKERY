@@ -3,6 +3,7 @@
 # [MODEL]
 model('user','checkout');
 model('user','header');
+model('user','mailer');
 
 # [VARIABLE]
 $address_order = $note_order = '';
@@ -136,6 +137,21 @@ if($bool_checkout) {
         );
     } // hoá đơn chi tiết
 
+    // tạo nội dung gửi mail
+    $data_checkout = [
+        'id_order' => $id_order,
+        'note_order' => $note_order ?? '(trống)',
+        'address_order' => $address_order,
+        'method_payment' => $method_payment == 1 ? 'Thanh toán khi giao hàng (COD)' : (($method_payment == 2) ? 'Thanh toán ví điện tử VNPAY' : 'Thanh toán ví điện tử MOMO'),
+        'status_payment' => $status_payment ? 'Đã thanh toán' : 'Chưa thanh toán',
+        'total_cart' => total_cart(),
+        'list_cart' => list_product_in_cart(),
+    ];
+    $content = content_checkout($data_checkout);
+    // gửi mail hoá đơn
+    send_mail($_SESSION['user']['email'],'Đơn hàng '.$id_order,$content);
+
+    // thông báo thành công và chuyển trang
     toast_create('success','Đơn hàng đã được tạo thành công !');
     unset($_SESSION['cart']); // xoá session giỏ hàng
     unset($_SESSION['checkout']); // xoá session thanh toán
