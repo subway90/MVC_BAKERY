@@ -59,7 +59,8 @@ function get_all_order_by_username($username) {
     $list_order = pdo_query(
         'SELECT *
         FROM orders
-        WHERE username = "'.$username.'"'
+        WHERE username = "'.$username.'"
+        ORDER BY created_at DESC'
     );
 
     // lặp từng hoá đơn để tính tổng
