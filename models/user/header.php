@@ -45,3 +45,27 @@ function list_product_in_cart() {
     }
     return $list_product;
 }
+
+/**
+ * Hàm này dùng để trả về tổng tiền trong giỏ hàng
+ * @return int
+ */
+function total_cart() {
+
+    $total = 0;
+
+    if(!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $cart) {
+            $get_price_product = pdo_query_value(
+                'SELECT price_product 
+                FROM product
+                WHERE id_product ='.$cart['id_product'].'
+                AND status_product = 1'
+            );
+
+            $total += $cart['quantity_product']*$get_price_product;
+        }
+    }
+
+    return $total;
+}
