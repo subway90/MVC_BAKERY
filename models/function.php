@@ -251,8 +251,8 @@ function toast_show() {
  * @return array|string|null
  */
 function clear_input($input) {
-// Giữ lại chữ cái, số, dấu gạch dưới, dấu chấm, dấu at, dấu cách và các ký tự tiếng Việt
-return preg_replace('/[^a-zA-Z0-9_. @àáảãạâầấẩẫậêềếểễệîìíỉĩịôồốổỗộơờớởỡợđÀÁẢÃẠÂẦẤẨẪẬÊỀẾỂỄỆÎÌÍỈĨỊÔỒỐỔỖỘƠỜỚỞỠỢĐ]/u', '', $input);
+    // Chuyển đổi các kí tự đặc biệt thành mã code HTML
+    return filter_var($input, FILTER_SANITIZE_STRING);
 }
 
 /**
