@@ -4,6 +4,7 @@
 model('user','checkout');
 model('user','header');
 model('user','mailer');
+model('user','vnpay');
 
 # [VARIABLE]
 $address_order = $note_order = '';
@@ -45,35 +46,12 @@ if(isset($_POST['checkout'])) {
         }
         // thanh toán VNPAY
         elseif($method_payment == 2) {
-            // cấu hình vnpay
-            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+            // Lấy mã hoá đơn
             $id_order = $_SESSION['checkout']['id_order'];
-            $vnp_Amount = total_cart() * 100;
-            $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-            $vnpUrl = VNPAY_URL_SANDBOX;
-            // mảng data vnpay
-            $vnpData = [
-                "vnp_Version" => "2.1.0",
-                "vnp_TmnCode" => VNPAY_TMNCODE,
-                "vnp_Amount" => $vnp_Amount,
-                "vnp_Command" => "pay",
-                "vnp_CreateDate" => date('YmdHis'),
-                "vnp_CurrCode" => "VND",
-                "vnp_IpAddr" => $_SERVER['REMOTE_ADDR'],
-                "vnp_Locale" => "vn",
-                "vnp_OrderInfo" => 'Thanh toán hoá đơn ' . $id_order,
-                "vnp_OrderType" => "other",
-                "vnp_ReturnUrl" => VNPAY_URL_RETURN,
-                "vnp_TxnRef" => $id_order,
-                "vnp_ExpireDate" => date('YmdHis', strtotime('+15 minutes', strtotime(date("YmdHis")))),
-            ];
-            // code xử lí tạo url vnpay
-            ksort($vnpData);
-            $queryString = http_build_query($vnpData);
-            $vnp_SecureHash = hash_hmac('sha512', $queryString, VNPAY_HASHKEY);
-            $vnpUrl .= "?" . $queryString . '&vnp_SecureHash=' . $vnp_SecureHash;
-
-            header('Location: ' . $vnpUrl);
+            // Tạo url thanh toán
+            $url_vnpay = create_vnpay_url($id_order,total_cart(),'Thanh toán hoá đơn '.$id_order);
+            // Đi đến trang thanh toán
+            header('Location: ' . $url_vnpay);
             die();
         }
         // thanh toán MOMO
@@ -83,41 +61,18 @@ if(isset($_POST['checkout'])) {
 
 
 
-// xử lí callback (nếu có)
+// xử lí callback thanh toán vnpay (nếu có)
 if (isset($_GET['callback-vnpay'])) {
-    if (isset($_GET['vnp_SecureHash']) && $_GET['vnp_SecureHash']) {
-        // xử lí
-        $vnp_SecureHash = $_GET['vnp_SecureHash'];
-        $inputData = array();
-        foreach ($_GET as $key => $value) {
-            if (substr($key, 0, 4) == "vnp_") {
-                $inputData[$key] = $value;
-            }
-        }
-        unset($inputData['vnp_SecureHash']);
-        ksort($inputData);
-        $hashData = "";
-        $i = 0;
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
-            } else {
-                $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
-                $i = 1;
-            }
-        }
-
-        $secureHash = hash_hmac('sha512', $hashData, VNPAY_HASHKEY);
-        // Request call-back trả về hợp lệ
-        if ($secureHash == $vnp_SecureHash) {
-            // Xét trạng thái thanh toán VNPAY trả về
-            if ($_GET['vnp_ResponseCode'] == '00') {
-                $bool_checkout = true; // lưu database
-                $status_payment = 1;   // trạng thái thanh toán
-            }
-            else toast_create('danger','Thanh toán VNPAY thất bại');
-        } else view_404('user');
+    $check_vnpay = check_callback_vnpay($_GET);
+    // Nếu callback có trạng thái
+    if($check_vnpay) {
+        if($check_vnpay == 1) {
+            $bool_checkout = true; // lưu database
+            $status_payment = 1;   // trạng thái thanh toán
+        }else toast_create('danger','Thanh toán VNPAY thất bại !');
     }
+    //Request callback trả về không hợp lệ
+    else return view_404('user');
 }
 
 // lưu database
