@@ -316,3 +316,14 @@ function view_json($status,$data) {
     $data = array_merge(['status' => $status],$data);
     echo json_encode($data);
 }
+
+/**
+ * Hàm này dùng để in ra mảng lỗi validate
+ * @param $array mảng lỗi
+ * @return void
+ */
+function show_error($array) {
+    if(!empty($array)){ 
+        foreach ($array as $error) echo'<div class="text-danger small mb-2"><i class="fas fa-exclamation-triangle me-2"></i>'.$error.'</div>';
+    }
+}
