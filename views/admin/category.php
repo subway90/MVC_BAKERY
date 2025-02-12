@@ -19,7 +19,7 @@
                         <?php if(!$status_page) {?>
                             <a href="<?=URL_ADMIN?>quan-li-danh-muc" class="btn btn-outline-success">Quay về Danh sách hoạt động</a>
                         <?php } else {?>
-                            <a href="<?=URL_ADMIN?>quan-li-danh-muc/them" class="btn btn-primary me-3"><i class="fa fas fa-plus me-2"></i> Thêm</a>
+                            <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalAddCategoryProduct"><i class="fa fas fa-plus me-2"></i> Thêm</button>
                             <a href="<?=URL_ADMIN?>quan-li-danh-muc/danh-sach-xoa" class="btn btn-outline-danger"><i class="fa fas fa-trash me-2"></i>Danh sách xoá</a>
                         <?php }?>
                     </div>
@@ -29,7 +29,7 @@
                 <div class="p-4"><input type="text" placeholder="Nhập thông tin tìm kiếm"
                         class="form-control form-control--search mx-auto" id="table-search" /></div>
                 <div class="sa-divider"></div>
-                <table class="sa-datatables-init" data-order="[[ 1, &quot;asc&quot; ]]"
+                <table class="sa-datatables-init" data-order="[[ 0, &quot;asc&quot; ]]"
                     data-sa-search-input="#table-search">
                     <thead>
                         <tr>
@@ -87,4 +87,31 @@
     </div>
 </div>
 
+<!-- Modal thêm danh mục -->
+
+
+
+<div class="modal fade" id="modalAddCategoryProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục mới</h5>
+                <button type="button" class="sa-close sa-close--modal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+            <div class="modal-body px-5">
+                <?=show_error($error_valid)?>
+                <div class="form-floating mb-3">
+                    <input name="input_name" value="<?=$input_name?>" type="text" class="form-control" id="name" placeholder="input">
+                    <label for="name">Tên danh mục</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button name="add" type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
             
