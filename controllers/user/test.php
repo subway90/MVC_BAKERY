@@ -1,8 +1,5 @@
 <?php
 
-# [HEADER]
-header('Content-Type: application/json');
-
 # [DATA]
 $data = [
     "vnpay" => [
@@ -22,4 +19,4 @@ $data = [
 ];
 
 # [RENDER]
-echo json_encode($data);
+view_json(200,$data);

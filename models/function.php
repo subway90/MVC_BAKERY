@@ -304,3 +304,15 @@ function create_uuid()
     // Chuyển đổi thành UUID
     return vsprintf('%s-%s-%s-%s-%s', str_split(bin2hex($data), 4));
 }
+
+/**
+ * Hàm này để trả dữ liệu dạng JSON
+ * @param int $status
+ * @param array $data
+ * @return void
+ */
+function view_json($status,$data) {
+    header('Content-Type: application/json');
+    $data = array_merge(['status' => $status],$data);
+    echo json_encode($data);
+}
