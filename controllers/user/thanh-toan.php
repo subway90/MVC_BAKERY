@@ -5,6 +5,7 @@ model('user','checkout');
 model('user','header');
 model('user','mailer');
 model('user','vnpay');
+model('user','momo');
 
 # [VARIABLE]
 $address_order = $note_order = '';
@@ -39,23 +40,31 @@ if(isset($_POST['checkout'])) {
 
     // phân loại phương thức thanh toán
     if($_SESSION['checkout']) {
-        // thanh toán khi giao hàng COD
+        // lấy mã hoá đơn
+        $id_order = $_SESSION['checkout']['id_order'];
+
+        // TH thanh toán khi giao hàng COD
         if($method_payment == 1) {
             $status_payment = 0;
             $bool_checkout = true;
         }
-        // thanh toán VNPAY
+        // TH thanh toán VNPAY
         elseif($method_payment == 2) {
-            // Lấy mã hoá đơn
-            $id_order = $_SESSION['checkout']['id_order'];
             // Tạo url thanh toán
             $url_vnpay = create_vnpay_url($id_order,total_cart(),'Thanh toán hoá đơn '.$id_order);
             // Đi đến trang thanh toán
             header('Location: ' . $url_vnpay);
             die();
         }
-        // thanh toán MOMO
-        else toast_create('warning','Phương thức thanh toán MOMO tạm thời bị gián đoạn !');
+        // TH thanh toán MOMO
+        elseif($method_payment == 3) {
+            // Tạo url thanh toán
+            $url_momo = create_momo_url($id_order,total_cart(),'thanh toán hoá đơn '.$id_order);
+            // Đi đến trang thanh toán
+            header('Location: ' . $url_momo);
+            die();
+        }
+        else toast_create('danger','Phương thức thanh toán không hợp lệ');
     }
 }
 
@@ -70,6 +79,20 @@ if (isset($_GET['callback-vnpay'])) {
             $bool_checkout = true; // lưu database
             $status_payment = 1;   // trạng thái thanh toán
         }else toast_create('danger','Thanh toán VNPAY thất bại !');
+    }
+    //Request callback trả về không hợp lệ
+    else return view_404('user');
+}
+
+// xử lí callback thanh toán momo (nếu có)
+if (isset($_GET['callback-momo'])) {
+    $check_momo = check_callback_momo();
+    // Nếu callback có trạng thái
+    if($check_momo) {
+        if($check_momo == 1) {
+            $bool_checkout = true; // lưu database
+            $status_payment = 1;   // trạng thái thanh toán
+        }else toast_create('danger','Thanh toán MOMO thất bại !');
     }
     //Request callback trả về không hợp lệ
     else return view_404('user');
