@@ -43,7 +43,7 @@ function create_user($full_name,$email,$username,$password) {
  */
 function get_one_user_by_username($username) {
     return pdo_query_one(
-        'SELECT u.username, u.email, u.full_name, u.phone, u.address, u.status, u.created_at, u.updated_at, r.name_role
+        'SELECT u.username, u.email, u.full_name, u.phone, u.address, u.avatar, u.status, u.created_at, u.updated_at, r.name_role
         FROM user u
         JOIN role r
         ON u.id_role = r.id_role
