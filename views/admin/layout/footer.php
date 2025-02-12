@@ -55,5 +55,14 @@
         });
     </script>
     <!-- //Summernote JS - CDN Link -->
+    <!-- Hiện modal tự động sau khi tải trang -->
+    <?php if(isset($show_modal)) {?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('<?=$show_modal?>'));
+            myModal.show();
+        });
+    </script>
+    <?php }?>
 </body>
 </html>
