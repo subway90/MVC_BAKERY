@@ -28,7 +28,6 @@
     <!-- //Summernote CSS - CDN Link -->
     
 </head>
-<div class="mt-5">
     <?=toast_show();//dùng toast?>
 </div>
 <body>

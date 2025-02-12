@@ -238,7 +238,7 @@ function toast_show() {
             }
           }      
         </style>
-        <div style="z-index: 3;" class="position-fixed end-0 me-1 mt-5 pt-5">
+        <div style="z-index: 9999;" class="position-fixed end-0 me-1 mt-5 pt-5">
             <div class="w-100 alert alert-'.$_SESSION['toast'][0].' border-0 alert-dismissible fade show m-0 rounded-0" role="alert">
                 <span class="ps-2 pe-5 py-2">'.$_SESSION['toast'][1].'</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
