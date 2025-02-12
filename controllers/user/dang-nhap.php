@@ -34,11 +34,12 @@ if(isset($_POST['login'])) {
             else {
                 // Đăng nhập thành công
                 if(md5($password) == $get_user['password']) {
-                    
+                    // Lưu dữ liệu user vào session
                     $_SESSION['user'] = get_one_user_by_username($get_user['username']);
+                    // Thông báo toast
+                    toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
                     // Chuyển hướng trang thanh toán (nếu có)
                     if($return_checkout_page) {
-                        toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
                         route('thanh-toan');
                     }
                     // Chuyển hướng theo role
@@ -47,7 +48,6 @@ if(isset($_POST['login'])) {
                         exit;
                     }else {
                         header('Location: '.URL);
-                        toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
                         exit;
                     }
                     
