@@ -186,6 +186,16 @@ function test_array($array) {
     exit;
 }
 
+/**
+ * Dùng để trả về các thông số của $input
+ * @param $input Giá trị cần hiển thị
+ * @return mixed
+ */
+function test($input) {
+    var_dump($input);
+    exit;
+}
+
 
 /**
  * Hàm này dùng để chuyển đến case theo yêu cầu.
