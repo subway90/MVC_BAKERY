@@ -93,7 +93,7 @@ function create_token($length){
  * Hàm này dùng để loại bỏ dấu của chuỗi
  * @param string $input Chuỗi cần loại bỏ dấu
  */
-function remove_mark_string($input) {
+function create_slug($input) {
     $search = array(
         '#(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)#', #1
         '#(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)#',#2
@@ -129,7 +129,7 @@ function remove_mark_string($input) {
         '-',#15
     );
     $input = preg_replace($search, $replace, $input);
-    $input = preg_replace('/(-)+/', ' ', $input);
+    $input = preg_replace('/(-)+/', '-', $input);
     return $input;
 }
 
