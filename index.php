@@ -16,7 +16,7 @@ if(isset($_GET['act']) && $_GET['act']) {
         // Cắt phần tử đầu tiên, tức xoá phần tử chứa 'admin'
         $_arrayURL = array_slice($_arrayURL, 1);
         // Kiểm tra request có rỗng không, để lấy action
-        if(!$_arrayURL || !$_arrayURL[0]) return route('thong-ke');
+        if(!$_arrayURL || !$_arrayURL[0]) return route('admin/thong-ke');
         else $_action = $_arrayURL[0];
         // Hiển thị file cho action
         if(file_exists('controllers/admin/'.$_action.'.php')) require_once 'controllers/admin/'.$_action.'.php';
