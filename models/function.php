@@ -327,3 +327,32 @@ function show_error($array) {
         foreach ($array as $error) echo'<div class="text-danger small mb-2"><i class="fas fa-exclamation-triangle me-2"></i>'.$error.'</div>';
     }
 }
+
+/**
+ * Hàm này dùng để tự động đăng nhập khi vừa truy cập trình duyệt
+ * @return void
+ */
+function auto_login() {
+    // Nếu session user rỗng, tức là chưa đăng nhập
+    if(empty($_SESSION['user'])) {
+        // nếu có cookie token_remember
+        if(isset($_COOKIE['token_remember'])) $token_remember = $_COOKIE['token_remember'];
+        else $token_remember = '';
+        // nếu có value
+        if($token_remember) {
+            // lấy thông tin user bằng token
+            $get_user = pdo_query_one(
+                'SELECT u.username, u.email, u.full_name, u.phone, u.address, u.avatar, u.status, u.created_at, u.updated_at, r.name_role
+                FROM user u
+                JOIN role r
+                ON u.id_role = r.id_role
+                WHERE u.status = 1
+                AND u.token_remember = "'.$token_remember.'"'
+            );
+            // nếu lấy thông tin thành công
+            if($get_user) $_SESSION['user'] = $get_user;
+            // thông báo toast
+            toast_create('success','Chào mừng bạn quay trở lại '.WEB_NAME);
+        }
+    }
+}
