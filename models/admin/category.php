@@ -6,9 +6,13 @@
  */
 function get_all_category() {
     return pdo_query(
-        'SELECT * FROM category_product 
-        WHERE status_category_product = 1 
-        ORDER BY created_at ASC'
+        'SELECT c.*, SUM(p.id_product) total_product
+        FROM category_product c
+        LEFT JOIN product p
+        ON p.id_category_product = c.id_category_product
+        WHERE c.status_category_product = 1 
+        GROUP BY c.name_category_product
+        ORDER BY c.created_at ASC'
     );
 };
 
