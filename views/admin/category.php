@@ -35,11 +35,10 @@
                         <tr>
                             <th class="w-min">ID</th>
                             <th class="min-w-10x">Tên danh mục</th>
-                            <th class="min-w-5x">Trạng thái</th>
+                            <th class="min-w-5x">Số lượng sản phẩm</th>
                             <th class="min-w-5x">Ngày tạo</th>
                             <th class="min-w-5x">Ngày cập nhật</th>
-                            <th class="min-w-5x">Hành động</th>
-                            <th class="w-min" data-orderable="false"></th>
+                            <th class="min-w-5x" data-orderable="false">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,31 +55,15 @@
                             <td>
                                 <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-tin-tuc/<?=$slug_category_product?>"><strong><?= $name_category_product ?></strong></a>
                             </td>
-                            <td class="text-nowrap"> <?= ($status_category_product == 1) ? '<div class="badge badge-sa-success">Hoạt động</div>' : '<div class="badge badge-sa-warning">Ẩn</div>' ?> </td>
+                            <td> 
+                                <?= ($total_product) ? '<div class="badge badge-sa-success">'.$total_product.' sản phẩm</div>' : '<div class="badge badge-sa-warning">0 sản phẩm</div>' ?> </td>
                             <td><?= format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') ?></td>
                             <td><?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted small">Chưa cập nhật</span>'?></td>
                             <td>
                                 <form method="post">
                                     <button name="open_edit" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#modalEditCategoryProduct"><i class="fa fas fa-edit me-2"></i> Sửa</button>
+                                    <button name="open_edit" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-trash me-2"></i> Xoá</button>
                                 </form>
-                            </td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-sa-muted btn-sm" type="button" id="customer-context-menu-0" data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="customer-context-menu-0">
-                                        <?php if($status_page) {?>
-                                        <li>
-                                            <a class="dropdown-item text-danger" href="<?=URL_ADMIN?>danh-muc-tin-tuc/<?=$slug_category?>/xoa/<?=$id_blog?>"><i class="fa fa-sm me-1 fas fa-trash"></i> Xoá</a>
-                                        </li>
-                                        <?php }else{?>
-                                        <li>
-                                            <a class="dropdown-item text-success" href="<?=URL_ADMIN?>danh-muc-tin-tuc/<?=$slug_category?>/khoi-phuc/<?=$id_blog?>"><i class="fa fa-sm me-1 fas fa-trash-restore"></i> Khôi phục</a>
-                                        </li>
-                                        <?php }?>
-                                    </ul>
-                                </div>
                             </td>
                         </tr>
                     <?php
