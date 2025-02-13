@@ -34,8 +34,16 @@ if(isset($_POST['login'])) {
             else {
                 // Đăng nhập thành công
                 if(md5($password) == $get_user['password']) {
-                    // Lưu dữ liệu user vào session
+                    
                     $_SESSION['user'] = get_one_user_by_username($get_user['username']);
+                    // Tạo token remember
+                    $token_remember = create_uuid();
+                    // Lưu token remember vào database
+                    pdo_execute(
+                        'UPDATE user SET token_remember ="'.$token_remember.'" WHERE username ="'.$_SESSION['user']['username'].'"'
+                    );
+                    // Lưu token remember vào cookie (thời hạn là 1 tháng)
+                    setcookie('token_remember', $token_remember, time() + (86400 * 30));
                     // Thông báo toast
                     toast_create('success','<i class="bi bi-check-circle me-2"></i> Đăng nhập thành công');
                     // Chuyển hướng trang thanh toán (nếu có)
