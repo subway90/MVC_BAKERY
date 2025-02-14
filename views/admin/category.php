@@ -58,6 +58,9 @@
                             </td>
                             <td>
                                 <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-tin-tuc/<?=$slug_category_product?>"><strong><?= $name_category_product ?></strong></a>
+                                <div class="samll text-muted">
+                                    <?= $description_category_product ?>
+                                </div>
                             </td>
                             <td> 
                                 <?= ($total_product) ? '<div class="badge badge-sa-success">'.$total_product.' sản phẩm</div>' : '<div class="badge badge-sa-warning">0 sản phẩm</div>' ?> 
@@ -96,7 +99,6 @@
 <!-- Modal thêm danh mục -->
 
 
-
 <div class="modal fade" id="modalAddCategoryProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -110,6 +112,10 @@
                 <div class="form-floating mb-3">
                     <input name="input_name" value="<?=$input_name?>" type="text" class="form-control" id="name" placeholder="input">
                     <label for="name">Tên danh mục</label>
+                </div>
+                <div class="form-floating">
+                    <textarea name="input_description" class="form-control" placeholder="Leave a comment here" id="description" style="height: 100px"><?= $input_description ?></textarea>
+                    <label for="description">Mô tả</label>
                 </div>
             </div>
             <div class="modal-footer">
