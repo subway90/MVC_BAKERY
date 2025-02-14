@@ -66,7 +66,7 @@ if(isset($_POST['edit_category']) && !empty($_SESSION['edit_category'])) {
     else {
         // cập nhật database
         pdo_execute(
-            'UPDATE category_product SET name_category_product = "'.$name.'", updated_at = "current_timestamp()"
+            'UPDATE category_product SET name_category_product = "'.$name.'", updated_at = current_timestamp
             WHERE id_category_product ='.$id_category_product
         );
         // thông báo toast
@@ -78,11 +78,32 @@ if(isset($_POST['edit_category']) && !empty($_SESSION['edit_category'])) {
     }
 }
 
+// Xoá danh mục
+if(isset($_POST['delete'])) {
+    // lấy input
+    $id = clear_input($_POST['delete']);
+    // kiểm tra tồn tại
+    if(!get_one_category_by_id($id)) toast_create('danger','Danh mục ID = '.$id.' không tồn tại');
+    else {
+        // thực hiện xoá
+        delete_one('category_product',$id);
+        // thông báo toast
+        toast_create('success','Xoá thành công danh mục ID ='.$id);
+        // chuyển route
+        route('admin/quan-li-danh-muc');
+    }
+}
+
+
+// Xem danh sách xoá
+if(isset($_arrayURL[1]) && $_arrayURL[1] == 'danh-sach-xoa') $status_page = false;
+
 
 
 # [DATA]
 // Lấy danh sách danh mục
-$list_category_product = get_all_category();
+if($status_page) $list_category_product = get_all_category('IS NULL');
+else $list_category_product = get_all_category('');
 
 $data = [
     'list_category_product' => $list_category_product,

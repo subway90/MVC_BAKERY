@@ -37,7 +37,11 @@
                             <th class="min-w-10x">Tên danh mục</th>
                             <th class="min-w-5x">Số lượng sản phẩm</th>
                             <th class="min-w-5x">Ngày tạo</th>
-                            <th class="min-w-5x">Ngày cập nhật</th>
+                            <?php if($status_page) {?>
+                                <th class="min-w-5x">Ngày cập nhật</th>
+                            <?php }else{ ?>
+                                <th class="min-w-5x">Ngày xoá</th>
+                            <?php }?>
                             <th class="min-w-5x" data-orderable="false">Hành động</th>
                         </tr>
                     </thead>
@@ -56,13 +60,26 @@
                                 <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-tin-tuc/<?=$slug_category_product?>"><strong><?= $name_category_product ?></strong></a>
                             </td>
                             <td> 
-                                <?= ($total_product) ? '<div class="badge badge-sa-success">'.$total_product.' sản phẩm</div>' : '<div class="badge badge-sa-warning">0 sản phẩm</div>' ?> </td>
-                            <td><?= format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') ?></td>
-                            <td><?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted small">Chưa cập nhật</span>'?></td>
+                                <?= ($total_product) ? '<div class="badge badge-sa-success">'.$total_product.' sản phẩm</div>' : '<div class="badge badge-sa-warning">0 sản phẩm</div>' ?> 
+                            </td>
+                            <td>
+                                <?= format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
+                            </td>
+                            <td>
+                            <?php if($status_page) {?>
+                                <?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted small">Chưa cập nhật</span>'?>
+                            <?php }else{ ?>
+                                <?= format_time($deleted_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
+                            <?php }?>
+                            </td>
                             <td>
                                 <form method="post">
+                                    <?php if($status_page) {?>
                                     <button name="open_edit" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#modalEditCategoryProduct"><i class="fa fas fa-edit me-2"></i> Sửa</button>
-                                    <button name="open_edit" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-trash me-2"></i> Xoá</button>
+                                    <button name="delete" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-trash me-2"></i> Xoá</button>
+                                    <?php }else{ ?>
+                                    <button name="restore" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-dark me-3"><i class="fa fas fa-trash-restore me-2"></i> Khôi phục</button>
+                                    <?php }?>
                                 </form>
                             </td>
                         </tr>
