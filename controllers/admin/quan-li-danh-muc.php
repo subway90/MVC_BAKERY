@@ -1,7 +1,7 @@
 <?php
 # [VARIABLE]
 $status_page = true;
-$input_name = $show_modal = '';
+$input_name = $input_description = $show_modal = '';
 $error_valid = [];
 
 # [MODEL]
@@ -13,17 +13,20 @@ model('admin','category');
 if(isset($_POST['add'])) {
     // lấy input
     $input_name = clear_input($_POST['input_name']);
+    $input_description = clear_input($_POST['input_description']);
 
     // xử lí validate
     if(!$input_name) $error_valid[] = 'Chưa nhập tên danh mục';
-    $check_name = check_name_category_product_exist($input_name);
-    if(!$check_name) $error_valid[] = 'Tên danh mục này đã tồn tại';
+    if(!$input_description) $error_valid[] = 'Chưa nhập mô tả cho danh mục';
+    // kiểm tra tồn tại
+    if(check_exist_one_by_name('category_product',$input_name)) $error_valid[] = 'Tên danh mục này đã tồn tại';
+    if(check_exist_one_by_name_in_trash('category_product',$input_name)) $error_valid[] = 'Tên danh mục này đã tồn tại trong danh sách xoá mềm <a class="text-danger fw-bold" href="'.URL_ADMIN.'quan-li-danh-muc/danh-sach-xoa">[Xem ngay]</a>';
     // nếu có lỗi, thì tự động mở modal
     if(!empty($error_valid)) $show_modal = 'modalAddCategoryProduct';
     // lưu database
     else{
         pdo_execute(
-            'INSERT INTO category_product (name_category_product) VALUES ("'.$input_name.'")'
+            'INSERT INTO category_product (name_category_product,slug_category_product,description_category_product) VALUES ("'.$input_name.'","'.create_slug($input_name).'","'.$input_description.'")'
         );
         // thông báo
         toast_create('success','Thêm thành công danh mục mới');
@@ -124,6 +127,7 @@ $data = [
     'list_category_product' => $list_category_product,
     'status_page' => $status_page,
     'input_name' => $input_name,
+    'input_description' => $input_description,
     'show_modal' => $show_modal,
     'error_valid' => $error_valid,
 ];
