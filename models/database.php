@@ -102,3 +102,28 @@ function pdo_query_value($sql)
         unset($conn);
     }
 }
+
+
+/**
+ * Hàm này dùng để xoá mềm một record của một bảng
+ * @param mixed $table_name Tên bảng cần xoá
+ * @param mixed $id_record ID cần xoá
+ * @return void
+ */
+function delete_one($table_name,$id_record) {
+    pdo_execute(
+        'UPDATE '.$table_name.' SET deleted_at = current_timestamp WHERE id_'.$table_name.' = '.$id_record
+    );
+}
+
+/**
+ * Hàm này dùng để khôi phục xoá mềm một record của một bảng
+ * @param mixed $table_name Tên bảng cần khôi phục
+ * @param mixed $id_record ID cần khôi phục
+ * @return void
+ */
+function restore_one($table_name,$id_record) {
+    pdo_execute(
+        'UPDATE '.$table_name.' SET deleted_at = NULL WHERE id_'.$table_name.' = '.$id_record
+    );
+}
