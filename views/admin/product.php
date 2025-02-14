@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-auto d-flex">
                         <?php if(!$status_page) {?>
-                            <a href="<?=URL_ADMIN?>quan-li-danh-muc" class="btn btn-outline-success">Quay về Danh sách hoạt động</a>
+                            <a href="<?=URL_ADMIN?>quan-li-san-pham" class="btn btn-outline-success">Quay về Danh sách hoạt động</a>
                         <?php } else {?>
                             <a href="<?=URL_ADMIN?>quan-li-san-pham/them" class="btn btn-primary me-3"><i class="fa fas fa-plus me-2"></i>Thêm</a>
                             <a href="<?=URL_ADMIN?>quan-li-san-pham/danh-sach-xoa" class="btn btn-outline-danger"><i class="fa fas fa-trash me-2"></i>Danh sách xoá</a>
