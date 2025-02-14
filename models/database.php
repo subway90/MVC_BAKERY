@@ -129,7 +129,7 @@ function restore_one($table_name,$id_record) {
 }
 
 /**
- * Hàm này dùng để kiểm tra một bảng có tồn tại hay không
+ * Kiểm tra một bảng có tồn tại hay không
  * 
  * Lưu ý: chỉ kiểm tra ở trạng thái hoạt động, tức chưa xoá mềm
  * @param mixed $table_name Tên bảng cần kiểm tra
@@ -139,12 +139,11 @@ function restore_one($table_name,$id_record) {
 function check_exist_one($table_name,$id_record) {
     if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE id_'.$table_name.' = '.$id_record.' AND deleted_at IS NULL'
     )) return true;
-    
     return false;
 }
 
 /**
- * Hàm này dùng để kiểm tra một bảng đã xoá mềm có tồn tại hay không
+ * Kiểm tra một bảng đã xoá mềm có tồn tại hay không
  * 
  * Lưu ý: chỉ kiểm tra ở trạng thái đã được xoá mềm
  * @param mixed $table_name Tên bảng cần kiểm tra
@@ -153,5 +152,33 @@ function check_exist_one($table_name,$id_record) {
  */
 function check_exist_one_in_trash($table_name,$id_record) {
     if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE id_'.$table_name.' = '.$id_record.' AND deleted_at')) return true;
+    return false;
+}
+
+/**
+ * Kiểm tra một tên trong bảng có tồn tại hay không
+ * 
+ * Lưu ý: chỉ kiểm tra ở trạng thái hoạt động, tức chưa xoá mềm
+ * @param mixed $table_name Tên bảng cần kiểm tra
+ * @param mixed $name_record Tên cần kiểm tra
+ * @return bool Trả về true nếu có tồn tại, trả về false nếu không tồn tại
+ */
+function check_exist_one_by_name($table_name,$name_record) {
+    if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE name_'.$table_name.' = "'.$name_record.'" AND deleted_at IS NULL'
+    )) return true;
+    return false;
+}
+
+/**
+ * Kiểm tra một tên trong bảng có tồn tại hay không trong danh sách xoá
+ * 
+ * Lưu ý: chỉ kiểm tra ở trạng thái đã xoá mềm
+ * @param mixed $table_name Tên bảng cần kiểm tra
+ * @param mixed $name_record Tên cần kiểm tra
+ * @return bool Trả về true nếu có tồn tại, trả về false nếu không tồn tại
+ */
+function check_exist_one_by_name_in_trash($table_name,$name_record) {
+    if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE name_'.$table_name.' = "'.$name_record.'" AND deleted_at'
+    )) return true;
     return false;
 }
