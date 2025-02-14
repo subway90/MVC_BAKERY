@@ -94,6 +94,21 @@ if(isset($_POST['delete'])) {
     }
 }
 
+// Khôi phục danh mục
+if(isset($_POST['restore'])) {
+    // lấy input
+    $id = clear_input($_POST['restore']);
+    if(!check_exist_one_in_trash('category_product',$id)) toast_create('danger','Danh mục ID = '.$id.' không tồn tại trong danh sách xoá');
+    else {
+        //
+        // thực hiện khôi phục
+        restore_one('category_product',$id);
+        // thông báo toast
+        toast_create('success','Khôi phục thành công danh mục ID ='.$id);
+        // chuyển route
+        route('admin/quan-li-danh-muc/danh-sach-xoa');
+    }
+}
 
 // Xem danh sách xoá
 if(isset($_arrayURL[1]) && $_arrayURL[1] == 'danh-sach-xoa') $status_page = false;
