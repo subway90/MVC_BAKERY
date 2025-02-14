@@ -19,7 +19,7 @@
                         <?php if(!$status_page) {?>
                             <a href="<?=URL_ADMIN?>quan-li-san-pham" class="btn btn-outline-success">Quay về Danh sách hoạt động</a>
                         <?php } else {?>
-                            <a href="<?=URL_ADMIN?>quan-li-san-pham/them" class="btn btn-primary me-3"><i class="fa fas fa-plus me-2"></i>Thêm</a>
+                            <a href="<?=URL_ADMIN?>them-san-pham" class="btn btn-primary me-3"><i class="fa fas fa-plus me-2"></i>Thêm</a>
                             <a href="<?=URL_ADMIN?>quan-li-san-pham/danh-sach-xoa" class="btn btn-outline-danger"><i class="fa fas fa-trash me-2"></i>Danh sách xoá</a>
                         <?php }?>
                     </div>
@@ -69,12 +69,12 @@
                             <td> 
                                 <?= ($quantity_product) ? '<div class="badge badge-sa-success">'.$quantity_product.' cái</div>' : '<div class="badge badge-sa-warning">0 cái</div>' ?> 
                             </td>
-                            <td>
+                            <td class="small">
                                 <?= format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
                             </td>
-                            <td>
+                            <td class="small">
                             <?php if($status_page) {?>
-                                <?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted small">Chưa cập nhật</span>'?>
+                                <?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted">Chưa cập nhật</span>'?>
                             <?php }else{ ?>
                                 <?= format_time($deleted_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
                             <?php }?>
