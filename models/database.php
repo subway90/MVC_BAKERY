@@ -182,3 +182,15 @@ function check_exist_one_by_name_in_trash($table_name,$name_record) {
     )) return true;
     return false;
 }
+
+/**
+ * Thực hiện xoá cứng mềm một record của một bảng
+ * @param mixed $table_name Tên bảng cần xoá cứng
+ * @param mixed $id_record ID cần xoá cứng
+ * @return void
+ */
+function delete_force_one($table_name,$id_record) {
+    pdo_execute(
+        'DELETE FROM '.$table_name.' WHERE id_'.$table_name.' = '.$id_record
+    );
+}
