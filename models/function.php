@@ -267,16 +267,19 @@ function clear_input($input) {
 
 /**
  * Hàm này dùng để lưu file
- * @param string $path Đường dẫn thư mục để lưu file
+ * @param string $folder Thư mục lưu file ( tiền tố assets/file/ )
  * @param mixed $file File cần lưu
  * @return string Trả về đường dẫn đã lưu nếu lưu thành công, trả về 0 nếu lưu thất bại
  */
-function save_file($path,$file) {
+function save_file($folder,$file) {
+    // Kiểm tra thư mục tồn tại chưa
+    if(!is_dir('assets/file/'.$folder)) die(_s_me_error.'Thư mục asset/file/'.$folder.' chưa được tạo khi dùng hàm save_file'._e_me_error);
     // Mã hóa tên file
     $file['name'] = uniqid().'.'.pathinfo($file['name'], PATHINFO_EXTENSION);
     // Tiến hành lưu
-    $check = move_uploaded_file($file["tmp_name"], $path.basename($file["name"]));
-    if($check) return $path.$file['name'];
+    $check = move_uploaded_file($file["tmp_name"], 'assets/file/'.$folder.'/'.basename($file["name"]));
+    // Trả về path đã lưu
+    if($check) return $folder.'/'.$file['name'];
     return 0;
 }
 
