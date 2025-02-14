@@ -4,13 +4,13 @@
  * Trả về danh sách danh mục
  * @return array
  */
-function get_all_category() {
+function get_all_category($condition_deleted) {
     return pdo_query(
-        'SELECT c.*, SUM(p.id_product) total_product
+        'SELECT c.*, COUNT(p.id_product) total_product
         FROM category_product c
         LEFT JOIN product p
         ON p.id_category_product = c.id_category_product
-        WHERE c.status_category_product = 1 
+        WHERE c.deleted_at '.$condition_deleted.'
         GROUP BY c.name_category_product
         ORDER BY c.created_at ASC'
     );
