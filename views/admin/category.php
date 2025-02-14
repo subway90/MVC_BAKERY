@@ -82,6 +82,7 @@
                                     <button name="delete" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-trash me-2"></i> Xoá</button>
                                     <?php }else{ ?>
                                     <button name="restore" value="<?=$id_category_product?>" type="submit" class="btn btn-sm btn-outline-dark me-3"><i class="fa fas fa-trash-restore me-2"></i> Khôi phục</button>
+                                    <button onclick="delete_force(<?=$id_category_product?>)" type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalDeleteCategoryProduct"><i class="fa fas fa-trash me-2"></i> Xoá vĩnh viễn</button>
                                     <?php }?>
                                 </form>
                             </td>
@@ -155,4 +156,36 @@ if(isset($_SESSION['edit_category'])) {
     </div>
 </div>
 <?php }?>
-            
+
+
+<?php if(!$status_page) {?>
+<!-- Modal xoá vĩnh viễn -->
+<div class="modal fade" id="modalDeleteCategoryProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xoá vĩnh viễn danh mục</h5>
+                <button type="button" class="sa-close sa-close--modal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+                <input type="hidden" name="id_force" value="">
+            <div class="modal-body text-center px-5">
+                <div class="mb-5">
+                    Bạn có chắc chắn xoá ? Việc xoá vĩnh viễn sẽ xoá tất cả sản phẩm thuộc danh mục này
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button name="delete_force" type="submit" class="btn btn-danger">Xoá</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function delete_force(id) {
+    document.querySelector('input[name="id_force"]').value = id;
+    var myModal = new bootstrap.Modal(document.getElementById('modalDeleteCategoryProduct'));
+    myModal.show();
+}
+</script>
+<?php }?>

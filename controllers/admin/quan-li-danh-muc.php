@@ -113,6 +113,23 @@ if(isset($_POST['restore'])) {
     }
 }
 
+// Xoá vĩnh viễn danh mục
+if(isset($_POST['delete_force'])) {
+    // lấy id
+    $id = clear_input($_POST['id_force']);
+    // kiểm tra tồn tại
+    if(!check_exist_one_in_trash('category_product',$id)) toast_create('danger','Danh mục ID = '.$id.' không tồn tại trong danh sách xoá');
+    // kiểm tra có sản phẩm hay không
+    if(pdo_query_value('SELECT COUNT(id_product) FROM product WHERE id_category_product = '.$id)) toast_create('danger','Danh mục này đang có sản phẩm, không thể xoá !');
+    else {
+        // thực hiện xoá
+        delete_force_one('category_product',$id);
+        // thông báo toast và chuyển route
+        toast_create('success','Xoá vĩnh viễn thành công danh mục ID = '.$id);
+    }
+    route('admin/quan-li-danh-muc/danh-sach-xoa');
+}
+
 // Xem danh sách xoá
 if(isset($_arrayURL[1]) && $_arrayURL[1] == 'danh-sach-xoa') $status_page = false;
 
