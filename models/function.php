@@ -267,15 +267,24 @@ function clear_input($input) {
 
 /**
  * Hàm này dùng để lưu file
+ * 
+ * Lưu ý: Nếu để false $encrypt_bool, thì file trùng tên sẽ thêm hậu tố -copy
+ * 
+ * @param bool $encrypt_bool Có cần mã hoá tên hay không
  * @param string $folder Thư mục lưu file ( tiền tố assets/file/ )
  * @param mixed $file File cần lưu
  * @return string Trả về đường dẫn đã lưu nếu lưu thành công, trả về 0 nếu lưu thất bại
  */
-function save_file($folder,$file) {
+function save_file($bool_encrypt,$folder,$file) {
     // Kiểm tra thư mục tồn tại chưa
     if(!is_dir('assets/file/'.$folder)) die(_s_me_error.'Thư mục asset/file/'.$folder.' chưa được tạo khi dùng hàm save_file'._e_me_error);
-    // Mã hóa tên file
-    $file['name'] = uniqid().'.'.pathinfo($file['name'], PATHINFO_EXTENSION);
+    if($bool_encrypt) {
+        // Mã hoá tên file
+        $file['name'] = uniqid().'.'.pathinfo($file['name'], PATHINFO_EXTENSION);
+    }else{
+        // Kiểm tra file đã tồn tại chưa, nếu có thì thêm hậu tố -copy
+        if(file_exists('assets/file/'.$folder.'/'.$file["name"])) $file['name'] = pathinfo($file['name'],PATHINFO_FILENAME).'-copy.'.pathinfo($file['name'], PATHINFO_EXTENSION);
+    }
     // Tiến hành lưu
     $check = move_uploaded_file($file["tmp_name"], 'assets/file/'.$folder.'/'.basename($file["name"]));
     // Trả về path đã lưu
@@ -288,8 +297,8 @@ function save_file($folder,$file) {
  * @param mixed $path Đường dẫn file cần xoá
  */
 function move_file($path) {
-    if (file_exists($path)) (unlink($path));
-    else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.$path._e_me_error);
+    if (file_exists('assets/file/'.$path)) (unlink('assets/file/'.$path));
+    else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.'assets/file/'.$path._e_me_error);
 }
 
 /**
