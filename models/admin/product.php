@@ -13,3 +13,15 @@ function get_all_product($condition_deleted) {
         ORDER BY p.created_at ASC'
     );
 };
+
+/**
+ * Trả về danh sách danh mục
+ * @return array
+ */
+function get_list_category() {
+    return pdo_query(
+        'SELECT name_category_product, id_category_product
+        FROM category_product
+        WHERE deleted_at IS NULL'
+    );
+};
