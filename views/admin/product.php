@@ -58,9 +58,14 @@
                                 </div>
                             </td>
                             <td>
-                            <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-san-pham/<?=$slug_product?>"><strong><?= $name_product ?></strong></a>
-                                <div class="small text-muted">
-                                    <?= $description_product ?>
+                                <div class="d-flex align-items-center">
+                                    <img class="thumbnail" width="50" src="<?= URL_STORAGE . $image_product ?>" alt="<?= $image_product ?>">
+                                    <div class="ms-3">
+                                        <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-san-pham/<?=$slug_product?>"><strong><?= $name_product ?></strong></a>
+                                        <div class="small text-muted">
+                                            <?= $description_product ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                             <td> 
@@ -162,3 +167,58 @@ function delete_force(id) {
 }
 </script>
 <?php }?>
+
+<div id="overlay"></div>
+<div id="largeImage">
+    <img id="largeImageView" src="" alt="">
+    <div class="text-center">
+        <span class="mt-5 small text-decoration-underline text-light">Nhấn vào màn hình để tắt</span>
+    </div>
+</div>
+
+<style>
+    #largeImage {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        transition: transform 1s ease;
+    }
+    #largeImage img {
+        max-width: 100%;
+        max-height: 100%;
+        
+    }
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+</style>
+
+<script>
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const largeImageView = document.getElementById('largeImageView');
+    const largeImage = document.getElementById('largeImage');
+    const overlay = document.getElementById('overlay');
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            largeImageView.src = this.src; // Chọn src của ảnh đã nhấn
+            largeImage.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+    });
+
+    overlay.addEventListener('click', function() {
+        largeImage.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+</script>
