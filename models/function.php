@@ -296,7 +296,7 @@ function save_file($bool_encrypt,$folder,$file) {
  * Hàm này dùng để xoá file theo PATH
  * @param mixed $path Đường dẫn file cần xoá
  */
-function move_file($path) {
+function delete_file($path) {
     if (file_exists('assets/file/'.$path)) (unlink('assets/file/'.$path));
     else die(_s_me_error.' File không được tìm thấy để xoá. Path file: '.'assets/file/'.$path._e_me_error);
 }

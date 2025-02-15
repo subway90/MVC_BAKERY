@@ -44,7 +44,7 @@ if(isset($_POST['update_product'])) {
     if($file) {
         if($file['size'] > LIMIT_SIZE_FILE*(1024*1024)) $error_valid[] = 'Dung lượng ảnh phải bé hơn '.LIMIT_SIZE_FILE.' MB';
         else {
-            if($old_image) move_file($old_image); // xoá ảnh cũ nếu có
+            if($old_image) delete_file($old_image); // xoá ảnh cũ nếu có
             $old_image = save_file($bool_encrypt_file,'menu',$_FILES['image_product']); // lưu ảnh mới
         }
     }
