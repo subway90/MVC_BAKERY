@@ -17,8 +17,8 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'thanh-toan') $retu
 
 if(isset($_POST['login'])) {
     // lấy thông tin từ form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = clear_input($_POST['username']);
+    $password = clear_input($_POST['password']);
 
     // Bắt validate
     if(!$username) toast_create('danger','Vui lòng nhập username');
