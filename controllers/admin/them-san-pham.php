@@ -58,6 +58,7 @@ if(isset($_POST['add_product'])) {
 // Danh sách danh mục
 
 $data = [
+    'status_page' => true, // trạng thái trang : TRUE là thêm sản phẩm, FALSE là sửa sản phẩm
     'list_category_product' => get_list_category(), // lấy danh sách danh mục
     'id_category_product' => $id_category_product,
     'name_product' => $name_product,
