@@ -170,6 +170,20 @@ function check_exist_one_by_name($table_name,$name_record) {
 }
 
 /**
+ * Kiểm tra một tên trong bảng có tồn tại hay không, ngoại trừ id_record
+ * 
+ * Lưu ý: chỉ kiểm tra ở trạng thái hoạt động, tức chưa xoá mềm
+ * @param mixed $table_name Tên bảng cần kiểm tra
+ * @param mixed $name_record Tên cần kiểm tra
+ * @return bool Trả về true nếu có tồn tại, trả về false nếu không tồn tại
+ */
+function check_exist_one_by_name_except_id($table_name,$name_record,$id_record) {
+    if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE name_'.$table_name.' = "'.$name_record.'" AND id_'.$table_name.' != '.$id_record.' AND deleted_at IS NULL'
+    )) return true;
+    return false;
+}
+
+/**
  * Kiểm tra một tên trong bảng có tồn tại hay không trong danh sách xoá
  * 
  * Lưu ý: chỉ kiểm tra ở trạng thái đã xoá mềm
