@@ -61,7 +61,7 @@
                                 <div class="d-flex align-items-center">
                                     <img class="thumbnail" width="50" src="<?= URL_STORAGE . $image_product ?>" alt="<?= $image_product ?>">
                                     <div class="ms-3">
-                                        <a class="text-dark" href="<?=URL_ADMIN?>chi-tiet-san-pham/<?=$slug_product?>"><strong><?= $name_product ?></strong></a>
+                                        <a class="text-dark" href="<?=URL_ADMIN?>sua-san-pham/<?=$id_product?>"><strong><?= $name_product ?></strong></a>
                                         <div class="small text-muted">
                                             <?= $description_product ?>
                                         </div>
@@ -87,7 +87,7 @@
                             <td class="">
                                 <form method="post">
                                     <?php if($status_page) {?>
-                                    <button name="open_edit" value="<?=$id_product?>" type="submit" class="btn btn-sm btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#modalEditCategoryProduct"><i class="fa fas fa-edit me-2"></i> Sửa</button>
+                                    <a href="<?=URL_ADMIN?>sua-san-pham/<?=$id_product?>" class="btn btn-sm btn-outline-primary me-3"><i class="fa fas fa-edit me-2"></i> Sửa</a>
                                     <button name="delete" value="<?=$id_product?>" type="submit" class="btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-trash me-2"></i> Xoá</button>
                                     <?php }else{ ?>
                                     <button name="restore" value="<?=$id_product?>" type="submit" class="btn btn-sm btn-outline-dark me-3"><i class="fa fas fa-trash-restore me-2"></i> Khôi phục</button>

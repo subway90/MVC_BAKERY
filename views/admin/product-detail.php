@@ -8,12 +8,21 @@
                                     <nav class="mb-2" aria-label="breadcrumb">
                                         <ol class="breadcrumb breadcrumb-sa-simple">
                                             <li class="breadcrumb-item"><a href="<?=URL_ADMIN?>quan-li-san-pham">Quản lí sản phẩm</a></li>
+                                            <?php if($status_page) {?>
                                             <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>
+                                            <?php }else{ ?>
+                                            <li class="breadcrumb-item active" aria-current="page">Sửa sản phẩm</li>
+                                            <?php }?>
                                         </ol>
                                     </nav>
                                 </div>
                                 <div class="col-auto d-flex"><a href="<?=URL_ADMIN?>quan-li-san-pham" class="btn btn-secondary me-3">Hủy</a>
+                                <?php if($status_page) {?>
                                 <button name="add_product" class="btn btn-primary" type="submit" >Lưu</button></div>
+                                <?php }else{ ?>
+                                <button name="update_product" class="btn btn-primary" type="submit" >Cập nhật</button></div>
+                                <?php }?>
+
                             </div>
                         </div>
                         <div class="sa-entity-layout px-lg-5"
