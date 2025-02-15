@@ -168,6 +168,7 @@ function delete_force(id) {
 </script>
 <?php }?>
 
+
 <div id="overlay"></div>
 <div id="largeImage">
     <img id="largeImageView" src="" alt="">
@@ -216,9 +217,13 @@ function delete_force(id) {
             overlay.style.display = 'block';
         });
     });
-
-    overlay.addEventListener('click', function() {
+    
+    // Hàm để ẩn ảnh lớn và overlay
+    function hideLargeImage() {
         largeImage.style.display = 'none';
         overlay.style.display = 'none';
-    });
+    }
+
+    overlay.addEventListener('click', hideLargeImage);
+    largeImage.addEventListener('click', hideLargeImage);
 </script>
