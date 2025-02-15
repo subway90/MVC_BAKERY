@@ -66,7 +66,7 @@ if(isset($_POST['update_product'])) {
         // Thông báo toast
         toast_create('success','Cập nhật sản phẩm thành công');
         // Chuyển route
-        route('admin/quan-li-san-pham');
+        route('admin/sua-san-pham/'.$id_product);
     }
 }
 

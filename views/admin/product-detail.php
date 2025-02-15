@@ -16,7 +16,7 @@
                                         </ol>
                                     </nav>
                                 </div>
-                                <div class="col-auto d-flex"><a href="<?=URL_ADMIN?>quan-li-san-pham" class="btn btn-secondary me-3">Hủy</a>
+                                <div class="col-auto d-flex"><a href="<?=URL_ADMIN?>quan-li-san-pham" class="btn btn-secondary me-3">Quay lại</a>
                                 <?php if($status_page) {?>
                                 <button name="add_product" class="btn btn-primary" type="submit" >Lưu</button></div>
                                 <?php }else{ ?>
