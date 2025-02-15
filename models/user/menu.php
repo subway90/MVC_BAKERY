@@ -7,7 +7,7 @@
 function get_all_category() {
     return pdo_query(
         'SELECT * FROM category_product 
-        WHERE status_category_product = 1 
+        WHERE deleted_at IS NULL 
         ORDER BY created_at ASC'
     );
 }
@@ -23,6 +23,6 @@ function get_all_product_by_slug_category($slug) {
         JOIN category_product c
         ON c.id_category_product = p.id_category_product
         WHERE c.slug_category_product = "'.$slug.'"
-        AND p.status_product = 1'
+        AND p.deleted_at IS NULL '
     );
 }
