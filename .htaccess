@@ -6,7 +6,7 @@ RewriteRule ^config\.php$ - [F,L]
 RewriteRule ^example.config\.php$ - [F,L]
 
 # Chặn truy cập vào các thư mục
-RewriteCond %{REQUEST_URI} ^/(controllers|models|views|phpmailer)/ [NC]
+RewriteCond %{REQUEST_URI} ^/(controllers|models|views|phpmailer|stringee)/ [NC]
 RewriteRule ^ - [F,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
