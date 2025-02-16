@@ -79,7 +79,7 @@
                             </td>
                             <td class="small">
                             <?php if($status_page) {?>
-                                <?= $updated_at ? format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted">Chưa cập nhật</span>'?>
+                                <?= $updated_at ? format_time($updated_at,'DD/MM/YYYY lúc hh:mm:ss') : '<span class="text-muted">Chưa cập nhật</span>'?>
                             <?php }else{ ?>
                                 <?= format_time($deleted_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
                             <?php }?>

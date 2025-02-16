@@ -31,7 +31,7 @@ if(isset($_POST['checkout'])) {
     // tạo session hoá đơn
     else {
         $_SESSION['checkout'] = [
-            'id_order' => create_uuid(), // toạ mã hoá đơn
+            'id_order' => create_uuid(), // tạo mã hoá đơn
             'address_order' => $address_order,
             'note_order' => $note_order,
             'method_payment' => $method_payment,

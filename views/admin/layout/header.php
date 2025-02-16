@@ -74,6 +74,14 @@
                                         <span class="sa-nav__title">Quản lí sản phẩm</span>
                                     </a>
                                 </li>
+                                <li class="sa-nav__menu-item sa-nav__menu-item--has-icon">
+                                    <a href="<?=URL_ADMIN?>quan-li-hoa-don" class="sa-nav__link <?=($page=='order') ? 'bg-dark' : ''?>">
+                                        <span class="sa-nav__icon">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </span>
+                                        <span class="sa-nav__title">Quản lí hoá đơn</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
