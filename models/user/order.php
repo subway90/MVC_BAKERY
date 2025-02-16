@@ -43,7 +43,8 @@ function check_order_exist($id_order) {
     return pdo_query_one(
         'SELECT id_order
         FROM orders 
-        WHERE id_order = "'.$id_order.'"'
+        WHERE deleted_at IS NULL
+        AND id_order = "'.$id_order.'"'
     );
 }
 
@@ -59,7 +60,8 @@ function get_all_order_by_username($username) {
     $list_order = pdo_query(
         'SELECT *
         FROM orders
-        WHERE username = "'.$username.'"
+        WHERE deleted_at IS NULL
+        AND username = "'.$username.'"
         ORDER BY created_at DESC'
     );
 
