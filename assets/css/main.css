@@ -36,6 +36,56 @@
   --nav-dropdown-color: #7f7f90; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #ec9900; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
+.bg-infomation {
+  width: 100%;     /* Chiều rộng toàn bộ */
+  height: 100%;    /* Chiều cao toàn bộ */
+  position: relative; /* Để sử dụng lớp phủ */
+  overflow: hidden; /* Đảm bảo không hiển thị nội dung thừa */
+}
+
+.bg-infomation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../assets/img/about.jpg'); /* Đường dẫn đến hình ảnh */
+  background-size: cover; /* Tương tự object-fit: cover */
+  background-position: center; /* Căn giữa hình ảnh */
+  background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+  filter: blur(5px); /* Mờ hình ảnh */
+  z-index: 0; /* Đặt lớp phủ nằm dưới cùng */
+}
+
+.bg-infomation > * {
+  position: relative; /* Để đảm bảo nội dung nằm trên lớp phủ */
+  z-index: 1; /* Đặt nội dung ở trên lớp phủ */
+}
+
+.sidebar {
+  min-width: 250px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+}
+
+.sidebar .nav-link {
+  color: var(--accent-color);
+}
+
+.sidebar .nav-link:hover {
+  background: #e5dada;
+}
+
+.sidebar .nav-link.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
 
 .bg-login{
   width: 100%;     /* Chiều rộng toàn bộ */
@@ -59,6 +109,7 @@
   color: var(--contrast-color);
   background: var(--accent-color);
   transition: 0.3s;
+  border-color: var(--accent-color);
 }
 
 .btn-primary:hover,
