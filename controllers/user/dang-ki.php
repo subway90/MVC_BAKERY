@@ -25,13 +25,13 @@ if(isset($_POST['register'])) {
     elseif(!$password_confirm) $error[] = 'Vui lòng nhập mật khẩu xác thực';
 
     // Kiểm tra email đã đăng kí chưa
-    if(check_one_exist('email',$email)) $error[] = 'Email này đã được đăng kí';
+    if(check_one_exist_in_user_with_field('email',$email)) $error[] = 'Email này đã được đăng kí';
     // Kiểm tra độ dài của username
     if(strlen($username) < 3) $error[] = 'Độ dài của username phải lớn từ 4 kí tự trở lên';
     // Kiểm tra username hợp lệ hay không
     if(!preg_match('/^[a-z0-9]+$/', $username)) $error[] = 'Username chỉ chứa các kí tự [a-z][0-9]';
     // Kiểm tra username đã đăng kí chưa
-    if(check_one_exist('username',$username)) $error[] = 'Username này đã tồn tại';
+    if(check_one_exist_in_user_with_field('username',$username)) $error[] = 'Username này đã tồn tại';
     // Kiểm tra độ dài của password
     if(strlen($password) < 7) $error[] = 'Độ dài của mật khẩu phải từ 8 kí tự trở lên';
     // Kiểm tra mật khẩu xác thực
