@@ -5,6 +5,9 @@ const _e_me_error = '</div>';
 
 /**
  * Dùng để xác nhận quyền xác thực theo custom role
+ * 
+ * Chỉ cần gọi tên role hoặc mảng role là dùng được
+ * 
  * @param mixed $type Loại author cần xác thực
  * @return void
  */
