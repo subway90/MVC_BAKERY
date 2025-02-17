@@ -149,10 +149,6 @@ function content_checkout($data_checkout)
                 <div class='head-info'>Phương thức thanh toán:</div>
                 <div class='body-info'> " . $method_payment . " </div>
             </div>
-            <div class='info'>
-                <div class='head-info'>Trạng thái thanh toán:</div>
-                <div class='body-info'> " . $status_payment . " </div>
-            </div>
         </div>
         <table>
             <thead>

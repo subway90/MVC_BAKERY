@@ -45,7 +45,6 @@ if(isset($_POST['checkout'])) {
 
         // TH thanh toán khi giao hàng COD
         if($method_payment == 1) {
-            $status_payment = 0;
             $bool_checkout = true;
         }
         // TH thanh toán VNPAY
@@ -77,7 +76,6 @@ if (isset($_GET['callback-vnpay'])) {
     if($check_vnpay) {
         if($check_vnpay == 1) {
             $bool_checkout = true; // lưu database
-            $status_payment = 1;   // trạng thái thanh toán
         }else toast_create('danger','Thanh toán VNPAY thất bại !');
     }
     //Request callback trả về không hợp lệ
@@ -89,10 +87,8 @@ if (isset($_GET['callback-momo'])) {
     $check_momo = check_callback_momo();
     // Nếu callback có trạng thái
     if($check_momo) {
-        if($check_momo == 1) {
-            $bool_checkout = true; // lưu database
-            $status_payment = 1;   // trạng thái thanh toán
-        }else toast_create('danger','Thanh toán MOMO thất bại !');
+        if($check_momo == 1) $bool_checkout = true; // lưu database
+        else toast_create('danger','Thanh toán MOMO thất bại !');
     }
     //Request callback trả về không hợp lệ
     else return view_404('user');
@@ -102,8 +98,8 @@ if (isset($_GET['callback-momo'])) {
 if($bool_checkout) {
     extract($_SESSION['checkout']);
 
-    pdo_execute('INSERT INTO orders (id_order,username,address_order,note_order,method_payment,status_payment)
-    VALUES ("'.$id_order.'","'.$_SESSION['user']['username'].'","'.$address_order.'","'.$note_order.'",'.$method_payment.','.$status_payment.')'
+    pdo_execute('INSERT INTO orders (id_order,username,address_order,note_order,method_payment)
+    VALUES ("'.$id_order.'","'.$_SESSION['user']['username'].'","'.$address_order.'","'.$note_order.'",'.$method_payment.')'
     ); // hoá đơn
 
     foreach ($_SESSION['cart'] as $cart) {
@@ -121,7 +117,6 @@ if($bool_checkout) {
         'note_order' => $note_order ?? '(trống)',
         'address_order' => $address_order,
         'method_payment' => $method_payment == 1 ? 'Thanh toán khi giao hàng (COD)' : (($method_payment == 2) ? 'Thanh toán ví điện tử VNPAY' : 'Thanh toán ví điện tử MOMO'),
-        'status_payment' => $status_payment ? 'Đã thanh toán' : 'Chưa thanh toán',
         'total_cart' => total_cart(),
         'list_cart' => list_product_in_cart(),
     ];

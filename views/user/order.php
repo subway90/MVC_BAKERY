@@ -74,14 +74,6 @@
                 </div>
                 <div class="col-12 d-flex flex-row">
                     <div class="col-4 fw-bold text-start text-primary">
-                        Trạng thái thanh toán:
-                    </div>
-                    <div class="">
-                        <?=$order['status_payment'] ? 'Đã thanh toán' : 'Chưa thanh toán'?>
-                    </div>
-                </div>
-                <div class="col-12 d-flex flex-row">
-                    <div class="col-4 fw-bold text-start text-primary">
                         Phương thức thanh toán:
                     </div>
                     <div class="">
