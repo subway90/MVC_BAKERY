@@ -37,6 +37,15 @@
   --nav-dropdown-hover-color: #ec9900; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
+.bg-login{
+  width: 100%;     /* Chiều rộng toàn bộ */
+  height: 100%;    /* Chiều cao toàn bộ */
+  background-image: url('../../assets/img/reservation.jpg'); /* Đường dẫn đến hình ảnh */
+  background-size: cover; /* Tương tự object-fit: cover */
+  background-position: center; /* Căn giữa hình ảnh */
+  background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+}
+
 .text-primary {
     color: var(--accent-color) !important;
 }

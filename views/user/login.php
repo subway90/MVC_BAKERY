@@ -1,13 +1,8 @@
-<!-- Book A Table Section -->
-<section id="book-a-table" class="book-a-table section">
+<section id="book-a-table" class="book-a-table section bg-login">
 
-    <div class="container">
-
-        <div class="d-flex flex-lg-row flex-column-reverse g-0" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="col-lg-7 reservation-img" style="background-image: url(assets/img/reservation.jpg);"></div>
-
-            <div class="col-lg-5 border rounded-lg-end-3 rounded-top-3 px-lg-3 px-4 py-5 py-lg-0 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+    <div class="container my-5">
+        <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div style="backdrop-filter: blur(10px);" class="col-lg-5 border border-2 shadow border-light rounded-3 py-4 bg-light bg-opacity-10" data-aos="fade-up" data-aos-delay="200">
                 <h2 class="text-center mb-3">Đăng nhập</h2>
                 <form action="<?= URL ?>dang-nhap<?=($return_checkout_page) ? '/thanh-toan' : ''?>" method="post" role="form" class="">
                     <div class="row justify-content-center">
