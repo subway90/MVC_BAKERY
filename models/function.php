@@ -327,6 +327,7 @@ function view_json($status,$data) {
     header('Content-Type: application/json');
     $data = array_merge(['status' => $status],$data);
     echo json_encode($data);
+    exit;
 }
 
 /**
