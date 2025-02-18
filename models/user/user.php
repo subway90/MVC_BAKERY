@@ -23,13 +23,13 @@ function check_valid_username($input) {
     return preg_match('/^[a-zA-Z0-9]+$/', $input) === 1;
 }
 
-function create_user($full_name,$email,$username,$password) {
+function create_user($full_name,$gender,$email,$username,$password) {
     try{
         pdo_execute(
-            'INSERT INTO user (full_name,email,username,password) VALUES ("'.$full_name.'","'.$email.'","'.$username.'","'.md5($password).'")'
+            'INSERT INTO user (full_name,gender,email,username,password) VALUES ("'.$full_name.'",'.$gender.',"'.$email.'","'.$username.'","'.md5($password).'")'
         );
     }catch(PDOException $e) {
-        return _s_me_error.$e->getMessage()._e_me_error;
+        die(_s_me_error.$e->getMessage()._e_me_error);
     }
 
     return 1;
@@ -43,7 +43,7 @@ function create_user($full_name,$email,$username,$password) {
  */
 function get_one_user_by_username($username) {
     return pdo_query_one(
-        'SELECT u.username, u.email, u.full_name, u.phone, u.gender, u.birth, u.created_at, u.updated_at, r.name_role
+        'SELECT u.username, u.email, u.full_name, u.gender, u.birth, u.created_at, u.updated_at, r.name_role
         FROM user u
         JOIN role r
         ON u.id_role = r.id_role
