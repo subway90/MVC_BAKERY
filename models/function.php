@@ -358,11 +358,11 @@ function auto_login() {
         if($token_remember) {
             // lấy thông tin user bằng token
             $get_user = pdo_query_one(
-                'SELECT u.username, u.email, u.full_name, u.phone, u.address, u.avatar, u.status, u.created_at, u.updated_at, r.name_role
+                'SELECT u.*, r.name_role
                 FROM user u
                 JOIN role r
                 ON u.id_role = r.id_role
-                WHERE u.status = 1
+                WHERE u.deleted_at IS NULL
                 AND u.token_remember = "'.$token_remember.'"'
             );
             // nếu lấy thông tin thành công
