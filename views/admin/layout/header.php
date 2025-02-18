@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="<?=URL?>assets/admin/vendor/nouislider/nouislider.min.css" />
     <link rel="stylesheet" href="<?=URL?>assets/admin/vendor/fullcalendar/main.min.css" />
     <link rel="stylesheet" href="<?=URL?>assets/admin/css/style.css" />
+    <!-- cdn bootstrap icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
     <!-- cdn google -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Summernote CSS - CDN Link -->
@@ -110,7 +112,7 @@
                         <button class="sa-toolbar-user" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                             data-bs-offset="0,1" aria-expanded="false">
                             <span class="sa-toolbar-user__avatar sa-symbol sa-symbol--shape--rounded">
-                                <img src="<?= $_SESSION['user']['avatar'] ? URL_STORAGE.$_SESSION['user']['avatar'] : DEFAULT_AVATAR ?>" width="64" height="64">
+                                <img src="<?= DEFAULT_AVATAR ?>" width="64" height="64">
                             </span>
                             <span class="sa-toolbar-user__info">
                                 <span class="sa-toolbar-user__title text-danger">
