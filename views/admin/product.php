@@ -59,7 +59,11 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img class="thumbnail" width="50" src="<?= URL_STORAGE . $image_product ?>" alt="<?= $image_product ?>">
+                                    <!-- <img class="thumbnail" width="50" src="<?= URL_STORAGE . $image_product ?>" alt="<?= $image_product ?>"> -->
+                                    <div class="thumbnail-container">
+                                        <img class="thumbnail" width="50" src="<?= URL_STORAGE . $image_product ?>" alt="<?= $image_product ?>">
+                                        <div class="hover-text text-light"><i class="bi bi-zoom-in"></i></div>
+                                    </div>
                                     <div class="ms-3">
                                         <a class="text-dark" href="<?=URL_ADMIN?>sua-san-pham/<?=$id_product?>"><strong><?= $name_product ?></strong></a>
                                         <div class="small text-muted">
@@ -202,22 +206,54 @@ function delete_force(id) {
         background: rgba(0, 0, 0, 0.7);
         z-index: 999;
     }
+    .thumbnail-container {
+        position: relative; /* Để định vị overlay */
+        display: inline-block; /* Để chứa nội dung bên trong */
+    }
+
+    .thumbnail {
+        display: block; /* Để không có khoảng cách dưới ảnh */
+        transition: transform 0.2s; /* Hiệu ứng chuyển tiếp cho phóng to */
+    }
+
+    .thumbnail-container:hover .thumbnail {
+        transform: scale(1.1); /* Phóng to ảnh khi hover */
+    }
+
+    .thumbnail-container:hover {
+        background: rgba(0, 0, 0, 0.3); /* Nền màu đen với độ mờ */
+        border: 1px dashed rgba(0, 0, 0, 0.5); /* Viền đứt nét */
+    }
+
+    .hover-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Căn giữa văn bản */
+        opacity: 0; /* Ẩn văn bản ban đầu */
+        transition: opacity 0.3s; /* Hiệu ứng chuyển tiếp */
+    }
+
+    .thumbnail-container:hover .hover-text {
+        opacity: 1; /* Hiện văn bản khi hover */
+    }
 </style>
 
 <script>
-    const thumbnails = document.querySelectorAll('.thumbnail');
+    const thumbnails = document.querySelectorAll('.thumbnail-container');
     const largeImageView = document.getElementById('largeImageView');
     const largeImage = document.getElementById('largeImage');
     const overlay = document.getElementById('overlay');
 
     thumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', function() {
-            largeImageView.src = this.src; // Chọn src của ảnh đã nhấn
+            const img = this.querySelector('.thumbnail');
+            largeImageView.src = img.src; // Lấy src của ảnh
             largeImage.style.display = 'block';
             overlay.style.display = 'block';
         });
     });
-    
+
     // Hàm để ẩn ảnh lớn và overlay
     function hideLargeImage() {
         largeImage.style.display = 'none';
