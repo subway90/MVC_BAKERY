@@ -9,10 +9,12 @@ function get_one_order_by_id($id_order) {
     $array = [];
     // lấy thông tin đơn hàng
     $order = pdo_query_one(
-        'SELECT u.full_name, u.avatar, u.email, u.phone, u.address, o.*
+        'SELECT u.full_name, u.email, o.*, s.name_shipping_address
         FROM orders o
-        JOIN user u
+        LEFT JOIN user u
         ON o.username = u.username
+        LEFT JOIN shipping_address s
+        ON o.id_shipping_address = s.id_shipping_address
         WHERE id_order = "'.$id_order.'"'
     );
 
