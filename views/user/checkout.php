@@ -27,7 +27,7 @@
                         <label for="email">Địa chỉ email<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
-                        <select name="method_payment" class="form-select" id="payment" aria-label="Floating label select example">
+                        <select name="method_payment" class="form-select" id="payment">
                             <option <?= $method_payment == 1 ? 'selected' : '' ?> value="1">Thanh toán khi giao hàng (COD)</option>
                             <option <?= $method_payment == 2 ? 'selected' : '' ?> value="2">Thanh toán ví điện tử VNPAY</option>
                             <option <?= $method_payment == 3 ? 'selected' : '' ?> value="3">Thanh toán ví điện tử Momo</option>
@@ -35,8 +35,17 @@
                         <label for="payment">Phương thức thanh toán<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
-                        <input value="<?= $address_order ?>" name="address_order" type="text" class="form-control" id="floatingInput" placeholder="bống béo bread">
-                        <label for="floatingInput">Địa chỉ giao hàng<span class="ms-1 text-danger">&#10033;</span></label>
+                        <select name="id_shipping_address" class="form-select" id="shipping_address">
+                            <?php if(empty($list_shipping_address)) {?>
+                            <option value="0" >Danh sách trống</option>
+                            <?php }else{ foreach ($list_shipping_address as $item) {?>
+                            <option <?= $id_shipping_address == $item['id_shipping_address'] ? 'selected' : '' ?> value="<?= $item['id_shipping_address'] ?>"><?= $item['name_shipping_address'] ?></option>
+                            <?php }}?>
+                        </select>
+                        <label for="shipping_address">Địa chỉ giao hàng<span class="ms-1 text-danger">&#10033;</span></label>
+                        <div class="text-primary text-start pt-2">
+                            <a class="nav-link" href="<?= URL ?>thong-tin-ca-nhan"><i class="bi bi-plus-circle small mx-1"></i> Thêm địa chỉ giao hàng khác</a>
+                        </div>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
                         <textarea name="note_order" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"><?= $note_order ?></textarea>

@@ -6,6 +6,7 @@ model('user','header');
 model('user','mailer');
 model('user','vnpay');
 model('user','momo');
+model('user','infomation');
 
 # [VARIABLE]
 $address_order = $note_order = '';
@@ -13,17 +14,17 @@ $method_payment = 1; // phương thức thanh toán
 $bool_checkout = false; // trạng thái hoàn thành của hoá đơn
 $error_valid = []; // mảng lỗi validate
 $id_order = null; // mã hoá đơn
-
+$id_shipping_address = 0; // id địa chỉ giao hàng
 # [HANDLE]
 // xử lí input khi xác nhận thanh toán
 if(isset($_POST['checkout'])) {
     // lấy dữ liệu
     $method_payment = clear_input($_POST['method_payment']);
-    $address_order = clear_input($_POST['address_order']);
+    $id_shipping_address = clear_input($_POST['id_shipping_address']);
     $note_order = clear_input($_POST['note_order']);
 
     // xử lí validate
-    if(!$address_order) $error_valid[] = 'Vui lòng nhập địa chỉ giao hàng';
+    if(!$id_shipping_address) $error_valid[] = 'Vui lòng chọn địa chỉ giao hàng';
     if(empty($_SESSION['cart'])) $error_valid[] = 'Giỏ hàng trống !';
 
     // thông báo lỗi validate
@@ -98,8 +99,8 @@ if (isset($_GET['callback-momo'])) {
 if($bool_checkout) {
     extract($_SESSION['checkout']);
 
-    pdo_execute('INSERT INTO orders (id_order,username,address_order,note_order,method_payment)
-    VALUES ("'.$id_order.'","'.$_SESSION['user']['username'].'","'.$address_order.'","'.$note_order.'",'.$method_payment.')'
+    pdo_execute('INSERT INTO orders (id_order,username,id_shipping_address,note_order,method_payment)
+    VALUES ("'.$id_order.'","'.$_SESSION['user']['username'].'",'.$id_shipping_address.',"'.$note_order.'",'.$method_payment.')'
     ); // hoá đơn
 
     foreach ($_SESSION['cart'] as $cart) {
@@ -133,7 +134,9 @@ if($bool_checkout) {
 
 # [DATA]
 $data = [
+    'id_shipping_address' => $id_shipping_address,
     'method_payment' => $method_payment,
+    'list_shipping_address' => get_all_shipping_address(),
     'address_order' => $address_order,
     'note_order' => $note_order,
 ];
