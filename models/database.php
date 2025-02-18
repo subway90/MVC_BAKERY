@@ -198,7 +198,7 @@ function check_exist_one_by_name_in_trash($table_name,$name_record) {
 }
 
 /**
- * Thực hiện xoá cứng mềm một record của một bảng
+ * Thực hiện xoá vĩnh viễn một record của một bảng
  * @param mixed $table_name Tên bảng cần xoá cứng
  * @param mixed $id_record ID cần xoá cứng
  * @return void
