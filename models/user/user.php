@@ -23,17 +23,27 @@ function check_valid_username($input) {
     return preg_match('/^[a-zA-Z0-9]+$/', $input) === 1;
 }
 
-function create_user($full_name,$gender,$email,$username,$password) {
+
+/**
+ * Tạo một user mới
+ * @param string $token_remember Mã ghi nhớ đăng nhập
+ * @param string $full_name Họ tên
+ * @param int $gender Giới tính
+ * @param string $email Email
+ * @param string $username Username
+ * @param string $password Mật khẩu
+ * @param int $id_role ID role
+ * @return int
+ */
+function create_user($token_remember,$full_name,$gender,$email,$username,$password,$id_role) {
     try{
         pdo_execute(
-            'INSERT INTO user (full_name,gender,email,username,password) VALUES ("'.$full_name.'",'.$gender.',"'.$email.'","'.$username.'","'.md5($password).'")'
+            'INSERT INTO user (token_remember,full_name,gender,email,username,password,id_role) VALUES ("'.$token_remember.'","'.$full_name.'",'.$gender.',"'.$email.'","'.$username.'","'.md5($password).'",'.$id_role.')'
         );
     }catch(PDOException $e) {
         die(_s_me_error.$e->getMessage()._e_me_error);
     }
-
     return 1;
-
 }
 
 /**
@@ -43,7 +53,7 @@ function create_user($full_name,$gender,$email,$username,$password) {
  */
 function get_one_user_by_username($username) {
     return pdo_query_one(
-        'SELECT u.username, u.email, u.full_name, u.gender, u.birth, u.created_at, u.updated_at, r.name_role
+        'SELECT u.*, r.name_role
         FROM user u
         JOIN role r
         ON u.id_role = r.id_role
