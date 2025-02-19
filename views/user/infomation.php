@@ -20,6 +20,7 @@
 
         <div class="content px-lg-5 mx-lg-5" data-aos="fade-up" data-aos-delay="160">
             <div class="tab-content" id="myTabContent">
+                <!-- Tab Hồ Sơ Của Tôi -->
                 <div class="tab-pane fade <?= $name_tab_show == 'info-tab' ? 'show active' : '' ?>" id="info" role="tabpanel" aria-labelledby="info-tab">
                     <form method="post" class="row">
                         <div class="col-12 col-lg-12 mb-3">
@@ -40,7 +41,7 @@
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
                             <label for="birth" class="form-label text-primary">Số điện thoại</label>
-                            <input disabled type="text" value="<?=$_SESSION['user']['phone']?>" class="form-control" id="birth">
+                            <input disabled type="text" value="<?=$_SESSION['user']['username']?>" class="form-control" id="birth">
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
                             <label for="birth" class="form-label text-primary">Email</label>
@@ -51,6 +52,7 @@
                         </div>
                     </form>
                 </div>
+                <!-- Tab Địa Chỉ Giao Hàng -->
                 <div class="tab-pane fade <?= $name_tab_show == 'address-tab' ? 'show active' : '' ?>" id="addresses" role="tabpanel" aria-labelledby="addresses-tab">
                     <div class="mb-3">
                         <h4 class="text-primary">Danh sách địa chỉ giao hàng của bạn</>
@@ -79,6 +81,7 @@
                     </table>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#modalAddShippingAddress" class="btn btn-primary shadow"><i class="bi bi-plus-circle me-2"></i> Thêm địa chỉ khác</button>
                 </div>
+                <!-- Tab Thay Đổi Mật Khẩu -->
                 <div class="tab-pane fade <?= $name_tab_show == 'change-password-tab' ? 'show active' : '' ?>" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
                     <form>
                         <div class="mb-3">
