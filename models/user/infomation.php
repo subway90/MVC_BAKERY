@@ -40,3 +40,19 @@ function check_exist_shipping_address_by_user($id) {
     ))return true;
     return false;
 }
+
+/**
+ * Hàm này để cập nhật thông tin hồ sơ
+ * @param string $full_name
+ * @param string $gender
+ * @param string $email
+ * @return void
+ */
+function update_infomation($full_name,$gender) {
+    pdo_execute(
+        'UPDATE user SET
+        full_name = "'.$full_name.'",
+        gender = '.$gender.'
+        WHERE username = "'.$_SESSION['user']['username'].'"'
+    );
+}

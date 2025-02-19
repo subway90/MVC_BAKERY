@@ -23,29 +23,29 @@
                 <!-- Tab Hồ Sơ Của Tôi -->
                 <div class="tab-pane fade <?= $name_tab_show == 'info-tab' ? 'show active' : '' ?>" id="info" role="tabpanel" aria-labelledby="info-tab">
                     <form method="post" class="row">
-                        <div class="col-12 col-lg-12 mb-3">
-                            <label for="fullName" class="form-label text-primary">Họ và tên</label>
-                            <input type="text" name="full_name" value="<?= $_SESSION['user']['full_name'] ?>" class="form-control" id="fullName" >
+                        <div class="col-12">
+                            <?= show_error($error_valid) ?>
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
-                            <label for="birth" class="form-label text-primary">Ngày sinh</label>
-                            <input name="birth" type="date" value="<?=$_SESSION['user']['birth']?>" class="form-control" id="birth">
+                            <label for="fullName" class="form-label text-primary">Họ và tên</label>
+                            <input name="input_update_full_name" type="text" value="<?= $input_update_full_name ? $input_update_full_name :  $_SESSION['user']['full_name'] ?>" class="form-control" id="fullName" >
+                        </div>
+                        <div class="col-12 col-lg-6 mb-3">
+                            <label for="email" class="form-label text-primary">Email <span class="text-muted"><i>(không thể cập nhật)</i></span></label>
+                            <input disabled type="text" value="<?= $_SESSION['user']['email'] ?>" class="form-control" id="email">
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
                             <label class="form-label text-primary">Giới tính</label>
-                            <select class="form-select" id="gender">
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Khác</option>
+                            <select name="input_update_gender" class="form-select" id="gender">
+                                <?= $id_gender = $input_update_gender ? $input_update_gender : $_SESSION['user']['gender']; ?>
+                                <option <?= $id_gender ==  '1' ? 'selected' : '' ?> value="1">Nam</option>
+                                <option <?= $id_gender ==  '2' ? 'selected' : '' ?> value="2">Nữ</option>
+                                <option <?= $id_gender ==  '3' ? 'selected' : '' ?> value="3">Khác</option>
                             </select>
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
-                            <label for="birth" class="form-label text-primary">Số điện thoại</label>
-                            <input disabled type="text" value="<?=$_SESSION['user']['username']?>" class="form-control" id="birth">
-                        </div>
-                        <div class="col-12 col-lg-6 mb-3">
-                            <label for="birth" class="form-label text-primary">Email</label>
-                            <input disabled type="text" value="<?=$_SESSION['user']['email']?>" class="form-control" id="birth">
+                            <label for="phone" class="form-label text-primary">Số điện thoại <span class="text-muted"><i>(không thể cập nhật)</i></span></label>
+                            <input disabled type="text" value="<?=$_SESSION['user']['username']?>" class="form-control" id="phone">
                         </div>
                         <div class="col-12 text-lg-start text-center mt-3">
                             <button name="update_info" type="submit" class="btn btn-primary shadow">Cập nhật thông tin</button>
