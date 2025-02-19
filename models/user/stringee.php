@@ -7,11 +7,15 @@ include 'Stringee/StringeeCurlClient.php';
  * Hàm này dùng để gọi voice gửi otp đến số điện thoại
  * @param string $to Số điện thoại người nhận
  * @param string $otp Mã otp
- * @return int trạng thái của cuộc gọi
+ * @return void trạng thái của cuộc gọi
  */
 function stringee_send_otp($to,$otp) {
+    // lấy key
     $keySid = STRINGEE_SID_KEY;
     $keySecret = STRINGEE_SECRET_KEY;
+    // chỉnh sửa số điện thoại về dạng '84xxxxxxxx'
+    $to = substr($to,1); // xoá kí tự đầu chuỗi
+    $to = '84'.$to; // thểm kí tự 84 vào đầu số
 
     $curlClient = new StringeeCurlClient($keySid, $keySecret);
     $url = 'https://api.stringee.com/v1/call2/callout';
@@ -49,7 +53,7 @@ function stringee_send_otp($to,$otp) {
     // echo '$status: ' . $status . '<br>';
     // echo '$content: ' . $content . '<br>';
 
-    return $status;
+    if($status != '200') die('Chức năng gọi voice gửi OTP bị gián đoạn, vui lòng thử lại sau ! <br><a href="'.URL.'">&rarr; Quay về Trang chủ</a>');
 }
 
 
