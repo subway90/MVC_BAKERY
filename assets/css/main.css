@@ -36,6 +36,22 @@
   --nav-dropdown-color: #7f7f90; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #ec9900; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
+
+.otp-input {
+  outline: none; /* Ẩn outline mặc định */
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 24px;
+  margin: 2px;
+  border: 1px dashed var(--nav-color);
+  border-radius: 5px;
+}
+.otp-input:focus {
+  border-style: solid;
+  border-color: var(--accent-color); /* Màu viền khi focus */
+}
+
 .bg-infomation {
   width: 100%;     /* Chiều rộng toàn bộ */
   height: 100%;    /* Chiều cao toàn bộ */
