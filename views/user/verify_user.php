@@ -1,7 +1,7 @@
 <section id="book-a-table" class="book-a-table section bg-login px-4">
     <form method="post">
         <div style="backdrop-filter: blur(10px);" class="container text-center col-lg-5 border border-2 shadow border-light rounded-3 py-5 bg-light bg-opacity-25" data-aos="fade-up" data-aos-delay="200">
-            <h4 class="text-primary">Nhập mã OTP xác thực  - <?= $_SESSION['verify_user']['otp'] ?></h4>
+            <h4 class="text-primary">Nhập mã OTP xác thực</h4>
             <div class="small py-3">
                 Bạn sẽ nhận được cuộc gọi từ số điện thoại <span class="text-danger fw-bold"><?= $_SESSION['verify_user']['username'] ?></span>,<br> vui lòng nghe máy để nhận mã OTP.
             </div>
