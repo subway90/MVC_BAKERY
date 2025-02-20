@@ -45,8 +45,6 @@ if(isset($_POST['update_info'])) {
 
 // Thêm địa chỉ giao hàng mới
 if(isset($_POST['add_shipping_address'])) {
-    // mở tab pane #address
-    $name_tab_show = 'address-tab';
     // lấy input
     $input_shipping_address = clear_input($_POST['input_shipping_address']);
     // xử lí validate
@@ -69,8 +67,6 @@ if(isset($_POST['add_shipping_address'])) {
 
 // Xoá địa chỉ giao hàng
 if(isset($_POST['delete_shipping_address'])) {
-    // mở tab pane #address
-    $name_tab_show = 'address-tab';
     // lấy input
     $id_delete = clear_input($_POST['id_delete']);
     // kiểm tra tồn tại
