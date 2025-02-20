@@ -7,11 +7,17 @@ author(['admin','user']);
 model('user','infomation');
 
 # [VARIABLE]
-$name_tab_show = 'info-tab'; // mở tab cập nhật thông tin
 $input_shipping_address = $name_modal_show = '';
 $error_valid = []; // mảng lỗi validate
 $input_update_full_name = $input_update_gender = ''; // biến update hồ sơ cá nhân
+$list_tab = ['ho-so-cua-toi','dia-chi-giao-hang','doi-mat-khau'];
+
 # [HANDLE]
+// mở tab
+if(isset($_arrayURL[1]) && $_arrayURL[1] && in_array($_arrayURL[1],$list_tab)) {
+    $name_tab_show = $_arrayURL[1];
+}else $name_tab_show = 'ho-so-cua-toi';
+
 // Cập nhật thông tin cá nhân
 if(isset($_POST['update_info'])) {
     // lấy input

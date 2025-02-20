@@ -4,15 +4,15 @@
         <div class="sidebar" data-aos="fade-up" data-aos-delay="100">
             <ul class="nav flex-lg-column flex-row flex-nowrap p-0 justify-content-center">
                 <li class="nav-item">
-                    <a class="<?= $name_tab_show == 'info-tab' ? 'active' : '' ?> text-center text-lg-start nav-link" id="info-tab" data-bs-toggle="pill" href="#info" role="tab"
+                    <a class="<?= $name_tab_show == 'ho-so-cua-toi' ? 'active' : '' ?> text-center text-lg-start nav-link" id="info-tab" data-bs-toggle="pill" href="#info" role="tab"
                         aria-controls="info" aria-selected="true"><i class="bi bi-person-vcard-fill me-2"></i>Hồ sơ của tôi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="<?= $name_tab_show == 'address-tab' ? 'active' : '' ?> text-center text-lg-start nav-link" id="addresses-tab" data-bs-toggle="pill" href="#addresses" role="tab"
+                    <a class="<?= $name_tab_show == 'dia-chi-giao-hang' ? 'active' : '' ?> text-center text-lg-start nav-link" id="addresses-tab" data-bs-toggle="pill" href="#addresses" role="tab"
                         aria-controls="addresses" aria-selected="false"><i class="bi bi-geo-alt me-2"></i>Địa chỉ giao hàng</a>
                 </li>
                 <li class="nav-item">
-                    <a class="<?= $name_tab_show == 'change-password-tab' ? 'active' : '' ?> text-center text-lg-start nav-link" id="change-password-tab" data-bs-toggle="pill" href="#change-password"
+                    <a class="<?= $name_tab_show == 'doi-mat-khau' ? 'active' : '' ?> text-center text-lg-start nav-link" id="change-password-tab" data-bs-toggle="pill" href="#change-password"
                         role="tab" aria-controls="change-password" aria-selected="false"><i class="bi bi-person-lock me-2"></i>Đổi mật khẩu</a>
                 </li>
             </ul>
@@ -21,7 +21,7 @@
         <div class="content px-lg-5 mx-lg-5" data-aos="fade-up" data-aos-delay="160">
             <div class="tab-content" id="myTabContent">
                 <!-- Tab Hồ Sơ Của Tôi -->
-                <div class="tab-pane fade <?= $name_tab_show == 'info-tab' ? 'show active' : '' ?>" id="info" role="tabpanel" aria-labelledby="info-tab">
+                <div class="tab-pane fade <?= $name_tab_show == 'ho-so-cua-toi' ? 'show active' : '' ?>" id="info" role="tabpanel" aria-labelledby="info-tab">
                     <form method="post" class="row">
                         <div class="col-12">
                             <?= show_error($error_valid) ?>
@@ -53,7 +53,7 @@
                     </form>
                 </div>
                 <!-- Tab Địa Chỉ Giao Hàng -->
-                <div class="tab-pane fade <?= $name_tab_show == 'address-tab' ? 'show active' : '' ?>" id="addresses" role="tabpanel" aria-labelledby="addresses-tab">
+                <div class="tab-pane fade <?= $name_tab_show == 'dia-chi-giao-hang' ? 'show active' : '' ?>" id="addresses" role="tabpanel" aria-labelledby="addresses-tab">
                     <div class="mb-3">
                         <h4 class="text-primary">Danh sách địa chỉ giao hàng của bạn</>
                     </div>
@@ -82,7 +82,7 @@
                     <button type="button" data-bs-toggle="modal" data-bs-target="#modalAddShippingAddress" class="btn btn-primary shadow"><i class="bi bi-plus-circle me-2"></i> Thêm địa chỉ khác</button>
                 </div>
                 <!-- Tab Thay Đổi Mật Khẩu -->
-                <div class="tab-pane fade <?= $name_tab_show == 'change-password-tab' ? 'show active' : '' ?>" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
+                <div class="tab-pane fade <?= $name_tab_show == 'doi-mat-khau' ? 'show active' : '' ?>" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
                     <form>
                         <div class="mb-3">
                             <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
