@@ -33,7 +33,7 @@ if(isset($_POST['checkout'])) {
     else {
         $_SESSION['checkout'] = [
             'id_order' => create_uuid(), // tạo mã hoá đơn
-            'address_order' => $address_order,
+            'id_shipping_address' => $id_shipping_address,
             'note_order' => $note_order,
             'method_payment' => $method_payment,
         ];
@@ -115,8 +115,8 @@ if($bool_checkout) {
     // tạo nội dung gửi mail
     $data_checkout = [
         'id_order' => $id_order,
-        'note_order' => $note_order ?? '(trống)',
-        'address_order' => $address_order,
+        'note_order' => $note_order ? $note_order : '(trống)',
+        'address_order' => get_name_shipping_address_by_id($id_shipping_address),
         'method_payment' => $method_payment == 1 ? 'Thanh toán khi giao hàng (COD)' : (($method_payment == 2) ? 'Thanh toán ví điện tử VNPAY' : 'Thanh toán ví điện tử MOMO'),
         'total_cart' => total_cart(),
         'list_cart' => list_product_in_cart(),

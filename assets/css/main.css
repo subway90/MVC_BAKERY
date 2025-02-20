@@ -37,6 +37,27 @@
   --nav-dropdown-hover-color: #ec9900; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
+.form-check-label {
+  border: 1px dashed var(--nav-color);
+  border-radius: 4px;
+  padding: 10px; /* Thêm padding để tạo khoảng cách */
+}
+
+.form-check-input {
+  display: none;
+}
+
+.form-check-input:checked + .form-check-label {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  border-style: solid;
+}
+
+.form-check-input:checked {
+  /* Khi input được chọn, border thành solid */
+  border: 1px solid var(--accent-color);
+}
+
 .otp-input {
   outline: none; /* Ẩn outline mặc định */
   width: 40px;

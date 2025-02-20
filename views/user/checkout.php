@@ -27,14 +27,6 @@
                         <label for="email">Địa chỉ email<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
-                        <select name="method_payment" class="form-select" id="payment">
-                            <option <?= $method_payment == 1 ? 'selected' : '' ?> value="1">Thanh toán khi giao hàng (COD)</option>
-                            <option <?= $method_payment == 2 ? 'selected' : '' ?> value="2">Thanh toán ví điện tử VNPAY</option>
-                            <option <?= $method_payment == 3 ? 'selected' : '' ?> value="3">Thanh toán ví điện tử Momo</option>
-                        </select>
-                        <label for="payment">Phương thức thanh toán<span class="ms-1 text-danger">&#10033;</span></label>
-                    </div>
-                    <div class="col-12 ps-1 form-floating mb-3">
                         <select name="id_shipping_address" class="form-select" id="shipping_address">
                             <?php if(empty($list_shipping_address)) {?>
                             <option value="0" >Danh sách trống</option>
@@ -44,12 +36,29 @@
                         </select>
                         <label for="shipping_address">Địa chỉ giao hàng<span class="ms-1 text-danger">&#10033;</span></label>
                         <div class="text-primary text-start pt-2">
-                            <a class="nav-link" href="<?= URL ?>thong-tin-ca-nhan"><i class="bi bi-plus-circle small mx-1"></i> Thêm địa chỉ giao hàng khác</a>
+                            <a class="nav-link" href="<?= URL ?>thong-tin-ca-nhan/dia-chi-giao-hang"><i class="bi bi-plus-circle small mx-1"></i> Thêm địa chỉ giao hàng khác</a>
                         </div>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
                         <textarea name="note_order" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"><?= $note_order ?></textarea>
-                        <label for="floatingTextarea2">Ghi chú</label>
+                        <label for="floatingTextarea2">Ghi chú đơn hàng</label>
+                    </div>
+                    <div class="col-12 mb-3 text-start ps-1">
+                        <div class="text-primary mb-3">
+                            Chọn phương thức thanh toán
+                        </div>
+                        <div class="form-check p-0 mb-2">
+                            <input class="form-check-input" type="radio" name="method_payment" value="1" id="method_payment1" <?= $method_payment == 1 ? 'checked' : '' ?>>
+                            <label class="form-check-label w-100 d-flex align-items-center" for="method_payment1"><img class="me-3" height="36" src="https://cdn-icons-png.flaticon.com/512/5163/5163783.png" alt="logo cod">Tiền mặt (Thanh toán khi giao hàng)</label>
+                        </div>
+                        <div class="form-check p-0 mb-2">
+                            <input class="form-check-input" type="radio" name="method_payment" value="2" id="method_payment2" <?= $method_payment == 2 ? 'checked' : '' ?>>
+                            <label class="form-check-label w-100 d-flex align-items-center" for="method_payment2"><img class="me-3" height="36" src="https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/company_logos/cong-ty-cp-giai-phap-thanh-toan-viet-nam-vnpay-6194ba1fa3d66.jpg" alt="logo vnpay">Ví điện tử VNPAY</label>
+                        </div>
+                        <div class="form-check p-0 mb-2">
+                            <input class="form-check-input" type="radio" name="method_payment" value="3" id="method_payment3" <?= $method_payment == 3 ? 'checked' : '' ?>>
+                            <label class="form-check-label w-100 d-flex align-items-center" for="method_payment3"><img class="me-3" height="36" src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="logo momo">Ví điện tử MOMO</label>
+                        </div>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3 text-lg-start text-center">
                     <?php
