@@ -83,20 +83,20 @@
                 </div>
                 <!-- Tab Thay Đổi Mật Khẩu -->
                 <div class="tab-pane fade <?= $name_tab_show == 'doi-mat-khau' ? 'show active' : '' ?>" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
-                    <form>
+                    <form method="post"  action="<?= URL ?>thong-tin-ca-nhan/doi-mat-khau">
                         <div class="mb-3">
-                            <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
-                            <input type="password" class="form-control" id="currentPassword">
+                            <label for="currentPassword" class="form-label text-primary">Mật khẩu hiện tại</label>
+                            <input name="input_current_password" value="<?= $input_current_password ?>" type="password" class="form-control" id="currentPassword">
                         </div>
                         <div class="mb-3">
-                            <label for="newPassword" class="form-label">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="newPassword">
+                            <label for="newPassword" class="form-label text-primary">Mật khẩu mới</label>
+                            <input name="input_new_password" value="<?= $input_new_password ?>" type="password" class="form-control" id="newPassword">
                         </div>
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
-                            <input type="password" class="form-control" id="confirmPassword">
+                            <label for="confirmPassword" class="form-label text-primary">Xác nhận mật khẩu mới</label>
+                            <input name="input_verify_password" value="<?= $input_verify_password ?>" type="password" class="form-control" id="confirmPassword">
                         </div>
-                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                        <button name="change_password" type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>
                 </div>
             </div>

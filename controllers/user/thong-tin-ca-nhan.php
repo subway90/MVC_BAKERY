@@ -9,7 +9,7 @@ model('user','infomation');
 # [VARIABLE]
 $input_shipping_address = $name_modal_show = '';
 $error_valid = []; // mảng lỗi validate
-$input_update_full_name = $input_update_gender = ''; // biến update hồ sơ cá nhân
+$input_update_full_name = $input_update_gender = $input_current_password = $input_new_password = $input_verify_password = ''; // biến update hồ sơ cá nhân
 $list_tab = ['ho-so-cua-toi','dia-chi-giao-hang','doi-mat-khau'];
 
 # [HANDLE]
@@ -79,6 +79,33 @@ if(isset($_POST['delete_shipping_address'])) {
     }
 }
 
+// Đổi mật khẩu
+if(isset($_POST['change_password'])) {
+    // lấy input
+    $input_current_password = clear_input($_POST['input_current_password']);
+    $input_new_password = clear_input($_POST['input_new_password']);
+    $input_verify_password = clear_input($_POST['input_verify_password']);
+    // xử lí validate
+    if(!$input_current_password) toast_create('danger','Vui lòng nhập mật khẩu hiện tại');
+    else if(md5($input_current_password) != $_SESSION['user']['password']) toast_create('danger','Mật khẩu hiện tại không chính xác');
+    else if(!$input_new_password) toast_create('danger','Vui lòng nhập mật khẩu mới');
+    else if(strlen($input_new_password) < 8) toast_create('danger','Độ dài mật khẩu phải lớn từ 8 kí tự trở lên');
+    else if(!$input_verify_password) toast_create('danger','Vui lòng nhập xác nhận mật khẩu mới');
+    else if($input_new_password != $input_verify_password) toast_create('danger','Mật khẩu xác nhận không trùng khớp mật khẩu mới');
+    // cập nhật
+    else {
+        // lưu database
+        pdo_execute(
+            'UPDATE user SET password = "'.md5($input_new_password).'" WHERE username = "'.$_SESSION['user']['username'].'"'
+        );
+        // cập nhật session
+        $_SESSION['user']['password'] = md5($input_new_password);
+        // thông báo
+        toast_create('success','Thay đổi mật khẩu mới thành công');
+        // chuyển route
+        route('thong-tin-ca-nhan/doi-mat-khau');
+    }
+}
 
 # [DATA]
 $data = [
@@ -89,6 +116,9 @@ $data = [
     'name_tab_show' => $name_tab_show,
     'input_update_full_name' => $input_update_full_name,
     'input_update_gender' => $input_update_gender,
+    'input_current_password' => $input_current_password,
+    'input_new_password' => $input_new_password,
+    'input_verify_password' => $input_verify_password,
 ];
 // test_array($data);
 # [RENDER]
