@@ -16,6 +16,21 @@ function get_all_shipping_address() {
 }
 
 /**
+ * Lấy tên của một ID địa chỉ giao hàng
+ * @param mixed $id ID địa chỉ cần lấy
+ * @return string
+ */
+function get_name_shipping_address_by_id($id) {
+    return pdo_query_value(
+        'SELECT name_shipping_address
+        FROM shipping_address
+        WHERE id_shipping_address = '.$id.'
+        AND deleted_at IS NULL
+        '
+    );
+}
+
+/**
  * Kiểm tra xem số lượt địa chỉ đã đạt giới hạn >= $limit hay chưa
  * 
  * @param int $limit Số lần giới hạn cho phép
