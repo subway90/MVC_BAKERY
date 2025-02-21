@@ -11,13 +11,9 @@
   <!-- List Category -->
     <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
-    <?php
-        $i = 0;
-        foreach ($array_menu as $menu) {
-        $i++;
-    ?>
+    <?php foreach ($array_menu as $index => $menu) { ?>
       <li class="nav-item">
-        <a class="nav-link <?=$i==1 ? 'active show' : '' ?>" data-bs-toggle="tab" data-bs-target="#<?=$menu['slug_category']?>">
+        <a class="nav-link <?= $index==0 ? 'active show' : '' ?>" data-bs-toggle="tab" data-bs-target="#<?=$menu['slug_category']?>">
           <h4><?=$menu['name_category']?></h4>
         </a>
       </li><!-- End tab nav item -->
