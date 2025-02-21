@@ -79,6 +79,8 @@
 
   <!-- Main JS File -->
   <script src="<?=URL?>assets/js/main.js"></script>
+  <!-- AJAX JS File -->
+  <script src="<?=URL?>assets/js/ajax.js"></script>
   <!-- Hiện modal tự động sau khi tải trang -->
   <?php if(isset($show_modal)) {?>
     <script>
