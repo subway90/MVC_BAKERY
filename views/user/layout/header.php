@@ -90,14 +90,8 @@
                 </div>
         </div>
     </header>
-    <!-- Canvas Cart -->
-    <div class="offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h3 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="cart-item offcanvas-body">
-            
-        </div>
-    </div>
+
+    <!-- Canvas Cart with AJAX-->
+    <div class="cart-item offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas" aria-labelledby="offcanvasRightLabel"></div>
+
     <main class="main">
