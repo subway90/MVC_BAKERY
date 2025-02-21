@@ -373,3 +373,43 @@ function auto_login() {
         }
     }
 }
+
+/**
+ * Tạo toast để thông báo
+ * 
+ * Lưu ý: Chỉ trả về, phải dùng lệnh echo
+ * 
+ * @param string $type Loại màu toast
+ * @param string $message Nội dung thông báo
+ * @return string Đoạn script thông báo toast
+ */
+function toast($type,$message) {
+        return '
+        <style>
+        .line-bar {
+            height: 2px;
+            animation: lmao '.(TOAST_TIME/1000).'s linear forwards;
+        }
+        @keyframes lmao {
+            from {
+              width: 100%;
+            }
+            to {
+              width: 0;
+            }
+          }      
+        </style>
+        <div style="z-index: 9999;" class="position-fixed end-0 me-1 mt-5 pt-5">
+            <div class="w-100 alert alert-'.$type.' border-0 alert-dismissible fade show m-0 rounded-0" role="alert">
+                <span class="ps-2 pe-5 py-2">'.$message.'</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="bg-'.$type.' line-bar"></div>
+        </div>
+        <script>
+            function closeAlert() {
+                document    .querySelector(".btn-close").click();
+            }
+            setTimeout(closeAlert,'.TOAST_TIME.')
+        </script>';
+}
