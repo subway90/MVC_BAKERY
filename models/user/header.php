@@ -28,13 +28,14 @@ function list_product_in_cart() {
             $product = pdo_query_one(
                 'SELECT * FROM product
                 WHERE id_product ='.$cart['id_product']
-                .' AND status_product = 1'
+                .' AND deleted_at IS NULL'
             );
             if(!empty($product)) {
                 extract($product);
                 $list_product[] = [
                     'quantity_product_in_cart' => $cart['quantity_product'],
                     'name_product' => $name_product,
+                    'description_product' => $description_product,
                     'quantity_product' => $quantity_product,
                     'price_product' => $price_product,
                     'image_product' => $image_product,
