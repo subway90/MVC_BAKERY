@@ -15,15 +15,15 @@
                         <span>bắt buộc nhập thông tin</span>
                     </div>
                     <div class="col-lg-6 col-12 ps-1 form-floating mb-3">
-                        <input readonly value="<?= $_SESSION['user']['full_name'] ?? '' ?>" type="text" class="form-control" id="fullname" placeholder="bống béo bread">
+                        <input readonly value="<?= $_SESSION['user']['full_name']?>" type="text" class="form-control" id="fullname" placeholder="bống béo bread">
                         <label for="fullname">Tên của bạn<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-lg-6 col-12 ps-1 form-floating mb-3">
-                        <input readonly value="<?= $_SESSION['user']['phone'] ?? '' ?>" type="text" class="form-control" id="phone" placeholder="bống béo bread">
+                        <input readonly value="<?= $_SESSION['user']['username']?>" type="text" class="form-control" id="phone" placeholder="bống béo bread">
                         <label for="phone">Số điện thoại<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
-                        <input readonly value="<?= $_SESSION['user']['email'] ?? '' ?>"type="text" class="form-control" id="email" placeholder="bống béo bread">
+                        <input readonly value="<?= $_SESSION['user']['email']?>"type="text" class="form-control" id="email" placeholder="bống béo bread">
                         <label for="email">Địa chỉ email<span class="ms-1 text-danger">&#10033;</span></label>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
