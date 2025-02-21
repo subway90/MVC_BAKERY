@@ -43,6 +43,10 @@
   padding: 10px; /* Thêm padding để tạo khoảng cách */
 }
 
+.border-primary {
+  border-color: var(--accent-color) !important;
+}
+
 .form-check-input {
   display: none;
 }
