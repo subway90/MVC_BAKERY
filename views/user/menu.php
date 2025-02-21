@@ -29,12 +29,8 @@
     <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
 
     <!-- List Product -->
-    <?php
-        $j=0;
-        foreach ($array_menu as $menu) {
-        $j++;
-    ?>
-      <div class="tab-pane fade <?=$j==1 ? 'active show' : '' ?>" id="<?=$menu['slug_category']?>">
+    <?php foreach ($array_menu as $index => $menu) {?>
+      <div class="tab-pane fade <?=$index==1 ? 'active show' : '' ?>" id="<?=$menu['slug_category']?>">
 
         <div class="tab-header text-center">
           <h3><?=$menu['name_category']?></h3>
