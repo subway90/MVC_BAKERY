@@ -29,19 +29,13 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- =======================================================
-  * Template Name: Yummy
-  * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- CDN Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
-<?=
-        // dùng toast
-    toast_show();
-?>
+<?= toast_show(); // dùng toast ?>
+<!-- Thông báo thêm giỏ hàng ajax -->
+<div id="message-ajax"></div>
 
 <body class="index-page">
 
@@ -86,8 +80,12 @@
                         <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
                     </ul>
                     <?php }?>
-                    <button class="btn border rounded-circle ms-lg-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
+                    <button type="button" class="ms-lg-2 btn rounded-circle btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
                         <i class="bi bi-basket"></i>
+                        <span id="count-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            12
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
                     </button>
                 </div>
         </div>
@@ -98,65 +96,8 @@
             <h3 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h3>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <?php
-            $list_product_in_cart = list_product_in_cart();
-            $total_cart = total_cart();
-            if(!empty($list_product_in_cart)) {
-            ?>
-            <div class="d-flex justify-content-between">
-                <div class="">
-                    <span>Số lượng sản phẩm:</span> <span class="text-primary"><?=count($list_product_in_cart)?></span>
-                </div>
-                <div class="">
-                    <a href="<?=URL?>gio-hang/delete_all" class="border rounded-2 py-1 px-2 small"><i class="bi bi-trash"></i> tất cả</a>
-                </div>
-            </div>
-            <?php
-            foreach ($list_product_in_cart as $product) {
-                extract($product);
-            ?>
-            <div class="row my-3 mx-1 ps-2 border rounded-5 rounded-end-0">
-                <img src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>" onerror="this.onerror=null; this.src='<?=DEFAULT_IMAGE?>';"
-                    class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain" alt="...">
-                <div class="col-8 text-start">
-                    <div class="h6 text-primary mt-1"><?= $name_product ?></div>
-                    <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_product,0,',','.')?>
-                            <sup>vnđ</sup></span></div>
-                    <div class="mt-1">
-                        <a href="<?=URL?>gio-hang/minus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2 <?=$quantity_product_in_cart < 2 ? 'disabled' : ''?>">
-                            <i class="bi bi-dash"></i>
-                        </a>
-                        <span class="px-2"><?=$quantity_product_in_cart?></span>
-                        <a href="<?=URL?>gio-hang/plus/<?=$id_product?>" class="btn btn-sm border text-hover py-1 px-2 my-2 <?=$quantity_product == $quantity_product_in_cart ? 'disabled' : ''?>">
-                            <i class="bi bi-plus"></i>
-                        </a>
-                        <span class="small">
-                            <?php if($quantity_product) {?>
-                            (còn <span class="text-primary"><?=$quantity_product?></span> cái)
-                            <?php }else{?>
-                                <span class="text-danger">(đã hết hàng)</span>
-                            <?php }?>
-                        </span>
-                    </div>
-                    <a href="<?=URL?>gio-hang/delete/<?=$id_product?>" class="btn btn-sm border text-hover p-0 px-2 my-2">
-                        <i class="bi bi-trash me-2"></i>Xóa
-                    </a>
-                </div>
-            </div>
-            <?php }?>
-            <div class="text-center">
-                <div class="d-flex justify-content-between text-primary p-2">
-                   <h5 class="fw-bold">Tổng:</h5>
-                   <div class=""><?= number_format($total_cart,0,',','.') ?> <sup>vnđ</sup></div>
-                </div>
-                <a class="border rounded-5 px-3 py-2 w-100 d-block" href="<?= URL ?>thanh-toan">Thanh toán</a>
-            </div>
-            <?php }else{ ?>
-                <div class="w-100 text-center mb-3">
-                    <span>Giỏ hàng trống</span>
-                </div>
-            <?php }?>
+        <div class="cart-item offcanvas-body">
+            
         </div>
     </div>
     <main class="main">
