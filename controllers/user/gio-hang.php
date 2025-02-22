@@ -40,7 +40,7 @@ if(isset($_GET['ajax_cart'])) {
                     <span>Số lượng sản phẩm:</span> <span class="text-primary">{$count_cart}</span>
                 </div>
                 <div class="">
-                    <a href="#" class="border rounded-2 py-1 px-2 small"><i class="bi bi-trash"></i> tất cả</a>
+                    <a href="{$url}gio-hang/delete_all" class="border rounded-2 py-1 px-2 small"><i class="bi bi-trash"></i> tất cả</a>
                 </div>
             </div>
         </div>
@@ -53,9 +53,9 @@ if(isset($_GET['ajax_cart'])) {
         <div class="text-center px-3 py-4">
             <div class="d-flex justify-content-between text-primary">
                 <h4 class="fw-bold">Tổng:</h4>
-                <div class="h4">'. .' <sup>vnđ</sup></div>
+                <div class="h4">{$total_cart} <sup>vnđ</sup></div>
             </div>
-            <a class="btn btn-primary d-block w-100 rounded-5" href="'. URL.'thanh-toan">Thanh toán</a>
+            <a class="btn btn-primary d-block w-100 rounded-5" href="{$url}thanh-toan">Thanh toán</a>
         </div>
     HTML;
     if(!empty($list_product_in_cart)) {
@@ -74,16 +74,16 @@ if(isset($_GET['ajax_cart'])) {
                         <div class="mt-1">Giá : <span class="text-primary">{$format_price} 
                                 <sup>vnđ</sup></span></div>
                         <div class="mt-1">
-                            <a href="#" class="btn btn-sm border text-hover py-1 px-2 my-2">
+                            <a href="{$url}gio-hang/minus/{$id_product}" class="btn btn-sm border text-hover py-1 px-2 my-2">
                                 <i class="bi bi-dash"></i>
                             </a>
                             <span class="px-2">{$quantity_product_in_cart}</span>
-                            <a href="#" class="btn btn-sm border text-hover py-1 px-2 my-2">
+                            <a href="{$url}gio-hang/add/{$id_product}" class="btn btn-sm border text-hover py-1 px-2 my-2">
                                 <i class="bi bi-plus"></i>
                             </a>
                             <span class="small">{$state_product}</span>
                         </div>
-                        <a href="#" class="btn btn-sm border text-hover p-0 px-2 my-2">
+                        <a href="{$url}gio-hang/delete/{$id_product}" class="btn btn-sm border text-hover p-0 px-2 my-2">
                             <i class="bi bi-trash me-2"></i>Xóa
                         </a>
                     </div>
@@ -100,6 +100,16 @@ if(isset($_GET['ajax_cart'])) {
     view_json(200,['data' => $head_cart.$content_cart.$foot_cart,'count'=>count($list_product_in_cart)]);
 }
 
+// Mua ngay sản phẩm
+if(isset($_POST['buy_now']) && $_POST['buy_now']) {
+    // lấy id
+    $id_product = $_POST['buy_now'];
+    // cập nhật giỏ hàng
+    update_cart($id_product);
+    // chuyển route thanh toán
+    route('thanh-toan');
+}
+
 
 // Thêm sản phẩm vào giỏ hàng
 if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'add') {
@@ -108,7 +118,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'add') {
         $id_product = $_arrayURL[2];
         update_cart($id_product);
         showCanvas();
-        route('thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
@@ -119,7 +128,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete') {
         $id_product = $_arrayURL[2];
         delete_cart($id_product);
         showCanvas();
-        route('thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
@@ -130,7 +138,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'plus') {
         $id_product = $_arrayURL[2];
         update_quantity('plus',$id_product);
         showCanvas();
-        route('thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
@@ -141,7 +148,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'minus') {
         $id_product = $_arrayURL[2];
         update_quantity('minus',$id_product);
         showCanvas();
-        route('thuc-don');
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
@@ -149,7 +155,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'minus') {
 if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete_all') {
     unset($_SESSION['cart']);
     showCanvas();
-    route('thuc-don');
 }
 
 # [DATA]
