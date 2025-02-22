@@ -15,6 +15,7 @@ $bool_checkout = false; // trạng thái hoàn thành của hoá đơn
 $error_valid = []; // mảng lỗi validate
 $id_order = null; // mã hoá đơn
 $id_shipping_address = 0; // id địa chỉ giao hàng
+$list_shipping_address = []; //danh sách địa chỉ giao hàng
 # [HANDLE]
 // xử lí input khi xác nhận thanh toán
 if(isset($_POST['checkout'])) {
@@ -133,10 +134,11 @@ if($bool_checkout) {
 }
 
 # [DATA]
+if($_SESSION['user']) $list_shipping_address = get_all_shipping_address();
 $data = [
     'id_shipping_address' => $id_shipping_address,
     'method_payment' => $method_payment,
-    'list_shipping_address' => get_all_shipping_address(),
+    'list_shipping_address' => $list_shipping_address,
     'address_order' => $address_order,
     'note_order' => $note_order,
 ];
