@@ -48,13 +48,15 @@
                   <?= number_format($product['price_product'], 0, ',', '.') ?> <sup>vnđ</sup>
                 </p>
 
-                <form class="form-submit">
+                <form method="post" action="gio-hang" class="form-submit text-center">
                   <input type="hidden" class="id_product" value="<?= $product['id_product'] ?>">
-                  <button type="button" class="btn btn-success btn-small addItemBtn">Add Cart</button>
+                  <button type="button" class="addItemBtn border mx-1 px-2 py-1 rounded-1 btn text-primary">
+                    <i class="bi bi-bag-plus me-1"></i> Giỏ hàng
+                  </button>
+                  <button name="buy_now" value="<?= $product['id_product'] ?>" type="submit" class="border mx-1 px-2 py-1 rounded-1 btn text-primary">
+                    <i class="bi bi-bag-check me-1"></i> Mua ngay
+                  </button>
                 </form>
-                <a class="border px-2 py-1 rounded-1" href="<?= URL ?>gio-hang/add/<?= $product['id_product'] ?>"><i
-                    class="bi bi-bag-plus me-1"></i> Giỏ hàng</a>
-                <a class="border px-2 py-1 rounded-1 ms-3" href="#"><i class="bi bi-bag-check me-1"></i> Mua ngay</a>
               </div>
             <?php } ?>
           </div>
