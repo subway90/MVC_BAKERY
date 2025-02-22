@@ -80,6 +80,7 @@
                         <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
                     </ul>
                     <?php }?>
+                    <?php if($page != 'checkout'){?>
                     <button type="button" class="ms-lg-2 btn rounded-circle btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
                         <i class="bi bi-basket"></i>
                         <span id="count-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -87,6 +88,7 @@
                             <span class="visually-hidden">unread messages</span>
                         </span>
                     </button>
+                    <?php }?>
                 </div>
         </div>
     </header>
