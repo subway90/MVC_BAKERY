@@ -65,27 +65,36 @@ if(isset($_GET['ajax_cart'])) {
             else $state_product = '<span class="text-danger">(đã hết hàng)</span>';
             // format giá
             $format_price = number_format($price_product,0,',','.');
+            // format button
+            ($quantity_product_in_cart == $quantity_product) ? $type_button_add = 'disabled' : $type_button_add = '';
+            ($quantity_product_in_cart == 1) ? $type_button_minus = 'disabled' : $type_button_minus = '';
             $content_cart .=
             <<<HTML
             <div class="row my-3 mx-1 ps-2 border rounded-5 rounded-end-0">
                     <img src="{$url_storage}{$image_product}" class="p-0 col-4 rounded-5 rounded-end-0 object-fit-contain">
                     <div class="col-8 text-start">
                         <div class="h6 text-primary mt-1">{$name_product}</div>
-                        <div class="mt-1">Giá : <span class="text-primary">{$format_price} 
-                                <sup>vnđ</sup></span></div>
-                        <div class="mt-1">
-                            <a href="{$url}gio-hang/minus/{$id_product}" class="btn btn-sm border text-hover py-1 px-2 my-2">
-                                <i class="bi bi-dash"></i>
-                            </a>
-                            <span class="px-2">{$quantity_product_in_cart}</span>
-                            <a href="{$url}gio-hang/add/{$id_product}" class="btn btn-sm border text-hover py-1 px-2 my-2">
-                                <i class="bi bi-plus"></i>
-                            </a>
-                            <span class="small">{$state_product}</span>
-                        </div>
-                        <a href="{$url}gio-hang/delete/{$id_product}" class="btn btn-sm border text-hover p-0 px-2 my-2">
-                            <i class="bi bi-trash me-2"></i>Xóa
-                        </a>
+                        <div class="mt-1">Giá : <span class="text-primary">{$format_price} <sup>vnđ</sup></span></div>
+                        <form class="form-quantity">
+                            <div class="mt-1">
+                                <input type="hidden" class="id_product" value="{$id_product}">
+
+                                <button {$type_button_minus} type="button" class="minusQuantityBtn btn btn-outline-primary btn-sm text-hover py-1 px-2 my-2">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                
+                                <span class="px-2">{$quantity_product_in_cart}</span>
+
+                                <button {$type_button_add} type="button" class="plusQuantityBtn btn btn-outline-primary btn-sm text-hover py-1 px-2 my-2">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+
+                                <span class="small">{$state_product}</span>
+                            </div>
+                            <button type="button" class="deleteItemBtn btn btn-sm border text-hover p-0 px-2 my-2">
+                                <i class="bi bi-trash me-2"></i>Xóa
+                            </button>
+                        </form>
                     </div>
                 </div>
             HTML;
@@ -111,14 +120,36 @@ if(isset($_POST['buy_now']) && $_POST['buy_now']) {
 }
 
 
-// Thêm sản phẩm vào giỏ hàng
-if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'add') {
+// Tăng số lượng
+if(isset($_POST['add_quantity']) && $_POST['add_quantity']) {
     // Lấy ID sản phẩm
-    if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
-        $id_product = $_arrayURL[2];
-        update_cart($id_product);
-        showCanvas();
-    }else view_404('user'); // Nếu ID Product không hợp lệ
+    $id_product = $_POST['id_product'];
+    // cập nhật giỏ hàng
+    $check = update_quantity('plus',$id_product);
+    // trả về json
+    if($check) view_json(200,['data'=> toast('success','Thêm số lượng thành công')]);
+    else view_json(200,['data'=> toast('danger','Đã đạt giới hạn')]);
+    
+}
+
+// Giảm số lượng
+if(isset($_POST['minus_quantity']) && $_POST['minus_quantity']) {
+    // Lấy ID sản phẩm
+    $id_product = $_POST['id_product'];
+    $check = update_quantity('minus',$id_product);
+    // trả về json
+    if($check) view_json(200,['data'=> toast('success','Giảm số lượng thành công')]);
+    else view_json(200,['data'=> toast('danger','Đã đạt giới hạn')]);
+}
+
+// Xoá sản phẩm khỏi giỏ hàng
+if(isset($_POST['delete_product']) && $_POST['delete_product']) {
+    // Lấy ID sản phẩm
+    $id_product = $_POST['id_product'];
+    // thực hiện xoá
+    delete_cart($id_product);
+    // trả về json
+    view_json(200,['data'=> toast('success','Xoá sản phẩm khỏi giỏ hàng thành công')]);
 }
 
 // Xoá sản phẩm ở giỏ hàng
@@ -131,26 +162,6 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete') {
     }else view_404('user'); // Nếu ID Product không hợp lệ
 }
 
-// Tăng số lượng sản phẩm ở giỏ hàng
-if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'plus') {
-    // Lấy ID sản phẩm
-    if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
-        $id_product = $_arrayURL[2];
-        update_quantity('plus',$id_product);
-        showCanvas();
-    }else view_404('user'); // Nếu ID Product không hợp lệ
-}
-
-// Giảm số lượng sản phẩm ở giỏ hàng
-if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'minus') {
-    // Lấy ID sản phẩm
-    if(isset($_arrayURL[2]) && $_arrayURL[2] && $_arrayURL[2]>0 && is_numeric($_arrayURL[2])) {
-        $id_product = $_arrayURL[2];
-        update_quantity('minus',$id_product);
-        showCanvas();
-    }else view_404('user'); // Nếu ID Product không hợp lệ
-}
-
 // Xoá tất cả giỏ hàng
 if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete_all') {
     unset($_SESSION['cart']);
@@ -158,6 +169,7 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete_all') {
 }
 
 # [DATA]
-$data = [
 
-];
+# [RENDER]
+showCanvas();
+route('thuc-don');
