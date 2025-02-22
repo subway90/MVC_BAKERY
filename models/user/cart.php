@@ -44,26 +44,45 @@ function delete_cart($id) {
  * Hàm này dùng để cập nhật số lượng
  * @param mixed $id
  * @param string $type
- * @return void
+ * @return bool trả về TRUE nếu cập nhật số lượng thành công, ngược lại trả về FALSE nếu đã đạt giới hạn
  */
-function update_quantity($type,$id): void {
-        foreach ($_SESSION['cart'] as $i => $product) { 
-            // Nếu ID sản phẩm đã tồn tại trong giỏ hàng
-            if($_SESSION['cart'][$i]['id_product'] == $id){
-                if($type == 'plus') {
-                    // Lấy tổng số lượng của sản phẩm đó
-                    $max_quantity = pdo_query_one(
-                        'SELECT quantity_product FROM product
-                        WHERE id_product ='.$id
-                        .' AND status_product = 1');
-                    // Kiểm tra đã đạt giới hạn chưa
-                    if($_SESSION['cart'][$i]['quantity_product'] < $max_quantity ) $_SESSION['cart'][$i]['quantity_product']++; // Thêm số lượng
+function update_quantity($type,$id) {
+    // Lặp sản phẩm trong session
+    foreach ($_SESSION['cart'] as $i => $product) {
+        // Nếu ID sản phẩm cập nhật có trong giỏ hàng
+        if($_SESSION['cart'][$i]['id_product'] == $id){
+            // Nếu tăng số lượng
+            if($type == 'plus') {
+                // Lấy tổng số lượng của sản phẩm đó
+                $max_quantity = pdo_query_value('SELECT quantity_product FROM product WHERE id_product ='.$id);
+                // Kiểm tra nếu chưa đạt giới hạn
+                if($_SESSION['cart'][$i]['quantity_product'] < $max_quantity ) {
+                    $_SESSION['cart'][$i]['quantity_product']++; // Thêm số lượng
+                    return true;
                 }
-                if($type == 'minus') {
-                    if($_SESSION['cart'][$i]['quantity_product']>1) $_SESSION['cart'][$i]['quantity_product']--; // Giảm số lượng
-                }
-                break;
             }
+            // Nếu giảm số lượng
+            else if($type == 'minus') {
+                // Kiểm tra số lượng chưa bé hơn 1 (chưa min)
+                if($_SESSION['cart'][$i]['quantity_product']>1) {
+                    $_SESSION['cart'][$i]['quantity_product']--; // Giảm số lượng
+                    return true;
 
+                }
+            }
         }
+
+    }
+    return false;
+}
+
+/**
+ * Trả về số lượng của sản phẩm đó
+ * @param mixed $id_product
+ * @return int
+ */
+function get_quantity_product($id_product) {
+    return pdo_query_value(
+        'SELECT quantity_product FROM product WHERE id_product ='.$id_product
+    );
 }
