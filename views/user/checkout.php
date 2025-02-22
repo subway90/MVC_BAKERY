@@ -97,7 +97,11 @@
             <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
                 <div class="row mx-1">
                     <?php
-                    // dữ liệu danh sách sản phẩm được render từ views/user/layout/header
+                    // lấy danh sách
+                    $list_product_in_cart = list_product_in_cart();
+                    // lấy tổng tiền
+                    $total_cart = total_cart();
+                    // kiểm tra
                     if (!empty($list_product_in_cart)) {
                         ?>
                         <div class="d-flex justify-content-between">
