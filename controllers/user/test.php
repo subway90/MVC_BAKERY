@@ -1,5 +1,15 @@
 <?php
 
+# [MODEL]
+model('user','stringee');
+
+# [VARIBLE]
+$to = '0965279041';
+$otp = '222222';
+
+# [HANDLE]
+stringee_send_otp($to,$otp);
+
 # [DATA]
 $data = [
     "vnpay" => [
