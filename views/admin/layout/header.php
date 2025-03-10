@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <title><?= (isset($title)) ? $title : WEB_NAME ?></title>
     <!-- icon -->
-    <link rel="icon" type="image/png" href="<?= URL_STORAGE.'system/logo.png' ?>" />
+    <link rel="shortcut icon" href="<?= URL_STORAGE ?>system/favicon.png" type="image/x-icon">
     <!-- fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i" />
     <!-- css -->
