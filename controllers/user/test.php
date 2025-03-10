@@ -4,8 +4,8 @@
 model('user','stringee');
 
 # [VARIBLE]
-$to = '0965279041';
-$otp = '222222';
+$to = STRINGEE_TEST_NUMBER_PHONE;
+$otp = STRINGEE_TEST_OTP;
 
 # [HANDLE]
 stringee_send_otp($to,$otp);
