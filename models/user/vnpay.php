@@ -3,17 +3,16 @@
 
 /**
  * Hàm này tạo url dẫn đến trang thanh toán vnpay
- * @param string $id_order Mã hoá đơn
+ * @param string $id_invoice Mã hoá đơn
  * @param string $amount Số tiền
  * @param string $message Nội dung
  * @return string url thanh toán
  */
-function create_vnpay_url($id_order,$amount,$message) {
+function create_vnpay_url($id_invoice,$amount,$message) {
     // cấu hình vnpay
     error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-    $id_order = $_SESSION['checkout']['id_order'];
+    $id_invoice = $_SESSION['checkout']['id_invoice'];
     $vnp_Amount = $amount * 100;
-    $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
     $vnpUrl = VNPAY_URL_SANDBOX;
     // mảng data vnpay
     $vnpData = [
@@ -25,10 +24,10 @@ function create_vnpay_url($id_order,$amount,$message) {
         "vnp_CurrCode" => "VND",
         "vnp_IpAddr" => $_SERVER['REMOTE_ADDR'],
         "vnp_Locale" => "vn",
-        "vnp_OrderInfo" => 'Thanh toán hoá đơn ' . $id_order,
+        "vnp_OrderInfo" => 'Thanh toán hoá đơn ' . $id_invoice,
         "vnp_OrderType" => "other",
         "vnp_ReturnUrl" => VNPAY_URL_RETURN,
-        "vnp_TxnRef" => $id_order,
+        "vnp_TxnRef" => $id_invoice,
         "vnp_ExpireDate" => date('YmdHis', strtotime('+15 minutes', strtotime(date("YmdHis")))),
     ];
     // code xử lí tạo url vnpay

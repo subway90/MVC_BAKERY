@@ -17,7 +17,7 @@ $username = $_SESSION['user']['username'];
 
 
 $data = [
-    'list_order' => get_all_order_by_username($username),
+    'list_invoice' => get_all_invoice_by_username($username),
 ];
 
 # [RENDER

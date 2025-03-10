@@ -2,51 +2,51 @@
 
 /**
  * Hàm này dùng để lấy thông tin hoá đơn và hoá đơn chi tiết theo mã hoá đơn
- * @param mixed $id_order mã hoá đơn cần lấy
+ * @param mixed $id_invoice mã hoá đơn cần lấy
  * @return array
  */
-function get_one_order_by_id($id_order) {
+function get_one_invoice_by_id($id_invoice) {
     $array = [];
     // lấy thông tin đơn hàng
-    $order = pdo_query_one(
-        'SELECT u.full_name, u.email, o.*, s.name_shipping_address
-        FROM orders o
+    $invoice = pdo_query_one(
+        'SELECT u.full_name, u.email, i.*, s.name_shipping_address
+        FROM invoice i
         LEFT JOIN user u
-        ON o.username = u.username
+        ON i.username = u.username
         LEFT JOIN shipping_address s
-        ON o.id_shipping_address = s.id_shipping_address
-        WHERE id_order = "'.$id_order.'"'
+        ON i.id_shipping_address = s.id_shipping_address
+        WHERE id_invoice = "'.$id_invoice.'"'
     );
 
     // lấy thông tin đơn hàng chi tiết
-    $order_detail = pdo_query(
-        'SELECT d.quantity_order, d.price_order, p.name_product, p.image_product
-        FROM order_detail d
-        JOIN orders o
-        ON d.id_order = o.id_order
+    $invoice_detail = pdo_query(
+        'SELECT d.quantity_invoice, d.price_invoice, p.name_product, p.image_product
+        FROM invoice_detail d
+        JOIN invoice i
+        ON d.id_invoice = i.id_invoice
         JOIN product p
         ON d.id_product = p.id_product
-        WHERE d.id_order = "'.$order['id_order'].'"'
+        WHERE d.id_invoice = "'.$invoice['id_invoice'].'"'
     );
 
 
     return $array = [
-        'order' => $order,
-        'order_detail' => $order_detail,
+        'invoice' => $invoice,
+        'invoice_detail' => $invoice_detail,
     ];
 }
 
 /**
  * Hàm này kiểm tra xem đơn hàng có tồn tại hay không
- * @param mixed $id_order Mã đơn hàng cần kiểm tra
+ * @param mixed $id_invoice Mã đơn hàng cần kiểm tra
  * @return string
  */
-function check_order_exist($id_order) {
+function check_invoice_exist($id_invoice) {
     return pdo_query_one(
-        'SELECT id_order
-        FROM orders 
+        'SELECT id_invoice
+        FROM invoice
         WHERE deleted_at IS NULL
-        AND id_order = "'.$id_order.'"'
+        AND id_invoice = "'.$id_invoice.'"'
     );
 }
 
@@ -56,34 +56,34 @@ function check_order_exist($id_order) {
  * @param mixed $username
  * @return array
  */
-function get_all_order_by_username($username) {
+function get_all_invoice_by_username($username) {
     $result = [];
     // lấy danh sách hoá đơn
-    $list_order = pdo_query(
+    $list_invoice = pdo_query(
         'SELECT *
-        FROM orders
+        FROM invoice
         WHERE deleted_at IS NULL
         AND username = "'.$username.'"
         ORDER BY created_at DESC'
     );
 
     // lặp từng hoá đơn để tính tổng
-    foreach($list_order as $order) {
+    foreach($list_invoice as $invoice) {
         // lấy danh sách hoá đơn chi tiết
-        $order_detail = pdo_query(
-            'SELECT d.quantity_order, d.price_order
-            FROM order_detail d
-            JOIN orders o
-            ON d.id_order = o.id_order
-            WHERE d.id_order = "'.$order['id_order'].'"'
+        $invoice_detail = pdo_query(
+            'SELECT d.quantity_invoice, d.price_invoice
+            FROM invoice_detail d
+            JOIN invoice i
+            ON d.id_invoice = i.id_invoice
+            WHERE d.id_invoice = "'.$invoice['id_invoice'].'"'
         );
         // tính tổng tiền
         $total = 0;
-        foreach ($order_detail as $detail) {
-            $total += $detail['price_order']*$detail['quantity_order'];
+        foreach ($invoice_detail as $detail) {
+            $total += $detail['price_invoice']*$detail['quantity_invoice'];
         };
-        $order += ['total'=> $total];
-        $result[] = $order;
+        $invoice += ['total'=> $total];
+        $result[] = $invoice;
     }
 
     return $result;

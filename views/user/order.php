@@ -17,7 +17,7 @@
                         ID:
                     </div>
                     <div class="text-start">
-                        <?=$order['id_order']?>
+                        <?=$invoice['id_invoice']?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -25,7 +25,7 @@
                         Trạng thái:
                     </div>
                     <div class="text-start">
-                        <?=$order['status_order'] == 0 ? 'Đang xử lí' : ($order['status_order'] == 1 ? 'Hoàn thành' : 'Đã huỷ') ?>
+                        <?=$invoice['status_invoice'] == 0 ? 'Đang xử lí' : ($invoice['status_invoice'] == 1 ? 'Hoàn thành' : 'Đã huỷ') ?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -33,7 +33,7 @@
                         Địa chỉ giao:
                     </div>
                     <div class="text-start">
-                        <?=$order['name_shipping_address']?>
+                        <?=$invoice['name_shipping_address']?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -41,7 +41,7 @@
                         Ghi chú:
                     </div>
                     <div class="text-start">
-                        <?=$order['note_order'] ? $order['note_order'] : '<i class="text-muted small">(trống)</i>'?>
+                        <?=$invoice['note_invoice'] ? $invoice['note_invoice'] : '<i class="text-muted small">(trống)</i>'?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -49,7 +49,7 @@
                         Ngày tạo đơn:
                     </div>
                     <div class="text-start">
-                        <?=format_time($order['created_at'],'lúc hh:mm DD/MM/YYYY')?>
+                        <?=format_time($invoice['created_at'],'lúc hh:mm DD/MM/YYYY')?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -57,7 +57,7 @@
                         Ngày cập nhật:
                     </div>
                     <div class="text-start">
-                        <?=$order['updated_at'] ? format_time($order['updated_at'],'lúc hh:mm DD/MM/YYYY') : '<span class="text-muted small fst-italic">(chưa cập nhật)</span>'?>
+                        <?=$invoice['updated_at'] ? format_time($invoice['updated_at'],'lúc hh:mm DD/MM/YYYY') : '<span class="text-muted small fst-italic">(chưa cập nhật)</span>'?>
                     </div>
                 </div>
                 <div class="col-12 text-start border-bottom my-4">
@@ -77,7 +77,7 @@
                         Phương thức thanh toán:
                     </div>
                     <div class="text-start">
-                        <?=$order['method_payment'] == 1 ? 'Tiền mặt (Thanh toán khi giao hàng)' : ($order['method_payment'] == 2 ? 'Ví điện tử VNPAY' : 'Ví điện tử Momo')?>
+                        <?=$invoice['method_payment'] == 1 ? 'Tiền mặt (Thanh toán khi giao hàng)' : ($invoice['method_payment'] == 2 ? 'Ví điện tử VNPAY' : 'Ví điện tử Momo')?>
                     </div>
                 </div>
             </div>
@@ -90,8 +90,8 @@
                 <h1>Danh sách</h1>
             </div>
             <?php
-            foreach ($order_detail as $order) {
-                extract($order);
+            foreach ($invoice_detail as $invoice) {
+                extract($invoice);
             ?>
             <div class="row justify-content-between px-4 py-2 my-2 mx-1 border rounded-5 align-items-center">
                 <div class="thumbnail-container col-lg-3 col-12">
@@ -100,11 +100,11 @@
                 </div>
                 <div class="col-lg-9 text-lg-start text-center ps-2">
                     <div class="h6 text-primary mt-1"><?= $name_product ?></div>
-                    <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_order,0,',','.')?><sup> vnđ</sup></span>
+                    <div class="mt-1">Giá : <span class="text-primary"><?=number_format($price_invoice,0,',','.')?><sup> vnđ</sup></span>
                     </div>
-                    <div class="mt-1">Số lượng : <span class="text-primary"><?=number_format($quantity_order,0,',','.')?></span>
+                    <div class="mt-1">Số lượng : <span class="text-primary"><?=number_format($quantity_invoice,0,',','.')?></span>
                     </div>
-                    <div class="mt-1">Tổng : <span class="text-primary"><?=number_format($price_order*$quantity_order,0,',','.')?><sup> vnđ</sup></span>
+                    <div class="mt-1">Tổng : <span class="text-primary"><?=number_format($price_invoice*$quantity_invoice,0,',','.')?><sup> vnđ</sup></span>
                     </div>
                 </div>
             </div>

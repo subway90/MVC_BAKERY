@@ -46,8 +46,8 @@
                         </div>
                     </div>
                     <div class="col-12 ps-1 form-floating mb-3">
-                        <textarea name="note_order" class="form-control" placeholder="Leave a comment here"
-                            id="floatingTextarea2" style="height: 100px"><?= $note_order ?></textarea>
+                        <textarea name="note_invoice" class="form-control" placeholder="Leave a comment here"
+                            id="floatingTextarea2" style="height: 100px"><?= $note_invoice ?></textarea>
                         <label for="floatingTextarea2">Ghi chú đơn hàng</label>
                     </div>
                     <div class="col-12 mb-3 text-start ps-1">

@@ -131,15 +131,15 @@ function content_checkout($data_checkout)
             <h2>Thông Tin Hoá Đơn</h2>
             <div class='info'>
                 <div class='head-info'>Mã đơn hàng:</div>
-                <div class='body-info'> " . $id_order . "</div>
+                <div class='body-info'> " . $id_invoice . "</div>
             </div>
             <div class='info'>
                 <div class='head-info'>Địa chỉ giao hàng:</div>
-                <div class='body-info'> " . $address_order . "</div>
+                <div class='body-info'> " . $address_invoice . "</div>
             </div>
             <div class='info'>
                 <div class='head-info'>Ghi chú đơn hàng:</div>
-                <div class='body-info'> " . $note_order . "</div>
+                <div class='body-info'> " . $note_invoice . "</div>
             </div>
             <div class='info'>
                 <div class='head-info'>Tổng tiền:</div>

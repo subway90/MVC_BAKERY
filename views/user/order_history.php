@@ -18,16 +18,16 @@
         </thead>
         <tbody>
             <?php
-            if(!empty($list_order)) {
-                foreach ($list_order as $order) {
-                    extract($order);
+            if(!empty($list_invoice)) {
+                foreach ($list_invoice as $invoice) {
+                    extract($invoice);
             ?>
             <tr>
-                <th><?= $id_order ?></th>
+                <th><?= $id_invoice ?></th>
                 <td><?= format_time($created_at,'DD/MM/YYYY lúc hh:mm') ?></td>
                 <td><?= number_format($total,0,',','.') ?> <sup>vnđ</sup></td>
                 <td>
-                    <a class="text-dark" href="<?=URL?>don-hang/<?=$id_order?>">
+                    <a class="text-dark" href="<?=URL?>don-hang/<?=$id_invoice?>">
                         <i class="bi bi-eye"></i> Xem
                     </a>
                 </td>
