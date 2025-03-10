@@ -5,7 +5,7 @@ $input_name = $input_description = $show_modal = '';
 $error_valid = [];
 
 # [MODEL]
-model('admin','order');
+model('admin','invoice');
 
 
 # [HANDLE]
@@ -14,45 +14,77 @@ if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     // lấy id
     $id = $_arrayURL[1];
     // kiểm tra tồn tại
-    if(!check_order_exist(false,$id)) view_404('admin');
-    else $array_order = get_one_order($id);
+    if(!check_invoice_exist(false,$id)) view_404('admin');
+    else $array_invoice = get_one_invoice($id);
 }else view_404('admin');
 
+// xoá hoá đơn
+if(isset($_POST['deleted_invoice'])) {
+    // tiến hành xoá mềm
+    ($id);
+    // xoá lí do hoá đơn bị hoàn trả
+    delete_reason_close_invoice($id);
+    // cập nhật lại route
+    route('admin/chi-tiet-hoa-don/'.$id);
+}
+
 // thay đổi trạng thái đơn hàng đã xử lí
-if(isset($_POST['check_order'])) {
-    // cập nhật database
-    pdo_execute('UPDATE orders SET status_order = 1, updated_at = current_timestamp WHERE id_order = "'.$id.'"');
+if(isset($_POST['check_invoice'])) {
+    // cập nhật trạng thái
+    update_state_invoice($id,1);
     // thông báo
     toast_create('success','Thay đổi trạng thái thành công');
-    // chuyển route
+    // cập nhật lại route
     route('admin/chi-tiet-hoa-don/'.$id);
 }
 
 // thay đổi trạng thái đơn hàng đang giao
-if(isset($_POST['delivery'])) {
-    // cập nhật database
-    pdo_execute('UPDATE orders SET status_order = 2, updated_at = current_timestamp WHERE id_order = "'.$id.'"');
+if(isset($_POST['delivery_invoice'])) {
+    // cập nhật trạng thái
+    update_state_invoice($id,2);
     // thông báo
     toast_create('success','Thay đổi trạng thái thành công');
-    // chuyển route
+    // cập nhật lại route
     route('admin/chi-tiet-hoa-don/'.$id);
 }
 
 // thay đổi trạng thái đơn đã hoàn thành
-if(isset($_POST['done_order'])) {
-    // cập nhật database
-    pdo_execute('UPDATE orders SET status_order = 3, updated_at = current_timestamp WHERE id_order = "'.$id.'"');
+if(isset($_POST['done_invoice'])) {
+    // cập nhật trạng thái
+    update_state_invoice($id,3);
     // thông báo
     toast_create('success','Thay đổi trạng thái thành công');
-    // chuyển route
+    // cập nhật lại route
+    route('admin/chi-tiet-hoa-don/'.$id);
+}
+
+// thay đổi trạng thái đơn hàng bị hoàn trả
+if(isset($_POST['refund_invoice'])) {
+    // lấy input
+    $reason_close_invoice = clear_input($_POST['reason_close_invoice']);
+    // cập nhật trạng thái
+    update_state_invoice($id,4);
+    // cập nhật lí do hoá đơn bị hoàn trả
+    add_reason_close_invoice($id,$reason_close_invoice);
+    // cập nhật lại route
+    route('admin/chi-tiet-hoa-don/'.$id);
+}
+
+// thay đổi trạng thái đơn hàng khôi phục bị hoàn trả
+if(isset($_POST['restore_refund_invoice'])) {
+    // cập nhật trạng thái
+    update_state_invoice($id,2);
+    // xoá lí do hoá đơn bị hoàn trả
+    delete_reason_close_invoice($id);
+    // cập nhật lại route
     route('admin/chi-tiet-hoa-don/'.$id);
 }
 
 # [DATA]
 // thông tin hoá đơn
-$data = $array_order['order'];
+$data = $array_invoice['invoice'];
 // thông tin mản hoá đơn chi tiết
-$data['list_order_detail'] = $array_order['order_detail'];
+$data['list_invoice_detail'] = $array_invoice['invoice_detail'];
 
 # [RENDER]
 view('admin','Quản lí hoá đơn','order_detail',$data);

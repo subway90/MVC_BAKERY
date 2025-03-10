@@ -69,7 +69,7 @@ function check_invoice_exist($bool_trash,$id_invoice) {
     // query
     if(pdo_query_value(
         'SELECT id_invoice
-        FROMinvoice 
+        FROM invoice 
         WHERE id_invoice = "'.$id_invoice.'"
         AND deleted_at '.$condition)
     ) return true;
