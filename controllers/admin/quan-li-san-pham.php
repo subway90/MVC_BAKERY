@@ -49,7 +49,7 @@ if(isset($_POST['delete_force'])) {
     // kiểm tra tồn tại
     if(!check_exist_one_in_trash('product',$id)) toast_create('danger','Sản phẩm ID = '.$id.' không tồn tại trong danh sách xoá');
     // kiểm tra có hoá đơn hay không
-    if(pdo_query_value('SELECT COUNT(id_order_detail) FROM order_detail WHERE id_product = '.$id)) toast_create('danger','Sản phẩm này đã có hoá đơn, không thể xoá !');
+    if(pdo_query_value('SELECT COUNT(id_invoice_detail) FROM invoice WHERE id_product = '.$id)) toast_create('danger','Sản phẩm này đã có hoá đơn, không thể xoá !');
     else {
         // xoá ảnh của sản phẩm đó nếu có
         $image = pdo_query_value('SELECT image_product FROM product WHERE id_product = '.$id);
