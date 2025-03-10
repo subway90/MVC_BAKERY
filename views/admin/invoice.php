@@ -46,7 +46,7 @@
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($list_order as $order) {
+                    foreach ($list_invoice as $order) {
                         extract($order);
                     ?>  
                         <tr>
@@ -56,7 +56,7 @@
                                         Mã đơn:
                                     </div>
                                     <div class="">
-                                        <a class="text-muted text-decoration-underline small" href="<?=URL_ADMIN?>chi-tiet-hoa-don/<?=$id_order?>"><strong><?= $id_order ?></strong></a>
+                                        <a class="text-muted text-decoration-underline small" href="<?=URL_ADMIN?>chi-tiet-hoa-don/<?=$id_invoice?>"><strong><?= $id_invoice ?></strong></a>
                                     </div>
                                 </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         Ghi chú:
                                     </div>
                                     <div class="ms-4 small">
-                                        <?= $note_order ?>
+                                        <?= $note_invoice ?>
                                     </div>
                                 </div>
                             </td>
@@ -116,10 +116,17 @@
                                 </div>
                             </td>
                             <td> 
-                                <?= !$status_order ? '<div class="badge badge-sa-danger">Chưa xử lí</div>' : (
-                                    $status_order == 1 ? '<div class="badge badge-sa-warning">Đang giao</div>' :
-                                    '<div class="badge badge-sa-success">Hoàn thành</div>'
-                                )?>
+                                <?php if(!$status_invoice): // Nếu chưa xử lí ?>
+                                    <div class="badge badge-sa-danger">Chưa xử lí</div>
+                                <?php elseif($status_invoice == 1): ?>
+                                    <div class="badge badge-sa-primary">Đã xử lí</div>
+                                <?php elseif($status_invoice == 2): ?>
+                                    <div class="badge badge-sa-warning">Đang giao hàng</div>
+                                <?php elseif($status_invoice == 3): ?>
+                                    <div class="badge badge-sa-success">Đã hoàn thành</div>
+                                <?php elseif($status_invoice == 4): ?>
+                                    <div class="badge badge-sa-dark">Hoàn trả</div>
+                                <?php endif ?>
                             </td>
                             <td>
                                 <?= format_time($created_at,'DD/MM/YYYY lúc hh:mm:ss') ?>
@@ -132,7 +139,7 @@
                             <?php }?>
                             </td>
                             <td>
-                                <a href="<?= URL_ADMIN.'chi-tiet-hoa-don/'.$id_order ?>" class="mt-3 btn btn-sm btn-secondary me-3">
+                                <a href="<?= URL_ADMIN.'chi-tiet-hoa-don/'.$id_invoice ?>" class="mt-3 btn btn-sm btn-secondary me-3">
                                     <i class="fa fas fa-eye me-2"></i> Xem
                                 </a>
                             </td>
