@@ -6,10 +6,11 @@
  */
 function get_all_order($condition_deleted) {
     return pdo_query(
-        'SELECT o.*, COUNT(d.id_order_detail) AS total_product, SUM(d.price_order * d.quantity_order) AS total_price, u.full_name, u.email, u.phone
+        'SELECT o.*, COUNT(d.id_order_detail) AS total_product, SUM(d.price_order * d.quantity_order) AS total_price, u.full_name, u.email, u.username, s.name_shipping_address
         FROM orders o
         LEFT JOIN order_detail d ON o.id_order = d.id_order
         LEFT JOIN user u ON u.username = o.username
+        LEFT JOIN shipping_address s ON o.id_shipping_address = s.id_shipping_address
         WHERE o.deleted_at '.$condition_deleted.'
         GROUP BY o.id_order
         ORDER BY o.created_at DESC'

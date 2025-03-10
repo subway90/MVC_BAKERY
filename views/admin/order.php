@@ -79,47 +79,39 @@
                                         ?>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
                                     <div class="fw-bold">
                                         Ghi chú:
                                     </div>
-                                    <div class="small">
+                                    <div class="ms-4 small">
                                         <?= $note_order ?>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="fw-bold">
-                                        Tên khách hàng
-                                    </div>
-                                    <div class="small">
+                                <div class="d-flex mb-3">
+                                    <span class="text-primary"><i class="bi bi-person-circle"></i></span>
+                                    <div class="ms-4 small">
                                         <a class="text-muted text-decoration-underline" href="<?=URL_ADMIN?>chi-tiet-nguoi-dung/<?=$username?>"><strong><?= $full_name ?></strong></a>
                                     </div>
                                 </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="fw-bold">
-                                        Số điện thoại:
-                                    </div>
-                                    <div class="small">
-                                        <?= $phone ?>
+                                <div class="d-flex mb-3">
+                                    <span class="text-primary"><i class="bi bi-telephone"></i></span>
+                                    <div class="ms-4 small">
+                                        <?= $username ?>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="fw-bold">
-                                        Email:
-                                    </div>
-                                    <div class="small">
+                                <div class="d-flex mb-3">
+                                    <span class="text-primary"><i class="bi bi-envelope"></i></span>
+                                    <div class="ms-4 small">
                                         <?= $email ?>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="fw-bold">
-                                        Địa chỉ giao:
-                                    </div>
-                                    <div class="small">
-                                        <?= $address_order ?>
+                                <div class="d-flex">
+                                    <span class="text-primary"><i class="bi bi-geo-alt"></i></span>
+                                    <div class="ms-4 small">
+                                        <?= $name_shipping_address ?>
                                     </div>
                                 </div>
                             </td>
