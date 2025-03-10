@@ -129,23 +129,21 @@
                                     Thông tin khách hàng
                                 </div>
                                 <div class="px-lg-5 py-3">
-                                <div class="col-12 d-flex justify-content-between align-items-center border-bottom py-2 px-2">
-                                        <div class="fw-bold">Ảnh đại diện</div>
-                                        <div class="">
-                                            <img width="40" src="<?= $avatar ? URL_STORAGE.$avatar : DEFAULT_AVATAR ?>" alt="">
-                                        </div>
-                                    </div>
                                     <div class="col-12 d-flex justify-content-between align-items-center border-bottom py-2 px-2">
                                         <div class="fw-bold">Họ tên</div>
                                         <div class="text-muted"><?=$full_name?></div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-between align-items-center border-bottom py-2 px-2">
                                         <div class="fw-bold">SĐT</div>
-                                        <div class="text-muted"><?=$phone?></div>
+                                        <div class="text-muted"><?=$username?></div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-between align-items-center border-bottom py-2 px-2">
                                         <div class="fw-bold">Email</div>
                                         <div class="text-muted"><?=$email?></div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-between align-items-center border-bottom py-2 px-2">
+                                        <div class="fw-bold">Địa chỉ giao hàng</div>
+                                        <div class="text-muted text-end"><?=$name_shipping_address?></div>
                                     </div>
                                 </div>
                                 
