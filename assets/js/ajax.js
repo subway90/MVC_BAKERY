@@ -7,7 +7,7 @@ $(document).ready(function () {
         var id_product = $form.find(".id_product").val();
 
         $.ajax({
-            url: 'gio-hang',
+            url: '/gio-hang',
             method: 'post',
             data: {
                 ajax_id_product: id_product,
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
         // Gửi yêu cầu AJAX đến server
         $.ajax({
-            url: 'gio-hang', // Địa chỉ URL mà yêu cầu sẽ được gửi đến
+            url: '/gio-hang', // Địa chỉ URL mà yêu cầu sẽ được gửi đến
             method: 'post', // Phương thức HTTP (POST)
             data: Object.assign(dataToSend, { id_product: id_product }), // Gửi dữ liệu
             dataType: 'json', // Kiểu dữ liệu mong muốn nhận được từ server
@@ -58,16 +58,13 @@ $(document).ready(function () {
     // Lấy danh sách
     function loadCart() {
         $.ajax({
-            url: 'gio-hang?ajax_cart=true', // Thay đổi URL nếu cần thiết
+            url: '/gio-hang?ajax_cart=true', // Thay đổi URL nếu cần thiết
             method: 'GET',
             dataType: 'json',
             success: function (response) {
                 $(".cart-item").html(response.data);
                 $("#count-cart").html(response.count);
             },
-            error: function () {
-                console.log("Đã có lỗi xảy ra.");
-            }
         });
     }
 
