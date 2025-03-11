@@ -73,7 +73,7 @@ if(isset($_POST['refund_invoice'])) {
 // thay đổi trạng thái đơn hàng khôi phục bị hoàn trả
 if(isset($_POST['restore_refund_invoice'])) {
     // cập nhật trạng thái
-    update_state_invoice($id,2);
+    update_state_invoice($id,1);
     // xoá lí do hoá đơn bị hoàn trả
     delete_reason_close_invoice($id);
     // cập nhật lại route
