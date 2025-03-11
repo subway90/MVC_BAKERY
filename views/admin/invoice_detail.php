@@ -22,7 +22,7 @@
                 data-sa-container-query="{&quot;920&quot;:&quot;sa-entity-layout--size--md&quot;,&quot;1100&quot;:&quot;sa-entity-layout--size--lg&quot;}">
                 <div class="sa-entity-layout__body">
                     <div class="sa-entity-layout__main">
-                    <?php if($status_invoice !== 3): // Nếu trạng thái đơn chưa hoàn thành ?>
+                    <?php if($status_invoice !== 3 && !$deleted_at): // Nếu trạng thái đơn chưa hoàn thành & chưa huỷ ?>
                     <div class="card mb-5">
                         <div class="card-body p-5 row">
                             <div class="col-12 h2 fs-exact-18">
@@ -31,7 +31,7 @@
                             <div class="pb-3">
                             <?php if(!$status_invoice) : // Nếu chưa xử lí ?>
                                 <button type="button" class="mt-3 btn btn-sm btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#modalCheckedOrder"><i class="fa fas fa-tasks me-2"></i>Chuyển trạng thái &#10137; Đơn hàng đã được xử lí</button>
-                                <button name="delete" value="<?=$id_invoice?>" type="submit" class="mt-3 btn btn-sm btn-outline-danger me-3"><i class="fa fas fa-times-circle me-2"></i> Huỷ đơn</button>
+                                <button type="button" class="mt-3 btn btn-sm btn-outline-danger me-3" data-bs-toggle="modal" data-bs-target="#modalCloseOrder"><i class="fa fas fa-times-circle me-2"></i> Huỷ đơn</button>
                             <?php elseif($status_invoice == 1) : // Nếu đã xử lí ?>
                                 <button type="button" class="mt-3 btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalDeliveryOrder"><i class="fa fas fa-shipping-fast me-2"></i>Chuyển trạng thái &#10137; Đơn hàng đang được giao</button>
                             <?php elseif($status_invoice == 2) : // Nếu đang giao hàng ?>
@@ -40,6 +40,7 @@
                                 <button type="button" class="mt-3 btn btn-sm btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#modalRefundOrder"><i class="fa fas fa-undo-alt me-2"></i>Chuyển trạng thái &#10137; Đơn hàng bị hoàn trả</button>
                             <?php elseif($status_invoice == 4) : // Nếu bị hoàn trả ?>
                                 <button type="button" class="mt-3 btn btn-sm btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#modalRestoreRefundOrder"><i class="fa fas fa-tasks me-2"></i>Chuyển trạng thái &#10137; Đơn hàng đã được xử lí</button>
+                                <button type="button" class="mt-3 btn btn-sm btn-outline-danger me-3" data-bs-toggle="modal" data-bs-target="#modalCloseOrder"><i class="fa fas fa-times-circle me-2"></i> Huỷ đơn</button>
                             <?php endif ?>
                             </div>
                         </div>
@@ -66,16 +67,28 @@
                                 <div class="col-12 d-flex justify-content-between border-bottom py-2 px-2">
                                     <div class="fw-bold">Trạng thái đơn</div>
                                     <div class="text-muted">
-                                        <?= $status_invoice==0 ? '<div class="badge badge-sa-danger">Chưa xử lí</div>' : '' ?>
-                                        <?= $status_invoice==1 ? '<div class="badge badge-sa-secondary">Đã xử lí</div>' : '' ?>
-                                        <?= $status_invoice==2 ? '<div class="badge badge-sa-warning">Đang giao</div>' : '' ?>
-                                        <?= $status_invoice==3 ? '<div class="badge badge-sa-success">Hoàn thành</div>' : '' ?>
-                                        <?= $status_invoice==4 ? '<div class="badge badge-sa-dark">Hoàn trả</div>' : '' ?>
+                                        <?php if($deleted_at): ?>
+                                            <div class="badge badge-sa-danger">Đơn bị huỷ</div>
+                                        <?php elseif(!$status_invoice): ?>
+                                            <div class="badge badge-sa-danger">Chưa xử lí</div>
+                                        <?php elseif($status_invoice == 1): ?>
+                                            <div class="badge badge-sa-secondary">Đã xử lí</div>
+                                        <?php elseif($status_invoice == 2): ?>
+                                            <div class="badge badge-sa-warning">Đang giao</div>
+                                        <?php elseif($status_invoice == 3): ?>
+                                            <div class="badge badge-sa-success">Hoàn thành</div>
+                                        <?php elseif($status_invoice == 4): ?>
+                                            <div class="badge badge-sa-dark">Hoàn trả</div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <?php if($reason_close_invoice): // Nếu có lí do hoàn trả ?>
                                 <div class="col-12 d-flex justify-content-between border-bottom py-2 px-2">
-                                    <div class="fw-bold">Lí do hoàn trả</div>
+                                    <?php if($deleted_at): ?>
+                                        <div class="fw-bold">Lí do huỷ đơn</div>
+                                    <?php else : ?>
+                                        <div class="fw-bold">Lí do hoàn trả</div>
+                                    <?php endif ?>
                                     <div class="text-muted">
                                         <?= $reason_close_invoice ?>
                                     </div>
@@ -164,7 +177,7 @@
 </div>
 </form>
 
-<?php if(!$status_invoice) : // Nếu chưa xử lí ?>
+<?php if(!$status_invoice || $status_invoice == 4) : // Nếu chưa xử lí hoặc bị hoàn trả ?>
 <!-- Modal đã xử lí -->
 <div class="modal fade" id="modalCheckedOrder" tabindex="-1" aria-labelledby="modalCheckedOrder" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -188,6 +201,53 @@
         </div>
     </div>
 </div>
+<!-- Modal huỷ đơn -->
+<div class="modal fade" id="modalCloseOrder" tabindex="-1" aria-labelledby="modalCloseOrder" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCloseOrder">Huỷ đơn hàng</h5>
+                <button type="button" class="sa-close sa-close--modal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+            <div class="modal-body text-center p-5">
+                    <div class="d-inline-block p-5 bg-secondary bg-opacity-75 rounded rounded-circle mb-5">
+                        <i class="fa fa-2x fa-times-circle text-danger"></i>
+                    </div>
+                <div class="mb-5">
+                    Bạn có chắc chắn <span class="fw-bold text-danger">Huỷ đơn hàng</span> ?
+                </div>  
+                <div class="text-danger small mb-3">Vui lòng nhập lí do huỷ đơn trước khi thay đổi</div>
+                <div class="form-floating mb-3">
+                    <input name="reason_close_invoice" type="text" class="form-control" id="reason_close" placeholder="reason_close">
+                    <label for="reason_close">Lí do huỷ đơn</label>
+                </div>
+                <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Huỷ</button>
+                <button name="close_invoice" type="submit" class="btn btn-danger">Thay đổi</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const reasonInput = document.getElementById("reason_close");
+        const submitButton = document.querySelector('button[name="close_invoice"]');
+
+        // Hàm kiểm tra giá trị input
+        function checkInput() {
+            if (reasonInput.value.trim() === "") submitButton.disabled = true; // Vô hiệu hóa nút nếu input trống
+            else submitButton.disabled = false; // Kích hoạt nút nếu có giá trị
+        }
+
+        // Gọi hàm kiểm tra khi có sự thay đổi trong input
+        reasonInput.addEventListener("input", checkInput);
+
+        // Khởi tạo trạng thái nút khi tải trang
+        checkInput();
+    });
+</script>
 
 <?php elseif($status_invoice == 1) : // Nếu đã xử lí ?>
 <!-- Modal đang giao hàng -->
@@ -286,30 +346,5 @@
         checkInput();
     });
 </script>
-
-<?php elseif($status_invoice == 4) : // Nếu đơn bị hoàn trả?>
-<!-- Modal đã xử lí -->
-<div class="modal fade" id="modalRestoreRefundOrder" tabindex="-1" aria-labelledby="modalRestoreRefundOrder" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalRestoreRefundOrder">Trạng thái đã xử lí</h5>
-                <button type="button" class="sa-close sa-close--modal" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="post">
-            <div class="modal-body text-center p-5">
-                    <div class="d-inline-block p-5 bg-secondary bg-opacity-75 rounded rounded-circle mb-5">
-                        <i class="fa fa-2x fa-tasks"></i>
-                    </div>
-                <div class="mb-5">
-                    Bạn có chắc chắn thay đổi sang <br> trạng thái <span class="fw-bold"> Đơn hàng đã được xử lí</span> ?
-                </div>
-                <button type="button" class="btn btn-secondary me-4" data-bs-dismiss="modal">Huỷ</button>
-                <button name="restore_refund_invoice" type="submit" class="btn btn-dark">Thay đổi</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <?php endif ?>

@@ -14,16 +14,18 @@ if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     // lấy id
     $id = $_arrayURL[1];
     // kiểm tra tồn tại
-    if(!check_invoice_exist(false,$id)) view_404('admin');
+    if(!check_exist_one_with_trash('invoice','"'.$id.'"')) view_404('admin');
     else $array_invoice = get_one_invoice($id);
 }else view_404('admin');
 
 // xoá hoá đơn
-if(isset($_POST['deleted_invoice'])) {
-    // tiến hành xoá mềm
-    ($id);
-    // xoá lí do hoá đơn bị hoàn trả
-    delete_reason_close_invoice($id);
+if(isset($_POST['close_invoice'])) {
+    // lấy input
+    $reason_close_invoice = clear_input($_POST['reason_close_invoice']);
+    // xoá mềm
+    delete_one('invoice','"'.$id.'"');
+    // cập nhật lí do hoá đơn bị hoàn trả
+    add_reason_close_invoice($id,$reason_close_invoice);
     // cập nhật lại route
     route('admin/chi-tiet-hoa-don/'.$id);
 }
@@ -87,4 +89,4 @@ $data = $array_invoice['invoice'];
 $data['list_invoice_detail'] = $array_invoice['invoice_detail'];
 
 # [RENDER]
-view('admin','Quản lí hoá đơn','order_detail',$data);
+view('admin','Quản lí hoá đơn','invoice_detail',$data);
