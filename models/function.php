@@ -335,6 +335,20 @@ function view_json($status,$data) {
 }
 
 /**
+ * Lồng layout vào trong một view
+ * 
+ * @param string $type Folder layout [user,admin]
+ * @param string $layout Tên layout
+ */
+function layout($type,$layout) {
+    if($type != 'admin' && $type != 'user') die(_s_me_error.'Type khai báo <strong>'.$type.'</strong> không phù hợp trong mảng [user,admin] '._e_me_error);
+    if(file_exists('views/'.$type.'/layout'.'/'.$layout.'.php')) {
+        if(!empty($data)) extract($data);
+        require 'views/'.$type.'/layout'.'/'.$layout.'.php';
+    }else die(_s_me_error.'Trang layout <strong>'.$type.'/layout'.'/'.$layout.'.php</strong> mà bạn khai báo không được tìm thấy'._e_me_error);
+}
+
+/**
  * Hàm này dùng để in ra mảng lỗi validate
  * @param $array mảng lỗi
  * @return void
