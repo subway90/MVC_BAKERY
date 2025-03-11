@@ -4,7 +4,7 @@
 author(['user','admin']);
 
 # [MODEL]
-model('user','order');
+model('user','invoice');
 
 # [VARIABLE]
 $username = $_SESSION['user']['username'];
@@ -21,4 +21,4 @@ $data = [
 ];
 
 # [RENDER
-view('user','Lịch sử mua hàng','order_history',$data);
+view('user','Lịch sử mua hàng','invoice_history',$data);
