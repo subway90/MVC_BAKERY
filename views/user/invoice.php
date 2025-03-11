@@ -25,7 +25,27 @@
                         Trạng thái:
                     </div>
                     <div class="text-start">
-                        <?=$invoice['status_invoice'] == 0 ? 'Đang xử lí' : ($invoice['status_invoice'] == 1 ? 'Hoàn thành' : 'Đã huỷ') ?>
+                        <?php if(!$invoice['status_invoice']): ?>
+                            <div class="d-flex align-items-center text-secondary">
+                                <i class="bi bi-hourglass me-2 fs-5"></i> Đang xử lí
+                            </div>
+                        <?php elseif($invoice['status_invoice'] == 1): ?>
+                            <div class="d-flex align-items-center text-infomation">
+                                <i class="bi bi-list-check me-2 fs-5"></i> Đã được xử lí
+                            </div>
+                        <?php elseif($invoice['status_invoice'] == 2): ?>
+                            <div class="d-flex align-items-center text-warning">
+                                <i class="bi bi-truck me-2 fs-5"></i> Đang giao hàng
+                            </div>
+                        <?php elseif($invoice['status_invoice'] == 3): ?>
+                            <div class="d-flex align-items-center text-success">
+                                <i class="bi bi-check-circle me-2 fs-5"></i> Đã hoàn thành
+                            </div>
+                        <?php elseif($invoice['status_invoice'] == 4): ?>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-arrow-counterclockwise me-2 fs-5"></i> Đã bị hoàn trả | Lí do : <span class="text-muted fst-italic ms-1"><?= $invoice['reason_close_invoice'] ?></span>
+                            </div>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -49,7 +69,7 @@
                         Ngày tạo đơn:
                     </div>
                     <div class="text-start">
-                        <?=format_time($invoice['created_at'],'lúc hh:mm DD/MM/YYYY')?>
+                        <?=format_time($invoice['created_at'],'lúc hh:mm | ngày DD tháng MM năm YYYY')?>
                     </div>
                 </div>
                 <div class="mb-2 col-12 d-flex flex-row">
@@ -57,7 +77,7 @@
                         Ngày cập nhật:
                     </div>
                     <div class="text-start">
-                        <?=$invoice['updated_at'] ? format_time($invoice['updated_at'],'lúc hh:mm DD/MM/YYYY') : '<span class="text-muted small fst-italic">(chưa cập nhật)</span>'?>
+                        <?=$invoice['updated_at'] ? format_time($invoice['updated_at'],'lúc hh:mm | ngày DD tháng MM năm YYYY') : '<span class="text-muted small fst-italic">(chưa cập nhật)</span>'?>
                     </div>
                 </div>
                 <div class="col-12 text-start border-bottom my-4">
