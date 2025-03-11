@@ -129,7 +129,7 @@ function restore_one($table_name,$id_record) {
 }
 
 /**
- * Kiểm tra một bảng có tồn tại hay không
+ * Kiểm tra một record có tồn tại hay không
  * 
  * Lưu ý: chỉ kiểm tra ở trạng thái hoạt động, tức chưa xoá mềm
  * @param mixed $table_name Tên bảng cần kiểm tra
@@ -143,7 +143,7 @@ function check_exist_one($table_name,$id_record) {
 }
 
 /**
- * Kiểm tra một bảng đã xoá mềm có tồn tại hay không
+ * Kiểm tra một record đã xoá mềm có tồn tại hay không
  * 
  * Lưu ý: chỉ kiểm tra ở trạng thái đã được xoá mềm
  * @param mixed $table_name Tên bảng cần kiểm tra
@@ -152,6 +152,18 @@ function check_exist_one($table_name,$id_record) {
  */
 function check_exist_one_in_trash($table_name,$id_record) {
     if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE id_'.$table_name.' = '.$id_record.' AND deleted_at')) return true;
+    return false;
+}
+
+/**
+ * Kiểm tra một record có tồn tại trong bảng hay không, bao gồm cả xoá mềm
+ * 
+ * @param mixed $table_name Tên bảng cần kiểm tra
+ * @param mixed $id_record ID cần kiểm tra
+ * @return bool Trả về true nếu có tồn tại, trả về false nếu không tồn tại
+ */
+function check_exist_one_with_trash($table_name,$id_record) {
+    if(pdo_query_value('SELECT id_'.$table_name.' FROM '.$table_name.' WHERE id_'.$table_name.' = '.$id_record)) return true;
     return false;
 }
 
