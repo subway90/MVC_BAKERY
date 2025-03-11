@@ -45,6 +45,7 @@ function content_checkout($data_checkout)
 {
     // giải nén mảng 
     extract($data_checkout);
+    $total_cart = number_format($total_cart);
     // tạo row giỏ hàng
     $row_cart = "";
     $i = 0;
@@ -61,7 +62,8 @@ function content_checkout($data_checkout)
             <td>" . number_format($total_product) . " VNĐ</td>
         </tr>";
     }
-    return "
+    return
+<<<HTML
 <!DOCTYPE html>
 <html lang='vi'>
 <head>
@@ -69,26 +71,25 @@ function content_checkout($data_checkout)
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Verdana, sans-serif	;
             margin: 0;
-            padding: 0 20%;
             background-color: #f4f4f4;
         }
         .invoice-container {
             background-color: #ffffff;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 12px;
         }
         .header {
-            background-color: #ffcc00; /* Màu vàng cam */
-            padding: 20px 20%;
+            background-color: #ffcc00;
+            padding: 20px;
             border-radius: 5px;
             text-align: center;
             margin-bottom: 20px;
         }
         .header h2 {
-            margin: 12px 0;
+            margin: 24px 0;
             font-size: 24px;
         }
         .header p {
@@ -99,29 +100,23 @@ function content_checkout($data_checkout)
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 12px;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid  #00000020;
             padding: 10px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #ffcc0050;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .info {
-            display: flex;
-            justify-content:space-between;
-            margin: 4px 0;
-        }
-        .info .head-info {
+        .head-info {
             font-weight: bold;
-            margin-right: 5px;
+            text-align: start;
+        }
+        .body-info {
+            margin-left: 6px;
+            text-align: end;
         }
     </style>
 </head>
@@ -129,26 +124,28 @@ function content_checkout($data_checkout)
     <div class='invoice-container'>
         <div class='header'>
             <h2>Thông Tin Hoá Đơn</h2>
-            <div class='info'>
-                <div class='head-info'>Mã đơn hàng:</div>
-                <div class='body-info'> " . $id_invoice . "</div>
-            </div>
-            <div class='info'>
-                <div class='head-info'>Địa chỉ giao hàng:</div>
-                <div class='body-info'> " . $address_invoice . "</div>
-            </div>
-            <div class='info'>
-                <div class='head-info'>Ghi chú đơn hàng:</div>
-                <div class='body-info'> " . $note_invoice . "</div>
-            </div>
-            <div class='info'>
-                <div class='head-info'>Tổng tiền:</div>
-                <div class='body-info'> " . number_format($total_cart) . " VNĐ</div>
-            </div>
-            <div class='info'>
-                <div class='head-info'>Phương thức thanh toán:</div>
-                <div class='body-info'> " . $method_payment . " </div>
-            </div>
+            <table  >
+                <tr>
+                    <td class='head-info'>Mã đơn hàng:</td>
+                    <td class='body-info'> {$id_invoice}</td>
+                </tr>
+                <tr>
+                    <td class='head-info'>Địa chỉ giao hàng:</td>
+                    <td class='body-info'> {$address_invoice}</td>
+                </tr>
+                <tr>
+                    <td class='head-info'>Ghi chú đơn hàng:</td>
+                    <td class='body-info'> {$note_invoice}</td>
+                </tr>
+                <tr>
+                    <td class='head-info'>Tổng tiền:</td>
+                    <td class='body-info'>{$total_cart} VNĐ</td>
+                </tr>
+                <tr>
+                    <td class='head-info'>Phương thức thanh toán:</td>
+                    <td class='body-info'>{$method_payment}</td>
+                </tr>
+            </table>
         </div>
         <table>
             <thead>
@@ -160,10 +157,10 @@ function content_checkout($data_checkout)
                     <th>Thành tiền</th>
                 </tr>
             </thead>
-            <tbody>" . $row_cart . " </tbody>
+            <tbody>{$row_cart}</tbody>
         </table>
     </div>
 </body>
-</html>";
-
+</html>
+HTML;
 }
