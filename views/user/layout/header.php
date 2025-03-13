@@ -39,61 +39,92 @@
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center sticky-top">
+    <header id="header" class="header d-flex align-items-center sticky-top py-2">
         <div class="container position-relative d-flex align-items-center justify-content-between">
-
-            <a href="<?= URL ?>" class="logo d-flex align-items-center me-auto me-xl-0">
-                <img src="<?=URL_STORAGE?>system/logo.png" alt="">
+            <a href="<?= URL ?>" class="logo d-flex align-items-center justify-content-center justify-content-lg-start">
+                <img width="80" src="<?= URL_STORAGE ?>system/logo.png" alt="">
                 <!-- <h1 class="sitename">BBB</h1>
                 <span>.</span> -->
             </a>
 
             <nav id="navmenu" class="navmenu">
-            <i class="mobile-nav-toggle d-xl-none bi bi-list ms-2"></i>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list ms-2"></i>
                 <ul>
+                    <span class="d-inline d-lg-none">
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL ?>thong-tin-ca-nhan">Thông tin cá nhân</a>
+                    </li>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL ?>doi-diem-thuong">Đổi điểm thưởng</a>
+                    </li>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL ?>lich-su-mua-hang"></i>Lịch sử mua hàng</a>
+                    </li>
+                    <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a>
+                    </li>
+                    <?php } ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a>
+                    </li>
+                    </span>
+                    <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
                     <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a>
                     <li><a href="<?= URL ?>" class="<?= ($page == '415151' ? 'active' : '') ?>">Liên hệ<br></a></li>
-                    <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                 </ul>
             </nav>
-
-            <div class="dropdown">
-                <?php
-                if (!$_SESSION['user']) { ?>
-                    <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person"></i><span class="ms-2 d-lg-inline d-none">Đăng nhập</span></a>
-                <?php } else { ?>
-                    <button class="btn btn-accent rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="fw-light small">xin chào</span> <?= $_SESSION['user']['full_name'] ?>
-                    </button>
-                    <ul class="dropdown-menu w-100">
-                        <li><a class="px-3 dropdown-item" href="<?= URL ?>thong-tin-ca-nhan"><i class="bi bi-person me-1"></i> Thông tin cá nhân</a></li>
-                        <li><a class="px-3 dropdown-item" href="<?= URL ?>doi-diem-thuong"><i class="bi bi-gift me-2"></i>Đổi điểm thưởng</a></li>
-                        <li><a class="px-3 dropdown-item" href="<?= URL ?>lich-su-mua-hang"><i class="bi bi-clock-history me-2"></i>Lịch sử mua hàng</a></li>
-                        <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
-                            <li><a class="px-3 dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a></li>
+            <div class="d-flex button-cart">
+                <div class="d-none d-lg-inline">
+                    <div class="dropdown">
+                        <?php
+                        if (!$_SESSION['user']) { ?>
+                            <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person"></i><span
+                                    class="ms-2 d-lg-inline d-none">Đăng nhập</span></a>
+                        <?php } else { ?>
+                            <button class="btn btn-accent rounded-pill dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="fw-light small">xin chào</span> <?= $_SESSION['user']['full_name'] ?>
+                            </button>
+                            <ul class="dropdown-menu w-100">
+                                <li><a class="px-3 dropdown-item" href="<?= URL ?>thong-tin-ca-nhan"><i
+                                            class="bi bi-person me-1"></i> Thông tin cá nhân</a></li>
+                                <li><a class="px-3 dropdown-item" href="<?= URL ?>doi-diem-thuong"><i
+                                            class="bi bi-gift me-2"></i>Đổi điểm thưởng</a></li>
+                                <li><a class="px-3 dropdown-item" href="<?= URL ?>lich-su-mua-hang"><i
+                                            class="bi bi-clock-history me-2"></i>Lịch sử mua hàng</a></li>
+                                <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
+                                    <li><a class="px-3 dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a></li>
+                                <?php } ?>
+                                <li>
+                                    <hr class="px-3 dropdown-divider">
+                                </li>
+                                <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
+                            </ul>
                         <?php } ?>
-                        <li>
-                            <hr class="px-3 dropdown-divider">
-                        </li>
-                        <li><a class="px-3 dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a></li>
-                    </ul>
-                    <?php }?>
-                    <?php if(isset($page) && $page != 'checkout'){?>
-                    <button type="button" class="ms-lg-2 btn rounded-circle btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
+                    </div>
+                </div>
+                <?php if (isset($page) && $page != 'checkout'): // button cart ?>
+                    <button type="button" class="ms-lg-2 btn rounded-circle btn-primary position-relative"
+                        data-bs-toggle="offcanvas" data-bs-target="#cartCanvas" aria-controls="cartCanvas">
                         <i class="bi bi-basket"></i>
-                        <span id="count-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span id="count-cart"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             12
                             <span class="visually-hidden">unread messages</span>
                         </span>
                     </button>
-                    <?php }?>
-                </div>
+                <?php endif ?>
+            </div>
         </div>
     </header>
 
     <!-- Canvas Cart with AJAX-->
-    <div class="cart-item offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas" aria-labelledby="offcanvasRightLabel"></div>
+    <div class="cart-item offcanvas offcanvas-end <?= boolCanvas() ?>" tabindex="-1" id="cartCanvas"
+        aria-labelledby="offcanvasRightLabel"></div>
 
     <main class="main">

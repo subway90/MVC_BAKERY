@@ -379,7 +379,6 @@ h6 {
 .header {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
 }
@@ -388,10 +387,6 @@ h6 {
   line-height: 1;
 }
 
-.header .logo img {
-  max-height: 36px;
-  margin-right: 8px;
-}
 
 .header .logo h1 {
   font-size: 30px;
@@ -423,18 +418,31 @@ h6 {
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1296px) {
   .header .logo {
     order: 0;
   }
 
-  .header .btn-getstarted {
+  .header .button-cart {
     order: 1;
-    padding: 10px 12px;
   }
 
   .header .navmenu {
     order: 2;
+  }
+}
+
+@media (max-width: 575px) {
+  .header .logo {
+    order: 1;
+  }
+
+  .header .button-cart {
+    order: 2;
+  }
+
+  .header .navmenu {
+    order: 0;
   }
 }
 
