@@ -381,9 +381,12 @@ function auto_login() {
                 AND u.token_remember = "'.$token_remember.'"'
             );
             // nếu lấy thông tin thành công
-            if($get_user) $_SESSION['user'] = $get_user;
-            // thông báo toast
-            toast_create('success','Chào mừng bạn quay trở lại '.WEB_NAME);
+            if($get_user) {
+                // gán dữ liệu cho session
+                $_SESSION['user'] = $get_user;
+                // thông báo toast
+                toast_create('success','Chào mừng bạn quay trở lại '.WEB_NAME);
+            }
         }
     }
 }
