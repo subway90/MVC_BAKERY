@@ -51,6 +51,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list ms-2"></i>
                 <ul>
                     <span class="d-inline d-lg-none">
+                    <?php if(is_login()) : ?>
                     <li>
                         <a class="justify-content-start dropdown-item" href="<?= URL ?>thong-tin-ca-nhan">Thông tin cá nhân</a>
                     </li>
@@ -60,29 +61,34 @@
                     <li>
                         <a class="justify-content-start dropdown-item" href="<?= URL ?>lich-su-mua-hang"></i>Lịch sử mua hàng</a>
                     </li>
-                    <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
-                    <li>
-                        <a class="justify-content-start dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a>
-                    </li>
-                    <?php } ?>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
                     <li>
                         <a class="justify-content-start dropdown-item" href="<?= URL ?>dang-xuat">Đăng xuất</a>
                     </li>
+                    <?php else : ?>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL ?>dang-nhap">Đăng nhập</a>
+                    </li>
+                    <?php endif ?>
+                    <?php if (auth('name_role') == 'admin') : ?>
+                    <li>
+                        <a class="justify-content-start dropdown-item" href="<?= URL_ADMIN ?>">Trang quản trị</a>
+                    </li>
+                    <?php endif ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     </span>
-                    <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
+                    <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                     <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a>
                     <li><a href="<?= URL ?>" class="<?= ($page == '415151' ? 'active' : '') ?>">Liên hệ<br></a></li>
                 </ul>
             </nav>
-            <div class="d-flex button-cart">
+            <div class="d-flex button-cart align-items-center">
                 <div class="d-none d-lg-inline">
                     <div class="dropdown">
                         <?php
-                        if (!$_SESSION['user']) { ?>
+                        if (!is_login()) { ?>
                             <a class="btn-getstarted" href="<?= URL ?>dang-nhap"><i class="bi bi-person"></i><span
                                     class="ms-2 d-lg-inline d-none">Đăng nhập</span></a>
                         <?php } else { ?>
