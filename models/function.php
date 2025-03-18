@@ -28,6 +28,31 @@ function author($type) {
 }
 
 /**
+ * Kiểm tra đã đăng nhập hay chưa, nếu chưa đăng nhập sẽ trả về FALSE, ngược lại sẽ trả về TRUE
+ * @return bool
+ */
+function is_login() {
+    if(!empty($_SESSION['user'])) return true;
+    return false;
+}
+
+/**
+ * Lấy thông tin của một user thông qua param
+ * 
+ * Trả về FALSE nếu dữ liệu trống hoặc không tồn tại
+ * 
+ * @param string $param Thông tin cần lấy
+ * 
+ * @return mixed
+ */
+function auth($param) {
+    if(empty($_SESSION['user'])) return false;
+    elseif($param == 'all') return $_SESSION['user'];
+    elseif(!isset($_SESSION['user'][$param])) die(_s_me_error.'Không tồn tại param '.$param.' trong session user'._e_me_error);
+    else return $_SESSION['user'][$param];
+}
+
+/**
  * Load view từ views/user
  * @param string $title Tiêu đề trang
  * @param string $page Tên file view cần load
