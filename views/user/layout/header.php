@@ -79,9 +79,8 @@
                     </li>
                     </span>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
-                    <li><a href="<?= URL ?>" class="<?= ($page == '15151' ? 'active' : '') ?>">Tin tức<br></a></li>
                     <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a>
-                    <li><a href="<?= URL ?>" class="<?= ($page == '415151' ? 'active' : '') ?>">Liên hệ<br></a></li>
+                    <li><a href="<?= URL ?>" class="<?= ($page == 'contact' ? 'active' : '') ?>">Liên hệ<br></a></li>
                 </ul>
             </nav>
             <div class="d-flex button-cart align-items-center">
@@ -99,8 +98,6 @@
                             <ul class="dropdown-menu w-100">
                                 <li><a class="px-3 dropdown-item" href="<?= URL ?>thong-tin-ca-nhan"><i
                                             class="bi bi-person me-1"></i> Thông tin cá nhân</a></li>
-                                <li><a class="px-3 dropdown-item" href="<?= URL ?>doi-diem-thuong"><i
-                                            class="bi bi-gift me-2"></i>Đổi điểm thưởng</a></li>
                                 <li><a class="px-3 dropdown-item" href="<?= URL ?>lich-su-mua-hang"><i
                                             class="bi bi-clock-history me-2"></i>Lịch sử mua hàng</a></li>
                                 <?php if ($_SESSION['user']['name_role'] == 'admin') { ?>
