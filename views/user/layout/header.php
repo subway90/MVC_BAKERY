@@ -80,7 +80,7 @@
                     </span>
                     <li><a href="<?= URL ?>" class="<?= ($page == 'home' ? 'active' : '') ?>">Trang chủ<br></a></li>
                     <li><a href="<?= URL ?>thuc-don" class="<?= ($page == 'menu' ? 'active' : '') ?>">Thực đơn<br></a>
-                    <li><a href="<?= URL ?>" class="<?= ($page == 'contact' ? 'active' : '') ?>">Liên hệ<br></a></li>
+                    <li><a href="<?= URL ?>lien-he" class="<?= ($page == 'contact' ? 'active' : '') ?>">Liên hệ<br></a></li>
                 </ul>
             </nav>
             <div class="d-flex button-cart align-items-center">
