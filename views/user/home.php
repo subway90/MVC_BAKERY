@@ -38,16 +38,15 @@
       <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
         <div class="content ps-0 ps-lg-5">
           <p class="fst-italic">
-            Bống Béo Bread là lựa chọn hàng đầu cho những ai yêu thích hương vị bánh mì kẹp truyền thống kết hợp phong c
+            Tại Bống Béo Bread, chúng tôi không chỉ bán bánh mì – chúng tôi mang đến một trải nghiệm ẩm thực đặc biệt. Với mong muốn đưa hương vị bánh mì pate truyền thống lan tỏa đến nhiều người hơn, mỗi ổ bánh tại đây đều được chăm chút kỹ lưỡng từ khâu nguyên liệu đến cách chế biến.
           </p>
           <ul>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+            <li><i class="bi bi-check-circle-fill"></i> <span>Pate nhà làm theo công thức riêng, béo ngậy và đậm đà</span></li>
+            <li><i class="bi bi-check-circle-fill"></i> <span>Bánh mì nướng giòn tại chỗ, luôn nóng hổi khi đến tay khách</span></li>
+            <li><i class="bi bi-check-circle-fill"></i> <span>Nhân thịt đa dạng: heo quay, gà nướng, chả lụa…</span></li>
           </ul>
           <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+            Hãy ghé Bống Béo Bread để cảm nhận sự khác biệt trong từng ổ bánh – ngon lành, nhanh chóng và đầy đủ dinh dưỡng cho ngày dài năng động.
           </p>
 
           <div class="position-relative mt-4">
