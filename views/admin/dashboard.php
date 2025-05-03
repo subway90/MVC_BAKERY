@@ -4,13 +4,7 @@
         <div class="py-5">
             <div class="row g-4 align-items-center">
                 <div class="col">
-                    <h1 class="h3 m-0">Dashboard</h1>
-                </div>
-                <div class="col-auto d-flex">
-                    <select class="form-select me-3">
-                        <option selected="">7 October, 2021</option>
-                    </select>
-                    <a href="#" class="btn btn-primary">Export</a>
+                    <h1 class="h3 m-0">Thống kê</h1>
                 </div>
             </div>
         </div>
@@ -19,39 +13,19 @@
                 <div class="card saw-indicator flex-grow-1"
                     data-sa-container-query="{&quot;340&quot;:&quot;saw-indicator--size--lg&quot;}">
                     <div class="sa-widget-header saw-indicator__header">
-                        <h2 class="sa-widget-header__title">Doanh thu ngày</h2>
+                        <h2 class="sa-widget-header__title">Doanh thu hôm nay</h2>
                         <div class="sa-widget-header__actions">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-sa-muted d-block" id="widget-context-menu-1"
-                                    data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Move</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="#">Remove</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">$3799.00</div>
+                        <div class="saw-indicator__value">640.000 <span class="small fs-5 fw-light">vnđ</span></div>
                         <div class="saw-indicator__delta saw-indicator__delta--rise">
                             <div class="saw-indicator__delta-direction">
                                 <i class="fas fa-angle-up"></i>
                             </div>
-                            <div class="saw-indicator__delta-value">34.7%</div>
+                            <div class="saw-indicator__delta-value">35.0 %</div>
                         </div>
-                        <div class="saw-indicator__caption">Compared to April 2021</div>
+                        <div class="saw-indicator__caption">So với hôm qua</div>
                     </div>
                 </div>
             </div>
@@ -61,37 +35,17 @@
                     <div class="sa-widget-header saw-indicator__header">
                         <h2 class="sa-widget-header__title">Doanh thu tuần</h2>
                         <div class="sa-widget-header__actions">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-sa-muted d-block" id="widget-context-menu-2"
-                                    data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-2">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Move</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="#">Remove</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">$272.98</div>
+                        <div class="saw-indicator__value">3.126.000 <span class="small fs-5 fw-light">vnđ</span></div>
                         <div class="saw-indicator__delta saw-indicator__delta--fall">
                             <div class="saw-indicator__delta-direction">
                                 <i class="fas fa-angle-down"></i>
                             </div>
-                            <div class="saw-indicator__delta-value">12.0%</div>
+                            <div class="saw-indicator__delta-value">12.0 %</div>
                         </div>
-                        <div class="saw-indicator__caption">Compared to April 2021</div>
+                        <div class="saw-indicator__caption">So với tuần trước</div>
                     </div>
                 </div>
             </div>
@@ -101,37 +55,17 @@
                     <div class="sa-widget-header saw-indicator__header">
                         <h2 class="sa-widget-header__title">Doanh thu tháng</h2>
                         <div class="sa-widget-header__actions">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-sa-muted d-block" id="widget-context-menu-3"
-                                    data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-3">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Move</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="#">Remove</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">578</div>
+                        <div class="saw-indicator__value">18.920.000 <span class="small fs-5 fw-light">vnđ</span></div>
                         <div class="saw-indicator__delta saw-indicator__delta--rise">
                             <div class="saw-indicator__delta-direction">
                                 <i class="fas fa-angle-up"></i>
                             </div>
-                            <div class="saw-indicator__delta-value">27.9%</div>
+                            <div class="saw-indicator__delta-value">17.5 %</div>
                         </div>
-                        <div class="saw-indicator__caption">Compared to April 2021</div>
+                        <div class="saw-indicator__caption">So với tháng trước</div>
                     </div>
                 </div>
             </div>
@@ -143,7 +77,7 @@
                         <div class="sa-widget-header__actions">
                         </div>
                     </div>
-                    <div class="saw-pulse__counter">148</div>
+                    <div class="saw-pulse__counter">44</div>
                     <div class="sa-widget-table saw-pulse__table">
                         <table>
                             <thead>
@@ -203,42 +137,20 @@
             <div class="col-12 col-lg-8 col-xxl-9 d-flex">
                 <div class="card flex-grow-1 saw-chart"
                     data-sa-data="[
-                        {&quot;label&quot;:&quot;Jan&quot;,&quot;value&quot;:50},
-                        {&quot;label&quot;:&quot;Feb&quot;,&quot;value&quot;:130},
-                        {&quot;label&quot;:&quot;Mar&quot;,&quot;value&quot;:525},
-                        {&quot;label&quot;:&quot;Apr&quot;,&quot;value&quot;:285},
-                        {&quot;label&quot;:&quot;May&quot;,&quot;value&quot;:470},
-                        {&quot;label&quot;:&quot;Jun&quot;,&quot;value&quot;:130},
-                        {&quot;label&quot;:&quot;Jul&quot;,&quot;value&quot;:285},
-                        {&quot;label&quot;:&quot;Aug&quot;,&quot;value&quot;:240},
-                        {&quot;label&quot;:&quot;Sep&quot;,&quot;value&quot;:710},
-                        {&quot;label&quot;:&quot;Oct&quot;,&quot;value&quot;:470},
-                        {&quot;label&quot;:&quot;Nov&quot;,&quot;value&quot;:640},
-                        {&quot;label&quot;:&quot;Dec&quot;,&quot;value&quot;:1110}]">
+                        {&quot;label&quot;:&quot;Tháng 1&quot;,&quot;value&quot;:12.62},
+                        {&quot;label&quot;:&quot;Tháng 2&quot;,&quot;value&quot;:14.51},
+                        {&quot;label&quot;:&quot;Tháng 3&quot;,&quot;value&quot;:10.22},
+                        {&quot;label&quot;:&quot;Tháng 4&quot;,&quot;value&quot;:15.5},
+                        {&quot;label&quot;:&quot;Tháng 5&quot;,&quot;value&quot;:18.92},
+                        {&quot;label&quot;:&quot;Tháng 6&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 7&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 8&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 9&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 10&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 11&quot;,&quot;value&quot;:0},
+                        {&quot;label&quot;:&quot;Tháng 12&quot;,&quot;value&quot;:0 }]">
                     <div class="sa-widget-header saw-chart__header">
-                        <h2 class="sa-widget-header__title">Doanh thu năm</h2>
-                        <div class="sa-widget-header__actions">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-sa-muted d-block" id="widget-context-menu-5"
-                                    data-bs-toggle="dropdown" aria-expanded="false" aria-label="More">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-5">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Move</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="#">Remove</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <h2 class="sa-widget-header__title">Doanh thu năm (<?= date('Y') ?>)</h2>
                     </div>
                     <div class="saw-chart__body">
                         <div class="saw-chart__container">

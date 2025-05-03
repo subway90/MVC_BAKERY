@@ -34,15 +34,11 @@
     <div class="row gy-4">
       <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
         <img src="<?= URL_STORAGE ?>system/section_introduce.png" class="img-fluid mb-4" alt="">
-        <div class="book-a-table">
-          <h3>Hotline đặt hàng</h3>
-          <p>0365 286 851</p>
-        </div>
       </div>
       <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
         <div class="content ps-0 ps-lg-5">
           <p class="fst-italic">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non similique quam, expedita nulla officia ducimus impedit, voluptates facilis illo explicabo fugit pariatur. Ea debitis provident odit reprehenderit sapiente amet tenetur.
+            Bống Béo Bread là lựa chọn hàng đầu cho những ai yêu thích hương vị bánh mì kẹp truyền thống kết hợp phong c
           </p>
           <ul>
             <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
@@ -55,8 +51,10 @@
           </p>
 
           <div class="position-relative mt-4">
-            <img src="assets/img/about-2.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+            <div class="book-a-table">
+              <h3>Hotline đặt hàng</h3>
+              <p>0365 286 851</p>
+            </div>
           </div>
         </div>
       </div>
