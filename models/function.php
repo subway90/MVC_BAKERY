@@ -24,7 +24,7 @@ function author($type) {
             if($_SESSION['user']['name_role'] == $type) $author = true;
         }
     }
-    if(!$author) view_404('user');
+    if(!$author) view_error(404);
 }
 
 /**
@@ -88,20 +88,18 @@ function model($type,$name_model) {
 }
 
 /**
- * Hiển thị trang 404
- * @param $type string [user] hoặc [admin]
+ * Hàm này dùng để hiển thị lỗi trạng tháu
+ * 
+ * Lưu ý : Hiện tại chỉ có 2 mã lỗi [401,404] là hoạt động
+ * 
+ * @param int $code Mã trạng thái trang 
+ * @return void
  */
-function view_404($type) {
-    if($type != 'admin' && $type != 'user') die(_s_me_error.'Type khai báo <strong>'.$type.'</strong> không phù hợp trong mảng [user,admin] '._e_me_error);
-    if(file_exists('views/'.$type.'/404.php')) {
-        require_once 'models/'.$type.'/header.php';
-        require_once 'views/'.$type.'/layout/header.php';
-        require_once 'views/'.$type.'/404.php';
-        require_once 'views/'.$type.'/layout/footer.php';
-        exit();
-    }else {
-        die(_s_me_error.'Trang view <strong>404.php</strong> mà bạn khai báo không được tìm thấy tại :<br> <strong>path : views/'.$type.'/404.php</strong>'._e_me_error);
-    }
+function view_error($code)
+{
+    http_response_code($code);
+    require_once 'page_error/' . $code . '.php';
+    exit();
 }
 
 function alert($content) {

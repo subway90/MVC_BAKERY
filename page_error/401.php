@@ -1,10 +1,14 @@
+<?php
+    require_once 'config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?= WEB_FAVICON ?>" type="image/x-icon">
-    <title><?= WEB_NAME ?> | 403 Forbidden</title>
+    <title><?= WEB_NAME ?> | 401 Unauthorization</title>
     <style>
         body {
             background-color :rgba(0, 0, 0, 0.95);
@@ -34,14 +38,23 @@
         p {
             font-size: 14px;
         }
+        a {
+            margin-top: 10px;
+            color : white;
+            text-decoration : none;
+        }
+        a:hover {
+            text-decoration : underline;
+        }
     </style>
 </head>
 <body>
     <div class="box">
-        <div class="error">403 Forbidden</div>
+        <div class="error">401 Unauthorization</div>
         <div class="">
-            <p>Bạn không có quyền truy cập vào đường dẫn này.</p>
+            <p>Đường dẫn này chưa được cấp quyền cho bạn.</p>
         </div>
     </div>
+    <a href="/">Quay lại trang chủ</a>
 </body>
 </html>
