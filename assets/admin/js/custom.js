@@ -179,6 +179,10 @@
             const values = data.map(function(item) { return item.value; });
             const canvas = $(this).find('canvas')[0];
 
+            function formatToThousand(value) {
+                return new Intl.NumberFormat('vi-VN').format(value);
+            }
+
             new Chart(canvas.getContext('2d'), {
                 type: 'bar',
                 data: {
@@ -209,7 +213,7 @@
                                 fontSize: 13,
                                 fontColor: '#828f99',
                                 callback: function (value) {
-                                    return value + 'Tr vnđ';
+                                    return formatToThousand(value/1000) + 'K vnđ';
                                 },
                             },
                             gridLines: {
