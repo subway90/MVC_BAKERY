@@ -18,13 +18,8 @@
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">640.000 <span class="small fs-5 fw-light">vnđ</span></div>
-                        <div class="saw-indicator__delta saw-indicator__delta--rise">
-                            <div class="saw-indicator__delta-direction">
-                                <i class="fas fa-angle-up"></i>
-                            </div>
-                            <div class="saw-indicator__delta-value">35.0 %</div>
-                        </div>
+                        <div class="saw-indicator__value"><?= number_format(revenue('today'),0,0,'.') ?> <span class="small fs-5 fw-light">vnđ</span></div>
+                        <?= render_compare_revenue('today') ?>
                         <div class="saw-indicator__caption">So với hôm qua</div>
                     </div>
                 </div>
@@ -38,13 +33,8 @@
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">3.126.000 <span class="small fs-5 fw-light">vnđ</span></div>
-                        <div class="saw-indicator__delta saw-indicator__delta--fall">
-                            <div class="saw-indicator__delta-direction">
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                            <div class="saw-indicator__delta-value">12.0 %</div>
-                        </div>
+                        <div class="saw-indicator__value"><?= number_format(revenue('this week'),0,0,'.') ?> <span class="small fs-5 fw-light">vnđ</span></div>
+                        <?= render_compare_revenue('week') ?>
                         <div class="saw-indicator__caption">So với tuần trước</div>
                     </div>
                 </div>
@@ -58,13 +48,8 @@
                         </div>
                     </div>
                     <div class="saw-indicator__body">
-                        <div class="saw-indicator__value">18.920.000 <span class="small fs-5 fw-light">vnđ</span></div>
-                        <div class="saw-indicator__delta saw-indicator__delta--rise">
-                            <div class="saw-indicator__delta-direction">
-                                <i class="fas fa-angle-up"></i>
-                            </div>
-                            <div class="saw-indicator__delta-value">17.5 %</div>
-                        </div>
+                        <div class="saw-indicator__value"><?= number_format(revenue('this month'),0,0,'.') ?> <span class="small fs-5 fw-light">vnđ</span></div>
+                        <?= render_compare_revenue('month') ?>
                         <div class="saw-indicator__caption">So với tháng trước</div>
                     </div>
                 </div>
@@ -137,18 +122,20 @@
             <div class="col-12 col-lg-8 col-xxl-9 d-flex">
                 <div class="card flex-grow-1 saw-chart"
                     data-sa-data="[
-                        {&quot;label&quot;:&quot;Tháng 1&quot;,&quot;value&quot;:12.62},
-                        {&quot;label&quot;:&quot;Tháng 2&quot;,&quot;value&quot;:14.51},
-                        {&quot;label&quot;:&quot;Tháng 3&quot;,&quot;value&quot;:10.22},
-                        {&quot;label&quot;:&quot;Tháng 4&quot;,&quot;value&quot;:15.5},
-                        {&quot;label&quot;:&quot;Tháng 5&quot;,&quot;value&quot;:18.92},
-                        {&quot;label&quot;:&quot;Tháng 6&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 7&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 8&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 9&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 10&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 11&quot;,&quot;value&quot;:0},
-                        {&quot;label&quot;:&quot;Tháng 12&quot;,&quot;value&quot;:0 }]">
+                        
+                        <?php 
+                        $count = count(revenue_year());
+                        if($count) :
+                            foreach (revenue_year() as $i => $row) :
+                                $last_string = '';
+                                if($i + 1 < $count) $last_string = ',';
+                                echo <<<HTML
+                                {&quot;label&quot;:&quot;Tháng {$row['month']}&quot;,&quot;value&quot;:{$row['total']} } {$last_string}
+                                HTML;
+                            endforeach;
+                        endif
+                        ?>
+                        ]">
                     <div class="sa-widget-header saw-chart__header">
                         <h2 class="sa-widget-header__title">Doanh thu năm (<?= date('Y') ?>)</h2>
                     </div>
