@@ -98,10 +98,9 @@ function revenue($type) {
 
 /**
  * Thống kê doanh thu từng tháng của năm hiện tại
- * @return array
  */
-function revenue_year() {
-    return pdo_query(
+function revenue_chart($type) {
+    if($type === 'nam') return pdo_query(
         'SELECT MONTH(i.created_at) AS month,SUM(id.quantity_invoice * id.price_invoice) AS total
         FROM invoice i
         JOIN invoice_detail id
@@ -109,6 +108,25 @@ function revenue_year() {
         WHERE YEAR(i.created_at) = YEAR(CURDATE())
         GROUP BY MONTH(i.created_at)
         ORDER BY month'
+    );
+    elseif($type === 'thang') return pdo_query(
+            'SELECT WEEK(i.created_at, 1) AS week,
+            SUM(id.quantity_invoice * id.price_invoice) AS total
+            FROM invoice i
+            JOIN invoice_detail id ON i.id_invoice = id.id_invoice
+            WHERE MONTH(i.created_at) = MONTH(CURDATE()) 
+            AND YEAR(i.created_at) = YEAR(CURDATE())
+            GROUP BY YEARWEEK(i.created_at, 1)
+            ORDER BY week'
+    );
+    elseif($type === 'tuan') return pdo_query(
+        'SELECT WEEKDAY(i.created_at) AS date, SUM(id.quantity_invoice * id.price_invoice) AS total
+        FROM invoice i
+        JOIN invoice_detail id ON i.id_invoice = id.id_invoice
+        WHERE i.created_at >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY -- Bắt đầu từ thứ Hai
+        AND i.created_at < CURDATE() + INTERVAL (7 - WEEKDAY(CURDATE())) DAY -- Kết thúc vào Chủ Nhật
+        GROUP BY DATE(i.created_at)
+        ORDER BY date'
     );
 }
 
@@ -154,4 +172,24 @@ function render_compare_revenue($type) {
         <div class="saw-indicator__delta-value">{$percen} %</div>
     </div>
     HTML;
+}
+
+/**
+ * Dùng để chuyển đổi chỉ số ngày trong tuần thành chuỗi ngày hợp lệ
+ * 
+ * Lưu ý : Thứ 2 = 0 ; ... ; Chủ nhật = 6
+ * 
+ * @param int $order Chỉ số cần chuyển dổi
+ * 
+ * @return string
+ */
+function convert_weekday($order) {
+    if($order === 0) return 'Thứ 2';
+    elseif($order === 1) return 'Thứ 3';
+    elseif($order === 2) return 'Thứ 4';
+    elseif($order === 3) return 'Thứ 5';
+    elseif($order === 4) return 'Thứ 6';
+    elseif($order === 5) return 'Thứ 7';
+    elseif($order === 6) return 'Chủ nhật';
+    else return '[ERR] Không hợp lệ khi chuyển đổi ngày';
 }

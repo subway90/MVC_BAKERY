@@ -122,22 +122,30 @@
             <div class="col-12 col-lg-8 col-xxl-9 d-flex">
                 <div class="card flex-grow-1 saw-chart"
                     data-sa-data="[
-                        
-                        <?php 
-                        $count = count(revenue_year());
-                        if($count) :
-                            foreach (revenue_year() as $i => $row) :
+                        <?php
+                            $count = count($data_chart);
+                            foreach ($data_chart as $i => $row) :
+                                if($type_chart === 'tuan') $row[0] = convert_weekday($row[0]);
                                 $last_string = '';
                                 if($i + 1 < $count) $last_string = ',';
                                 echo <<<HTML
-                                {&quot;label&quot;:&quot;Tháng {$row['month']}&quot;,&quot;value&quot;:{$row['total']} } {$last_string}
+                                {&quot;label&quot;:&quot;{$label_chart} {$row[0]}&quot;,&quot;value&quot;:{$row[1]} } {$last_string}
                                 HTML;
                             endforeach;
-                        endif
                         ?>
                         ]">
                     <div class="sa-widget-header saw-chart__header">
-                        <h2 class="sa-widget-header__title">Doanh thu năm (<?= date('Y') ?>)</h2>
+                        <h2 class="sa-widget-header__title">
+                            <?= $title_chart ?>
+                        </h2>
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+                            <span class="text-muted small me-2">
+                                Hiển thị theo
+                            </span>
+                            <a href="<?= URL_ADMIN ?>thong-ke/tuan" class="btn btn-sm btn-outline-dark <?= $type_chart == 'tuan' ? 'active' : '' ?>">Tuần</a>
+                            <a href="<?= URL_ADMIN ?>thong-ke/thang" class="btn btn-sm btn-outline-dark <?= $type_chart == 'thang' ? 'active' : '' ?>">Tháng</a>
+                            <a href="<?= URL_ADMIN ?>thong-ke/nam" class="btn btn-sm btn-outline-dark <?= $type_chart == 'nam' ? 'active' : '' ?>">Năm</a>
+                        </div>
                     </div>
                     <div class="saw-chart__body">
                         <div class="saw-chart__container">
