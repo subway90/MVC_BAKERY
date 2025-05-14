@@ -13,10 +13,10 @@ $file = '';
 if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     $id_product = clear_input($_arrayURL[1]);
     $get_product = get_one_product($id_product);
-    if(!$get_product) view_404('admin');
+    if(!$get_product) view_error(404);
     extract($get_product);
     $old_image = $image_product;
-}else view_404('admin');
+}else view_error(404);
 // lưu sản phẩm mới
 if(isset($_POST['update_product'])) {
     // lấy input

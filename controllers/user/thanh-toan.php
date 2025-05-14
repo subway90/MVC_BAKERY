@@ -81,7 +81,7 @@ if (isset($_GET['callback-vnpay'])) {
         }else toast_create('danger','Thanh toán VNPAY thất bại !');
     }
     //Request callback trả về không hợp lệ
-    else return view_404('user');
+    else return view_error(404);
 }
 
 // xử lí callback thanh toán momo (nếu có)
@@ -93,7 +93,7 @@ if (isset($_GET['callback-momo'])) {
         else toast_create('danger','Thanh toán MOMO thất bại !');
     }
     //Request callback trả về không hợp lệ
-    else return view_404('user');
+    else return view_error(404);
 }
 
 // lưu database

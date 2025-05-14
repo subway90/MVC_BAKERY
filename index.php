@@ -23,12 +23,12 @@ if(isset($_GET['act']) && $_GET['act']) {
         // Hiển thị file cho action
         if(file_exists('controllers/admin/'.$_action.'.php')) require_once 'controllers/admin/'.$_action.'.php';
         // Trả về trang 404 nếu không tìm thấy action
-        else return view_404('admin');
+        else return view_error(404);
     }
     // Trả về action bên user
     else{
         if(file_exists('controllers/user/'.$_action.'.php')) require_once 'controllers/user/'.$_action.'.php';
-        else return view_404('user');
+        else return view_error(404);
     }
 }
 // Trường hợp không có action

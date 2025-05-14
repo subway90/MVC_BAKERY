@@ -159,7 +159,7 @@ if(isset($_arrayURL[1]) && $_arrayURL[1] && $_arrayURL[1] == 'delete') {
         $id_product = $_arrayURL[2];
         delete_cart($id_product);
         showCanvas();
-    }else view_404('user'); // Nếu ID Product không hợp lệ
+    }else view_error(404); // Nếu ID Product không hợp lệ
 }
 
 // Xoá tất cả giỏ hàng

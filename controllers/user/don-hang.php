@@ -11,8 +11,8 @@ $total = 0;
 if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     $id_invoice = $_arrayURL[1];
     // kiếm tra xem đơn hàng có tồn tại hay không
-    if(!check_invoice_exist($id_invoice)) view_404('user');
-}else view_404('user');
+    if(!check_invoice_exist($id_invoice)) view_error(404);
+}else view_error(404);
 
 
 # [DATA]

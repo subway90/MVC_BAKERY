@@ -14,9 +14,9 @@ if(isset($_arrayURL[1]) && $_arrayURL[1]) {
     // lấy id
     $id = $_arrayURL[1];
     // kiểm tra tồn tại
-    if(!check_exist_one_with_trash('invoice','"'.$id.'"')) view_404('admin');
+    if(!check_exist_one_with_trash('invoice','"'.$id.'"')) view_error(404);
     else $array_invoice = get_one_invoice($id);
-}else view_404('admin');
+}else view_error(404);
 
 // xoá hoá đơn
 if(isset($_POST['close_invoice'])) {
