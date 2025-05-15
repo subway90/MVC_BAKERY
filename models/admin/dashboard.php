@@ -193,3 +193,48 @@ function convert_weekday($order) {
     elseif($order === 6) return 'Chủ nhật';
     else return '[ERR] Không hợp lệ khi chuyển đổi ngày';
 }
+
+function data_chart($start,$end,$type) {
+    if(!in_array($type,['ngay','tuan','thang','nam'])) view_error(404);
+
+    if($type === 'ngay') {
+        $select = 'WEEKDAY(i.created_at) AS order_of_week, DATE(i.created_at)';
+        $query = 'DATE(i.created_at) BETWEEN "'.$start.'" AND "'.$end.'"';
+    }
+    elseif($type === 'tuan') {
+        $select = 'MIN(i.created_at) start, MAX(i.created_at) end, WEEK(i.created_at, 1)';
+        $query = 'DATE(i.created_at) BETWEEN "'.$start.'" AND "'.$end.'"';
+    }
+    elseif($type === 'thang') {
+        $select = 'MIN(i.created_at) start, MAX(i.created_at) end, MONTH(i.created_at)';
+        $query = 'DATE(i.created_at) BETWEEN "'.$start.'" AND "'.$end.'"';
+    }
+    elseif($type === 'nam') {
+        $select = 'MIN(i.created_at) start, MAX(i.created_at) end, YEAR(i.created_at)';
+        $query = 'DATE(i.created_at) BETWEEN "'.$start.'" AND "'.$end.'"';
+    }
+    
+    return pdo_query(
+        'SELECT '.$select.' AS date, SUM(id.quantity_invoice * id.price_invoice) AS total
+        FROM invoice i
+        LEFT JOIN invoice_detail id ON i.id_invoice = id.id_invoice
+        WHERE '.$query.'
+        GROUP BY date
+        ORDER BY date'
+    );
+}
+
+/**
+ * Chuyển đổi từ định dạng DD-MM-YYYY thành YYYY-MM-DD
+ * @param mixed $date Ngày cần định dạng | Format : DD-MM-YYYY
+ * @return string
+ */
+function convert_to_date_sql($date) {
+    // Kiểm tra định dạng đầu vào
+    if (preg_match('/^(\\d{2})-(\\d{2})-(\\d{4})$/', $date, $matches)) {
+        // Trả về định dạng YYYY-MM-DD
+        return $matches[3] . '-' . $matches[2] . '-' . $matches[1];
+    }
+
+    return 'Định dạng không đúng theo DD-MM-YYYY';
+}
