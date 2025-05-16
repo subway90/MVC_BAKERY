@@ -16,9 +16,10 @@ if(isset($_POST['ajax_id_product'])) {
     // lấy ID sản phẩm
     $id_product = $_POST['ajax_id_product'];
     // cập nhật vào session cart
-    update_cart($id_product);
+    $check = update_cart($id_product);
     // thông báo toast
-    view_json(200,['data' => toast('success','Thêm sản phẩm vào giỏ hàng thành công !')]);    
+    if($check['code']) view_json(200,['data' => toast('success',$check['message'])]);    
+    else view_json(403,['data' => toast('warning',$check['message'])]);    
 }
 
 // Lấy danh sách giỏ hàng bằng ajax
@@ -127,8 +128,8 @@ if(isset($_POST['add_quantity']) && $_POST['add_quantity']) {
     // cập nhật giỏ hàng
     $check = update_quantity('plus',$id_product);
     // trả về json
-    if($check) view_json(200,['data'=> toast('success','Thêm số lượng thành công')]);
-    else view_json(200,['data'=> toast('danger','Đã đạt giới hạn')]);
+    if($check['code']) view_json(200,['data'=> toast('success',$check['message'])]);
+    else view_json(200,['data'=> toast('warning',$check['message'])]);
     
 }
 
@@ -138,8 +139,8 @@ if(isset($_POST['minus_quantity']) && $_POST['minus_quantity']) {
     $id_product = $_POST['id_product'];
     $check = update_quantity('minus',$id_product);
     // trả về json
-    if($check) view_json(200,['data'=> toast('success','Giảm số lượng thành công')]);
-    else view_json(200,['data'=> toast('danger','Đã đạt giới hạn')]);
+    if($check['code']) view_json(200,['data'=> toast('success',$check['message'])]);
+    else view_json(200,['data'=> toast('warning',$check['message'])]);
 }
 
 // Xoá sản phẩm khỏi giỏ hàng
