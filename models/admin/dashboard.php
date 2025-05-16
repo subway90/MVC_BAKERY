@@ -184,13 +184,13 @@ function render_compare_revenue($type) {
  * @return string
  */
 function convert_weekday($order) {
-    if($order === 0) return 'Thứ 2';
-    elseif($order === 1) return 'Thứ 3';
-    elseif($order === 2) return 'Thứ 4';
-    elseif($order === 3) return 'Thứ 5';
-    elseif($order === 4) return 'Thứ 6';
-    elseif($order === 5) return 'Thứ 7';
-    elseif($order === 6) return 'Chủ nhật';
+    if($order == 0) return 'Thứ 2';
+    elseif($order == 1) return 'Thứ 3';
+    elseif($order == 2) return 'Thứ 4';
+    elseif($order == 3) return 'Thứ 5';
+    elseif($order == 4) return 'Thứ 6';
+    elseif($order == 5) return 'Thứ 7';
+    elseif($order == 6) return 'Chủ nhật';
     else return '[ERR] Không hợp lệ khi chuyển đổi ngày';
 }
 
