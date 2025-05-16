@@ -9,7 +9,7 @@
         <h1 data-aos="fade-up">Bống Béo Bread</h1>
         <p data-aos="fade-up" data-aos-delay="100">Thương hiệu bánh mì đặc sản địa phương - từ 2017</p>
         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-          <a href="#book-a-table" class="btn-get-started">Mua ngay</a>
+          <a href="/thuc-don" class="btn-get-started">Đặt hàng ngay</a>
         </div>
       </div>
       <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
