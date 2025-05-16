@@ -6,7 +6,7 @@ model('admin','product');
 # [VARIABLE]
 $id_category_product = $name_product = $description_product = $quantity_product = $price_product = $old_image = $file = '';
 $error_valid = [];
-$bool_encrypt_file = false;
+
 # [HANDLE]
 // lưu sản phẩm mới
 if(isset($_POST['add_product'])) {
@@ -20,8 +20,6 @@ if(isset($_POST['add_product'])) {
     $image_product = $_FILES['image_product'];
      // nếu upload ảnh mới
     if(($_FILES['image_product']['tmp_name'])) $file = $_FILES['image_product'];
-    // nếu có bật mã hoá ảnh
-    if(isset($_POST['bool_encrypt_file'])) $bool_encrypt_file = true;
 
     // xử lí validate
     if(!$id_category_product) $error_valid[] = 'Vui lòng chọn danh mục sản phẩm';
@@ -35,7 +33,7 @@ if(isset($_POST['add_product'])) {
         if($file['size'] > LIMIT_SIZE_FILE*(1024*1024)) $error_valid[] = 'Dung lượng ảnh phải bé hơn '.LIMIT_SIZE_FILE.' MB';
         else {
             if($old_image) delete_file($old_image); // xoá ảnh cũ nếu có
-            $old_image = save_file($bool_encrypt_file,'menu',$_FILES['image_product']); // lưu ảnh mới
+            $old_image = save_file(true,'menu',$_FILES['image_product']); // lưu ảnh mới
         }
     }
     if(!$old_image) $error_valid[] = 'Vui lòng nhập ảnh sản phẩm';
@@ -66,7 +64,6 @@ $data = [
     'price_product' => $price_product,
     'old_image' => $old_image,
     'error_valid' => $error_valid,
-    'bool_encrypt_file' => $bool_encrypt_file,
 ];
 
 # [RENDER]

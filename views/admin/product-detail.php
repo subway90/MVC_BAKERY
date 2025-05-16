@@ -85,20 +85,10 @@
                                                     <img src="<?=DEFAULT_IMAGE?>" id="image" class="w-100 h-auto" width="320" height="320" alt="image product" />
                                                     <?php }else{ ?>
                                                     <img src="<?=URL_STORAGE?><?=$old_image?>" id="image" class="w-100 h-auto" width="320" height="320" alt="image product" />
-                                                    <div class="text-info text-center mt-2"><?=$old_image?></div>
                                                     <?php } ?>
                                                 </div>
                                             </div>
                                             <div class="mt-4">
-                                                    <div class="my-3">
-                                                        <label class="form-check form-switch">
-                                                            <input <?= $bool_encrypt_file ? 'checked' : '' ?> type="checkbox" name="bool_encrypt_file" class="form-check-input"/>
-                                                            <span class="form-check-label" >Mã hoá tên ảnh</span>
-                                                        </label>
-                                                        <small class="text-muted">
-                                                            Việc tắt mã hoá tên ảnh để giúp cho SEO Webiste
-                                                        </small>
-                                                    </div>
                                                     <input type="file" id="imageFile" name="image_product" onchange="chooseFile(this)" class="form-control" accept="image/jpeg,image/png, image/gif" >
                                                     <input hidden type="text" name="old_image" value="<?=$old_image?>">
                                             </div>
