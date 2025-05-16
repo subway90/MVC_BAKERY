@@ -219,6 +219,7 @@ function data_chart($start,$end,$type) {
         FROM invoice i
         LEFT JOIN invoice_detail id ON i.id_invoice = id.id_invoice
         WHERE '.$query.'
+        AND i.status_invoice = 3
         GROUP BY date
         ORDER BY date'
     );
