@@ -4,11 +4,9 @@
 model('user','stringee');
 
 # [VARIBLE]
-$to = STRINGEE_TEST_NUMBER_PHONE;
-$otp = STRINGEE_TEST_OTP;
 
 # [HANDLE]
-stringee_send_otp($to,$otp);
+test_array(create_uuid(36));
 
 # [DATA]
 $data = [

@@ -329,19 +329,26 @@ function delete_file($path) {
 }
 
 /**
- * Tạo mã ngẫu nhiên độ dài 24, thích hợp cho làm id
+ * Tạo mã UUID
+ * @param $length Độ dài quy định, mặc định sẽ là 36. Khuyến khích từ 12 - 100
  * @return string
  */
-function create_uuid()
+function create_uuid($length = 36)
 {
-    // Tạo một chuỗi ngẫu nhiên
-    $data = random_bytes(16);
-    // Đặt giá trị phiên bản (4 cho UUID ngẫu nhiên)
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // Phiên bản 4
-    // Đặt giá trị variant (2 cho RFC 4122)
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-    // Chuyển đổi thành UUID
-    return vsprintf('%s-%s-%s-%s-%s', str_split(bin2hex($data), 4));
+    // Nếu độ dài yêu cầu là 36, trả về UUID chuẩn
+    if ($length === 36) {
+        // Tạo một chuỗi ngẫu nhiên
+        $data = random_bytes(16);
+        // Đặt giá trị phiên bản (4 cho UUID ngẫu nhiên)
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // Phiên bản 4
+        // Đặt giá trị variant (2 cho RFC 4122)
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+        // Chuyển đổi thành UUID
+        return vsprintf('%s-%s-%s-%s-%s', str_split(bin2hex($data), 4));
+    }
+
+    // Nếu độ dài khác 36, tạo chuỗi ngẫu nhiên
+    return bin2hex(random_bytes($length / 2)); // Chia cho 2 vì mỗi byte thành 2 ký tự hex
 }
 
 /**
