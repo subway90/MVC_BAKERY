@@ -44,6 +44,15 @@ if(isset($_POST['check_invoice'])) {
 if(isset($_POST['delivery_invoice'])) {
     // cập nhật trạng thái
     update_state_invoice($id,2);
+    // cập nhật số lượng sản phẩm
+    $list_product = pdo_query(
+        'SELECT id_product, quantity_invoice FROM invoice_detail WHERE id_invoice = "'.$id.'"'
+    );
+    foreach ($list_product as $product) {
+        pdo_execute(
+            'UPDATE product SET quantity_product = quantity_product - '.$product['quantity_invoice'].' WHERE id_product ='.$product['id_product']
+        );
+    }
     // thông báo
     toast_create('success','Thay đổi trạng thái thành công');
     // cập nhật lại route
