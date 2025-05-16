@@ -1,10 +1,10 @@
 <!-- sa-app__body -->
 <div id="top" class="sa-app__body px-2 px-lg-4">
     <div class="container pb-6">
-        <div class="py-5">
+        <div class="pb-3">
             <div class="row g-4 align-items-center">
                 <div class="col">
-                    <h1 class="h3 m-0">Thống kê</h1>
+                    <h1 class="h5 m-0">Thống kê</h1>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                 <div class="card saw-indicator flex-grow-1"
                     data-sa-container-query="{&quot;340&quot;:&quot;saw-indicator--size--lg&quot;}">
                     <div class="sa-widget-header saw-indicator__header">
-                        <h2 class="sa-widget-header__title">Doanh thu tuần</h2>
+                        <h2 class="sa-widget-header__title">Doanh thu tuần này</h2>
                         <div class="sa-widget-header__actions">
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="card saw-indicator flex-grow-1"
                     data-sa-container-query="{&quot;340&quot;:&quot;saw-indicator--size--lg&quot;}">
                     <div class="sa-widget-header saw-indicator__header">
-                        <h2 class="sa-widget-header__title">Doanh thu tháng</h2>
+                        <h2 class="sa-widget-header__title">Doanh thu tháng này</h2>
                         <div class="sa-widget-header__actions">
                         </div>
                     </div>
@@ -55,6 +55,11 @@
                         <?= render_compare_revenue('month') ?>
                         <div class="saw-indicator__caption">So với tháng trước</div>
                     </div>
+                </div>
+            </div>
+            <div class="row mt-4 align-items-center">
+                <div class="col">
+                    <h1 class="h5 m-0">Biểu đồ thống kê</h1>
                 </div>
             </div>
             <!-- <div class="col-12 col-lg-4 col-xxl-3 d-flex">
