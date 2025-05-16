@@ -133,6 +133,10 @@ function update_quantity($type,$id) {
                 'message' => 'Tăng số lượng thành công',
             ];
         }
+        elseif($_SESSION['cart'][$order_in_cart-1]['quantity_product'] > $get_product['quantity_product'] ) {
+            $_SESSION['cart'][$order_in_cart-1]['quantity_product'] = $get_product['quantity_product'];
+        }
+        
     }
 
     // Nếu giảm số lượng

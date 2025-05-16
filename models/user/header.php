@@ -27,8 +27,9 @@ function list_product_in_cart() {
         foreach ($_SESSION['cart'] as $cart) {
             $product = pdo_query_one(
                 'SELECT * FROM product
-                WHERE id_product ='.$cart['id_product']
-                .' AND deleted_at IS NULL'
+                WHERE id_product ='.$cart['id_product'] .'
+                AND quantity_product > 0
+                AND deleted_at IS NULL'
             );
             if(!empty($product)) {
                 extract($product);
