@@ -10,6 +10,8 @@ model('admin','invoice');
 
 # [HANDLE]
 
+// Xem danh sách xoá
+if(isset($_arrayURL[1]) && $_arrayURL[1] == 'danh-sach-xoa') $status_page = false;
 
 # [DATA]
 // Lấy danh sách danh mục

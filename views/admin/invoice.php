@@ -28,7 +28,7 @@
                 <div class="p-4"><input type="text" placeholder="Nhập thông tin tìm kiếm"
                         class="form-control form-control--search mx-auto" id="table-search" /></div>
                 <div class="sa-divider"></div>
-                <table class="sa-datatables-init" data-order="none"
+                <table class="sa-datatables-init" data-order="[]"
                     data-sa-search-input="#table-search">
                     <thead>
                         <tr>
@@ -115,8 +115,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td> 
-                                <?php if(!$status_invoice): // Nếu chưa xử lí ?>
+                            <td>
+                                <?php if($deleted_at): // Nếu chưa xử lí ?>
+                                    <div class="badge badge-sa-danger">Đã bị huỷ</div>
+                                    <div class="small text-muted mt-2"><span class="fw-bold">Lí do :</span> <?=$reason_close_invoice ?></div>
+                                <?php elseif(!$status_invoice): // Nếu chưa xử lí ?>
                                     <div class="badge badge-sa-danger">Chưa xử lí</div>
                                 <?php elseif($status_invoice == 1): ?>
                                     <div class="badge badge-sa-primary">Đã xử lí</div>
@@ -126,6 +129,7 @@
                                     <div class="badge badge-sa-success">Đã hoàn thành</div>
                                 <?php elseif($status_invoice == 4): ?>
                                     <div class="badge badge-sa-dark">Hoàn trả</div>
+                                    <div class="small text-muted mt-2"><span class="fw-bold">Lí do :</span> <?=$reason_close_invoice ?></div>
                                 <?php endif ?>
                             </td>
                             <td>
