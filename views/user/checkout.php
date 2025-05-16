@@ -115,9 +115,9 @@
                         foreach ($list_product_in_cart as $product) {
                             extract($product);
                             ?>
-                            <div class="row justify-content-lg-between justify-content-center px-4 py-2 my-2 mx-1 border rounded-5 align-items-center">
+                            <div class="row justify-content-lg-between justify-content-center p-2 my-2 mx-1 border rounded-5 align-items-center">
                                 <div class="thumbnail-container col-lg-3 col-12">
-                                    <img class="thumbnail p-0 rounded-5 rounded-end-0 object-fit-contain" style="width:80px" src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>" onerror="this.onerror=null; this.src='<?=DEFAULT_IMAGE?>';" alt="...">
+                                    <img class="w-100 thumbnail p-0 rounded-4 rounded-end-0 object-fit-contain" src="<?= $image_product ? URL_STORAGE.$image_product : DEFAULT_IMAGE ?>" onerror="this.onerror=null; this.src='<?=DEFAULT_IMAGE?>';" alt="...">
                                     <div class="hover-text text-light"><i class="bi bi-zoom-in"></i></div>
                                 </div>
                                 <div class="col-9 text-center text-lg-start ps-2">
