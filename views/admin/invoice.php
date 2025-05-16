@@ -28,7 +28,7 @@
                 <div class="p-4"><input type="text" placeholder="Nhập thông tin tìm kiếm"
                         class="form-control form-control--search mx-auto" id="table-search" /></div>
                 <div class="sa-divider"></div>
-                <table class="sa-datatables-init" data-order="[[ 3, &quot;DESC&quot; ]]"
+                <table class="sa-datatables-init" data-order="none"
                     data-sa-search-input="#table-search">
                     <thead>
                         <tr>
