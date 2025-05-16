@@ -37,8 +37,7 @@ if(isset($_POST['update_product'])) {
     if(!$name_product) $error_valid[] = 'Vui lòng nhập tên sản phẩm';
     if(check_exist_one_by_name_except_id('product',$name_product,$id_product)) $error_valid[] = 'Tên sản phẩm này đã tồn tại';
     if(!$description_product) $error_valid[] = 'Vui lòng nhập mô tả sản phẩm';
-    if(!$quantity_product) $error_valid[] = 'Vui lòng nhập số lượng sản phẩm';
-    else if($quantity_product < 0 || $quantity_product > 1000) $error_valid[] = 'Số lượng sản phẩm phải lớn hơn 0 và bé hơn 1.000';
+    if($quantity_product < 0 || $quantity_product > 1000) $error_valid[] = 'Số lượng sản phẩm phải từ 0 đến 1.000';
     if(!$price_product) $error_valid[] = 'Vui lòng nhập giá sản phẩm';
     else if($price_product < 0 || $price_product > 1000000000) $error_valid[] = 'Số lượng sản phẩm phải lớn hơn 0 VNĐ và bé hơn 100.000.000 VNĐ';
     if($file) {
